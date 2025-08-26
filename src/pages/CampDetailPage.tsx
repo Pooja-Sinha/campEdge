@@ -94,15 +94,22 @@ const CampDetailPage = () => {
   }
 
   const handleBookNow = () => {
+    console.log('Book Now clicked:', { isAuthenticated, selectedSlot, participants, campId: camp?.id });
+
     if (!isAuthenticated) {
+      console.log('User not authenticated, redirecting to login');
       navigate('/login')
       return
     }
     if (!selectedSlot) {
+      console.log('No slot selected');
       alert('Please select a date first')
       return
     }
-    navigate(`/booking/${camp?.id}?slot=${selectedSlot}&participants=${participants}`)
+
+    const bookingUrl = `/booking/${camp?.id}?slot=${selectedSlot}&participants=${participants}`;
+    console.log('Navigating to booking page:', bookingUrl);
+    navigate(bookingUrl)
   }
 
   if (isLoading) {
@@ -583,10 +590,10 @@ const CampDetailPage = () => {
                   <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-700 dark:text-gray-300">
-                        {formatCurrency(camp.pricing.basePrice)} × {participants} person{participants > 1 ? 's' : ''}
+                        {formatCurrency(camp.availability.slots.find(slot => slot.id === selectedSlot)?.price || camp.pricing.basePrice)} × {participants} person{participants > 1 ? 's' : ''}
                       </span>
                       <span className="font-semibold text-gray-900 dark:text-white">
-                        {formatCurrency(camp.pricing.basePrice * participants)}
+                        {formatCurrency((camp.availability.slots.find(slot => slot.id === selectedSlot)?.price || camp.pricing.basePrice) * participants)}
                       </span>
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import type { User } from '../types/index'
+import authMockData from '../data/auth_mock_data.json'
 
 interface AuthState {
   user: User | null
@@ -23,50 +24,10 @@ const mockLogin = async (email: string, password: string): Promise<User> => {
   await new Promise(resolve => setTimeout(resolve, 1000))
   
   // Mock user data based on email
-  const mockUsers: Record<string, User> = {
-    'user@campindia.com': {
-      id: 'user-001',
-      name: 'John Doe',
-      email: 'user@campindia.com',
-      phone: '+91-9876543210',
-      role: 'user',
-      verified: true,
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-      location: 'Mumbai, Maharashtra',
-      bio: 'Adventure enthusiast and photographer',
-      createdAt: '2022-01-15T10:00:00Z',
-      updatedAt: '2024-11-15T14:30:00Z'
-    },
-    'organizer@campindia.com': {
-      id: 'org-001',
-      name: 'Adventure Guide',
-      email: 'organizer@campindia.com',
-      phone: '+91-9876543211',
-      role: 'organizer',
-      verified: true,
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-      location: 'Manali, Himachal Pradesh',
-      bio: 'Professional mountain guide with 10+ years experience',
-      createdAt: '2019-05-20T10:00:00Z',
-      updatedAt: '2024-11-13T15:20:00Z'
-    },
-    'admin@campindia.com': {
-      id: 'admin-001',
-      name: 'Admin User',
-      email: 'admin@campindia.com',
-      phone: '+91-9876543212',
-      role: 'admin',
-      verified: true,
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
-      location: 'Bangalore, Karnataka',
-      bio: 'CampIndia platform administrator',
-      createdAt: '2020-01-01T10:00:00Z',
-      updatedAt: '2024-11-15T10:00:00Z'
-    }
-  }
+  const mockUsers: Record<string, User> = authMockData.users as Record<string, User>
   
   const user = mockUsers[email]
-  if (!user || password !== 'password123') {
+  if (!user || password !== authMockData.defaultPassword) {
     console.log('Invalid email or password (authStore): email: ', email, 'password: ', password)
     throw new Error('Invalid email or password')
   }

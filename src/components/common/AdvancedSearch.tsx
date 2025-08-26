@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { useDebounce } from '../../hooks/useDebounce'
 import { cn } from '../../utils/cn'
+import searchSuggestionsData from '../../data/search_suggestions_mock_data.json'
 
 interface SearchSuggestion {
   id: string
@@ -53,24 +54,15 @@ const AdvancedSearch = ({
   const debouncedQuery = useDebounce(query, 300)
 
   // Mock data for suggestions
-  const mockSuggestions: SearchSuggestion[] = useMemo(() => [
-    // Locations
-    { id: 'loc-1', type: 'location', title: 'Himachal Pradesh', subtitle: '15 camps available', icon: <MapPin className="w-4 h-4" /> },
-    { id: 'loc-2', type: 'location', title: 'Rajasthan', subtitle: '8 camps available', icon: <MapPin className="w-4 h-4" /> },
-    { id: 'loc-3', type: 'location', title: 'Kerala', subtitle: '6 camps available', icon: <MapPin className="w-4 h-4" /> },
-    { id: 'loc-4', type: 'location', title: 'Uttarakhand', subtitle: '12 camps available', icon: <MapPin className="w-4 h-4" /> },
-    
-    // Camps
-    { id: 'camp-1', type: 'camp', title: 'Triund Trek & Camping', subtitle: 'Himachal Pradesh • ₹3,500', icon: <Star className="w-4 h-4" /> },
-    { id: 'camp-2', type: 'camp', title: 'Jaisalmer Desert Safari', subtitle: 'Rajasthan • ₹4,200', icon: <Star className="w-4 h-4" /> },
-    { id: 'camp-3', type: 'camp', title: 'Gokarna Beach Camping', subtitle: 'Karnataka • ₹2,800', icon: <Star className="w-4 h-4" /> },
-    
-    // Activities
-    { id: 'act-1', type: 'activity', title: 'Trekking', subtitle: '25 camps offer this', category: 'Adventure' },
-    { id: 'act-2', type: 'activity', title: 'Photography', subtitle: '18 camps offer this', category: 'Creative' },
-    { id: 'act-3', type: 'activity', title: 'Wildlife Safari', subtitle: '12 camps offer this', category: 'Nature' },
-    { id: 'act-4', type: 'activity', title: 'River Rafting', subtitle: '8 camps offer this', category: 'Adventure' },
-  ], [])
+  const mockSuggestions: SearchSuggestion[] = useMemo(() =>
+    searchSuggestionsData.suggestions.map(suggestion => ({
+      ...suggestion,
+      type: suggestion.type as 'location' | 'camp' | 'activity' | 'recent' | 'popular',
+      icon: suggestion.type === 'location' ? <MapPin className="w-4 h-4" /> :
+            suggestion.type === 'camp' ? <Star className="w-4 h-4" /> :
+            <Star className="w-4 h-4" />
+    }))
+  , [])
 
   // Filter suggestions based on query
   const filteredSuggestions = useMemo(() => {

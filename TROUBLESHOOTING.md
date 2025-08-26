@@ -1,6 +1,6 @@
-# 🔧 CampIndia Troubleshooting Guide
+# 🔧 CampEdge Troubleshooting Guide
 
-This guide helps resolve common issues with the CampIndia camping platform.
+This guide helps resolve common issues with the CampEdge camping platform.
 
 ## ✅ Issues Fixed
 

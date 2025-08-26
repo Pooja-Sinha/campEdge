@@ -21,7 +21,7 @@ import {
   Clock
 } from 'lucide-react'
 import { useIsAuthenticated, useAuth } from '../hooks/useAuth'
-import { useUserBookings, useWishlist } from '../hooks/useCamps'
+import { useUserBookings, useUserWishlist } from '../hooks/useCamps'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import { formatCurrency, formatDate, formatDuration } from '../utils/format'
 import { cn } from '../utils/cn'
@@ -50,7 +50,7 @@ const ProfilePage = () => {
   const { isAuthenticated, user } = useIsAuthenticated()
   const { updateProfile } = useAuth()
   const { data: bookingsResponse, isLoading: bookingsLoading } = useUserBookings(user?.id || '')
-  const { data: wishlistResponse, isLoading: wishlistLoading } = useWishlist(user?.id || '')
+  const { data: wishlistResponse, isLoading: wishlistLoading } = useUserWishlist(user?.id || '', !!user?.id)
 
   const {
     register,
@@ -449,13 +449,13 @@ const ProfilePage = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex space-x-4">
                         <img
-                          src={booking.camp.images.find(img => img.isPrimary)?.url}
-                          alt={booking.camp.title}
+                          src={booking.camp?.images?.find(img => img.isPrimary)?.url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'}
+                          alt={booking.camp?.title || 'Camp'}
                           className="w-20 h-20 rounded-lg object-cover"
                         />
                         <div>
                           <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-                            {booking.camp.title}
+                            {booking.camp?.title || 'Unknown Camp'}
                           </h3>
                           <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
                             <div className="flex items-center space-x-1">
@@ -556,8 +556,8 @@ const ProfilePage = () => {
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
-                        src={item.camp.images.find(img => img.isPrimary)?.url}
-                        alt={item.camp.title}
+                        src={item.camp?.images?.find((img: any) => img.isPrimary)?.url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'}
+                        alt={item.camp?.title || 'Camp'}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
 
@@ -570,36 +570,36 @@ const ProfilePage = () => {
                       <div className="absolute top-3 left-3">
                         <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center space-x-1">
                           <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                          <span className="text-xs font-medium">{item.camp.rating.average}</span>
+                          <span className="text-xs font-medium">{item.camp?.rating?.average || 0}</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="p-4">
                       <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1">
-                        {item.camp.title}
+                        {item.camp?.title || 'Unknown Camp'}
                       </h3>
 
                       <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
                         <div className="flex items-center space-x-1">
                           <MapPin className="w-4 h-4" />
-                          <span>{item.camp.location.name}, {item.camp.location.state}</span>
+                          <span>{item.camp?.location?.name || 'Unknown'}, {item.camp?.location?.state || ''}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Calendar className="w-4 h-4" />
-                          <span>{formatDuration(item.camp.duration.days, item.camp.duration.nights)}</span>
+                          <span>{item.camp?.duration ? formatDuration(item.camp.duration.days, item.camp.duration.nights) : 'N/A'}</span>
                         </div>
                       </div>
 
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="text-lg font-bold text-gray-900 dark:text-white">
-                            {formatCurrency(item.camp.pricing.basePrice)}
+                            {formatCurrency(item.camp?.pricing?.basePrice || 0)}
                           </div>
                           <div className="text-xs text-gray-500 dark:text-gray-400">per person</div>
                         </div>
                         <a
-                          href={`/camps/${item.camp.id}`}
+                          href={`/camps/${item.camp?.id || ''}`}
                           className="btn-primary text-sm"
                         >
                           View Details

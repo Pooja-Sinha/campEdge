@@ -43,7 +43,12 @@ const CampsPage = () => {
 
   // Filter states
   const [filters, setFilters] = useState<SearchFilters>({
+    search: searchParams.get('search') || '',
     location: searchParams.get('location') || '',
+    dateRange: searchParams.get('startDate') && searchParams.get('endDate') ? {
+      startDate: searchParams.get('startDate')!,
+      endDate: searchParams.get('endDate')!
+    } : undefined,
     priceRange: {
       min: parseInt(searchParams.get('minPrice') || '0'),
       max: parseInt(searchParams.get('maxPrice') || '50000')
@@ -63,11 +68,21 @@ const CampsPage = () => {
 
   const { data: campsResponse, isLoading, error } = useCamps(filters, currentPage, 12)
 
+  // Sync searchQuery with filters.search when filters change from URL
+  useEffect(() => {
+    if (filters.search !== searchQuery) {
+      setSearchQuery(filters.search || '')
+    }
+  }, [filters.search])
+
   // Update URL params when filters change
   useEffect(() => {
     const params = new URLSearchParams()
     if (searchQuery) params.set('search', searchQuery)
+    if (filters.search) params.set('search', filters.search)
     if (filters.location) params.set('location', filters.location)
+    if (filters.dateRange?.startDate) params.set('startDate', filters.dateRange.startDate)
+    if (filters.dateRange?.endDate) params.set('endDate', filters.dateRange.endDate)
     if (filters.priceRange?.min) params.set('minPrice', filters.priceRange.min.toString())
     if (filters.priceRange?.max && filters.priceRange.max < 50000) {
       params.set('maxPrice', filters.priceRange.max.toString())
@@ -91,7 +106,7 @@ const CampsPage = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    setFilters(prev => ({ ...prev, location: searchQuery }))
+    setFilters(prev => ({ ...prev, search: searchQuery }))
     setCurrentPage(1)
   }
 

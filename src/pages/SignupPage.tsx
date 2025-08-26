@@ -68,8 +68,9 @@ const SignupPage = () => {
       } else {
         setError('root', { message: 'Signup failed. Please try again.' })
       }
-    } catch (error: any) {
-      if (error.message?.includes('email already exists')) {
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+      if (errorMessage.includes('email already exists')) {
         setError('email', { message: 'Email already exists' })
       } else {
         setError('root', { message: 'Signup failed. Please try again.' })

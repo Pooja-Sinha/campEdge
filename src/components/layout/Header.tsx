@@ -2,19 +2,25 @@ import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Menu, X, Search, User, Heart, Bell, Sun, Moon, LogOut, Settings, ChevronDown } from 'lucide-react'
 import { useIsAuthenticated, useAuth } from '../../hooks/useAuth'
+import { useUIStore } from '../../store/uiStore'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
   const { isAuthenticated, user } = useIsAuthenticated()
   const { logout } = useAuth()
+  const { theme, setTheme } = useUIStore()
   const navigate = useNavigate()
   const profileMenuRef = useRef<HTMLDivElement>(null)
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    document.documentElement.classList.toggle('dark')
+  // Determine if we're in dark mode for icon display
+  const isDarkMode = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+  const toggleTheme = () => {
+    const themes = ['light', 'dark', 'system'] as const
+    const currentIndex = themes.indexOf(theme)
+    const nextTheme = themes[(currentIndex + 1) % themes.length]
+    setTheme(nextTheme)
   }
 
   const handleLogout = async () => {
@@ -54,10 +60,10 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">C</span>
+              <span className="text-white font-bold text-lg">CE</span>
             </div>
             <span className="font-display font-bold text-xl text-gray-900 dark:text-white">
-              CampIndia
+              CampEdge
             </span>
           </Link>
 
@@ -85,11 +91,12 @@ const Header = () => {
               <Search className="w-5 h-5" />
             </button>
 
-            {/* Dark Mode Toggle */}
+            {/* Theme Toggle */}
             <button
-              onClick={toggleDarkMode}
+              onClick={toggleTheme}
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-              aria-label="Toggle dark mode"
+              aria-label={`Switch theme (current: ${theme})`}
+              title={`Current theme: ${theme}. Click to cycle through light, dark, and system themes.`}
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>

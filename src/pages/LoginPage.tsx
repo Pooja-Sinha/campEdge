@@ -61,9 +61,9 @@ const LoginPage = () => {
   }
 
   const demoAccounts = [
-    { email: 'user@campindia.com', password: 'password123', role: 'User' },
-    { email: 'organizer@campindia.com', password: 'password123', role: 'Organizer' },
-    { email: 'admin@campindia.com', password: 'password123', role: 'Admin' },
+    { email: 'user@campedge.com', password: 'password123', role: 'User' },
+    { email: 'organizer@campedge.com', password: 'password123', role: 'Organizer' },
+    { email: 'admin@campedge.com', password: 'password123', role: 'Admin' },
   ]
 
   const fillDemoAccount = (email: string, password: string) => {

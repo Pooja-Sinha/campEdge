@@ -1,3 +1,3 @@
-User: user@campindia.com / password123
-Organizer: organizer@campindia.com / password123
-Admin: admin@campindia.com / password123
+User: user@campedge.com / password123
+Organizer: organizer@campedge.com / password123
+Admin: admin@campedge.com / password123
