@@ -1,0 +1,307 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "email": "john.doe@example.com",
+      "name": "John Doe",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "phone": "+91-9876543213",
+      "preferences": {
+        "language": "en",
+        "theme": "system",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2024-01-10T10:00:00Z",
+      "updatedAt": "2024-11-20T10:00:00Z"
+    },
+    {
+      "id": "user-002",
+      "email": "priya.sharma@example.com",
+      "name": "Priya Sharma",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "phone": "+91-9876543214",
+      "preferences": {
+        "language": "hi",
+        "theme": "light",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": true
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2024-02-15T10:00:00Z",
+      "updatedAt": "2024-11-18T10:00:00Z"
+    },
+    {
+      "id": "user-demo-001",
+      "email": "user@campindia.com",
+      "name": "Demo User",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "phone": "+91-9876543210",
+      "verified": true,
+      "location": "Mumbai, Maharashtra",
+      "bio": "Adventure enthusiast and photographer",
+      "preferences": {
+        "language": "en",
+        "theme": "system",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2022-01-15T10:00:00Z",
+      "updatedAt": "2024-11-15T14:30:00Z"
+    },
+    {
+      "id": "org-demo-001",
+      "email": "organizer@campindia.com",
+      "name": "Demo Organizer",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "role": "organizer",
+      "phone": "+91-9876543211",
+      "verified": true,
+      "location": "Manali, Himachal Pradesh",
+      "bio": "Professional mountain guide with 10+ years experience",
+      "preferences": {
+        "language": "en",
+        "theme": "light",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": true
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2019-05-20T10:00:00Z",
+      "updatedAt": "2024-11-13T15:20:00Z"
+    },
+    {
+      "id": "admin-demo-001",
+      "email": "admin@campindia.com",
+      "name": "Demo Admin",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "role": "admin",
+      "phone": "+91-9876543212",
+      "verified": true,
+      "location": "Bangalore, Karnataka",
+      "bio": "CampIndia platform administrator",
+      "preferences": {
+        "language": "en",
+        "theme": "dark",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2020-01-01T10:00:00Z",
+      "updatedAt": "2024-11-15T10:00:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "review-001",
+      "userId": "user-001",
+      "campId": "camp-001",
+      "bookingId": "booking-001",
+      "rating": 5,
+      "title": "Absolutely Amazing Himalayan Experience!",
+      "content": "This was hands down the best trekking experience I've ever had. The guides were incredibly knowledgeable and safety-conscious. The views from Kedarkantha peak were breathtaking, and the entire team made sure we were comfortable throughout the journey. The food was surprisingly good for a mountain trek, and the camping equipment was top-notch. I would definitely recommend this to anyone looking for an authentic Himalayan adventure.",
+      "images": [
+        {
+          "id": "review-img-001",
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+          "caption": "Summit view from Kedarkantha"
+        }
+      ],
+      "pros": [
+        "Excellent guides and safety measures",
+        "Stunning mountain views",
+        "Good quality equipment",
+        "Delicious mountain cuisine"
+      ],
+      "cons": [
+        "Weather can be unpredictable",
+        "Physical fitness required"
+      ],
+      "wouldRecommend": true,
+      "verified": true,
+      "helpful": 23,
+      "createdAt": "2024-01-25T10:00:00Z",
+      "updatedAt": "2024-01-25T10:00:00Z",
+      "response": {
+        "content": "Thank you so much for your wonderful review, John! We're thrilled that you had such an amazing experience with us. Safety and authentic experiences are our top priorities, and it's great to hear that our team delivered on both fronts. We look forward to welcoming you on another adventure soon!",
+        "createdAt": "2024-01-26T10:00:00Z",
+        "organizerId": "org-001"
+      }
+    },
+    {
+      "id": "review-002",
+      "userId": "user-002",
+      "campId": "camp-002",
+      "bookingId": "booking-002",
+      "rating": 4,
+      "title": "Magical Desert Experience",
+      "content": "The desert camp was truly magical. Watching the sunset over the sand dunes while riding a camel was unforgettable. The cultural performances in the evening were authentic and entertaining. The luxury tents were comfortable with good facilities. The only downside was that it got quite cold at night, so pack warm clothes! Overall, a wonderful experience that I'd love to repeat.",
+      "pros": [
+        "Beautiful desert landscape",
+        "Authentic cultural experiences",
+        "Comfortable accommodation",
+        "Great camel safari"
+      ],
+      "cons": [
+        "Very cold nights",
+        "Limited activities during the day"
+      ],
+      "wouldRecommend": true,
+      "verified": true,
+      "helpful": 18,
+      "createdAt": "2024-02-28T10:00:00Z",
+      "updatedAt": "2024-02-28T10:00:00Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "booking-001",
+      "userId": "user-001",
+      "campId": "camp-001",
+      "slotId": "slot-001",
+      "participants": [
+        {
+          "id": "participant-001",
+          "name": "John Doe",
+          "age": 28,
+          "gender": "male",
+          "email": "john.doe@example.com",
+          "phone": "+91-9876543213",
+          "medicalConditions": "None",
+          "dietaryRestrictions": "Vegetarian"
+        },
+        {
+          "id": "participant-002",
+          "name": "Sarah Johnson",
+          "age": 26,
+          "gender": "female",
+          "email": "sarah.j@example.com",
+          "phone": "+91-9876543215",
+          "medicalConditions": "None",
+          "dietaryRestrictions": "None"
+        }
+      ],
+      "totalAmount": 25000,
+      "paidAmount": 25000,
+      "paymentStatus": "paid",
+      "bookingStatus": "completed",
+      "specialRequests": "Please arrange vegetarian meals for John",
+      "emergencyContact": {
+        "name": "Mike Doe",
+        "phone": "+91-9876543216",
+        "relation": "Brother"
+      },
+      "createdAt": "2024-01-05T10:00:00Z",
+      "updatedAt": "2024-01-20T10:00:00Z",
+      "checkIn": "2024-01-15T10:00:00Z",
+      "checkOut": "2024-01-19T16:00:00Z"
+    }
+  ],
+  "wishlist": [
+    {
+      "id": "wishlist-001",
+      "userId": "user-001",
+      "campId": "camp-002",
+      "addedAt": "2024-11-15T10:00:00Z",
+      "notes": "Want to visit during winter season"
+    },
+    {
+      "id": "wishlist-002",
+      "userId": "user-002",
+      "campId": "camp-001",
+      "addedAt": "2024-11-10T10:00:00Z",
+      "notes": "Planning for next year's adventure"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "blog-001",
+      "title": "Essential Gear for Himalayan Trekking",
+      "slug": "essential-gear-himalayan-trekking",
+      "excerpt": "A comprehensive guide to packing the right gear for your Himalayan adventure. From clothing layers to safety equipment, we cover everything you need to know.",
+      "content": "Trekking in the Himalayas requires careful preparation and the right gear. Here's a detailed guide to help you pack smart for your mountain adventure...",
+      "featuredImage": "https://images.unsplash.com/photo-1551524164-6cf2ac2d8c9c?w=800&h=400&fit=crop",
+      "author": {
+        "id": "author-001",
+        "name": "Rajesh Kumar",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+      },
+      "category": "gear",
+      "tags": ["trekking", "gear", "himalayan", "preparation"],
+      "published": true,
+      "publishedAt": "2024-11-01T10:00:00Z",
+      "createdAt": "2024-10-25T10:00:00Z",
+      "updatedAt": "2024-11-01T10:00:00Z",
+      "readTime": 8,
+      "views": 1247
+    },
+    {
+      "id": "blog-002",
+      "title": "Best Time to Visit Rajasthan for Desert Camping",
+      "slug": "best-time-rajasthan-desert-camping",
+      "excerpt": "Discover the optimal seasons for desert camping in Rajasthan. Learn about weather patterns, festivals, and what to expect during different times of the year.",
+      "content": "Rajasthan's desert landscape offers unique camping experiences throughout the year, but timing your visit can make all the difference...",
+      "featuredImage": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&h=400&fit=crop",
+      "author": {
+        "id": "author-002",
+        "name": "Meera Joshi",
+        "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+      },
+      "category": "destination",
+      "tags": ["rajasthan", "desert", "timing", "weather"],
+      "published": true,
+      "publishedAt": "2024-10-15T10:00:00Z",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-15T10:00:00Z",
+      "readTime": 6,
+      "views": 892
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-001",
+      "userId": "user-001",
+      "type": "booking_confirmed",
+      "title": "Booking Confirmed!",
+      "message": "Your booking for Himalayan Base Camp Adventure has been confirmed. Check your email for details.",
+      "data": {
+        "bookingId": "booking-001",
+        "campId": "camp-001"
+      },
+      "read": true,
+      "createdAt": "2024-01-05T10:30:00Z"
+    },
+    {
+      "id": "notif-002",
+      "userId": "user-001",
+      "type": "camp_reminder",
+      "title": "Trek Starting Tomorrow!",
+      "message": "Your Himalayan adventure starts tomorrow. Don't forget to pack your essentials and arrive at the meeting point on time.",
+      "data": {
+        "bookingId": "booking-001",
+        "campId": "camp-001"
+      },
+      "read": true,
+      "createdAt": "2024-01-14T18:00:00Z"
+    }
+  ]
+}

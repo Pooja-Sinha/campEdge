@@ -1,0 +1,186 @@
+{
+  "reviews": [
+    {
+      "id": "review-001",
+      "campId": "camp-001",
+      "userId": "user-001",
+      "rating": 5,
+      "title": "Absolutely Incredible Himalayan Experience!",
+      "content": "This was hands down the best camping experience I've ever had! The trek to Triund was challenging but so rewarding. The views of the Dhauladhar range were breathtaking, especially at sunrise. Our guide Rajesh was incredibly knowledgeable about the local flora and fauna. The camping setup was professional with quality tents and sleeping bags. The food was surprisingly good for a mountain camp - hot meals and plenty of variety. I particularly loved the bonfire sessions where we shared stories under the starlit sky. The weather was perfect in October, crisp and clear. I've already booked my next trip with them!",
+      "pros": ["Stunning views", "Professional guides", "Quality equipment", "Great food", "Perfect weather"],
+      "cons": ["Steep initial climb", "Limited phone signal"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+          "caption": "Sunrise view from Triund"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=300&fit=crop",
+          "caption": "Our cozy campsite"
+        }
+      ],
+      "helpful": 24,
+      "verified": true,
+      "tripDate": "2024-10-15",
+      "createdAt": "2024-10-20T14:30:00Z",
+      "organizerResponse": {
+        "content": "Thank you so much Arjun! We're thrilled you had such an amazing experience. Rajesh will be delighted to hear your feedback. We look forward to welcoming you back for your next adventure!",
+        "respondedAt": "2024-10-21T09:15:00Z",
+        "respondedBy": "org-001"
+      }
+    },
+    {
+      "id": "review-002",
+      "campId": "camp-001",
+      "userId": "user-003",
+      "rating": 4,
+      "title": "Great Adventure with Minor Issues",
+      "content": "Overall a fantastic experience! The trek was exactly the level of challenge I was looking for. The group was well-organized and the pace was perfect for intermediate trekkers. The camping gear was in good condition, though my tent had a small tear that let in some cold air at night. The guides were friendly and safety-conscious. Food was decent but could use more variety for vegetarians. The highlight was definitely the night sky - I've never seen so many stars! The sunrise view was worth every step of the climb. Would definitely recommend to anyone looking for a weekend adventure near Delhi.",
+      "pros": ["Perfect difficulty level", "Amazing night sky", "Safety-focused guides", "Great group dynamics"],
+      "cons": ["Tent had minor damage", "Limited vegetarian options"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+          "caption": "The incredible night sky"
+        }
+      ],
+      "helpful": 18,
+      "verified": true,
+      "tripDate": "2024-09-28",
+      "createdAt": "2024-10-02T11:45:00Z",
+      "organizerResponse": {
+        "content": "Thanks for the detailed feedback Vikram! We've noted the tent issue and have since replaced our entire inventory. We're also working on expanding our vegetarian menu options. Hope to see you on another adventure soon!",
+        "respondedAt": "2024-10-02T16:20:00Z",
+        "respondedBy": "org-001"
+      }
+    },
+    {
+      "id": "review-003",
+      "campId": "camp-002",
+      "userId": "user-002",
+      "rating": 5,
+      "title": "Perfect Desert Escape",
+      "content": "What an incredible way to experience the Thar Desert! The camel safari was magical - our camels were well-trained and the handlers were experienced. The desert camp was beautifully set up with traditional Rajasthani décor. The cultural program in the evening was authentic and entertaining - the folk dancers and musicians were talented. The food was absolutely delicious, especially the dal baati churma cooked in the traditional way. Sleeping under the open sky was a once-in-a-lifetime experience. The sunrise over the dunes was spectacular. Our guide shared fascinating stories about desert life and local history. Highly recommend for anyone wanting to experience authentic Rajasthan!",
+      "pros": ["Authentic cultural experience", "Excellent food", "Professional camel handlers", "Beautiful camp setup", "Knowledgeable guides"],
+      "cons": ["Can get quite cold at night", "Sand gets everywhere"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&h=300&fit=crop",
+          "caption": "Camel safari at sunset"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+          "caption": "Traditional Rajasthani dinner"
+        }
+      ],
+      "helpful": 31,
+      "verified": true,
+      "tripDate": "2024-11-05",
+      "createdAt": "2024-11-08T16:20:00Z"
+    },
+    {
+      "id": "review-004",
+      "campId": "camp-003",
+      "userId": "user-004",
+      "rating": 4,
+      "title": "Beautiful Beach Camping Experience",
+      "content": "Gokarna beach camping was a refreshing change from mountain treks! The location right on the beach was perfect - falling asleep to the sound of waves was so peaceful. The tents were spacious and clean. Beach activities were well-organized - volleyball, frisbee, and beach walks. The bonfire on the beach was the highlight of the trip. Food was good with fresh seafood options. The sunset views were absolutely stunning. Only downside was that it got quite windy at night and some sand blew into the tents. The bathroom facilities could be improved. Overall, a great experience for beach lovers!",
+      "pros": ["Perfect beachfront location", "Peaceful atmosphere", "Great beach activities", "Fresh seafood", "Stunning sunsets"],
+      "cons": ["Windy nights", "Basic bathroom facilities", "Sand in tents"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop",
+          "caption": "Sunset from our beach camp"
+        }
+      ],
+      "helpful": 22,
+      "verified": true,
+      "tripDate": "2024-08-20",
+      "createdAt": "2024-08-25T13:10:00Z"
+    },
+    {
+      "id": "review-005",
+      "campId": "camp-004",
+      "userId": "user-005",
+      "rating": 5,
+      "title": "Perfect Family Adventure",
+      "content": "This was our first family camping trip and it exceeded all expectations! The organizers were incredibly accommodating with our 8-year-old and 12-year-old kids. The activities were perfect for families - nature walks, bird watching, and storytelling sessions. The kids loved the treasure hunt and star gazing session. Safety was clearly a priority with proper supervision and child-friendly equipment. The food was excellent with options for picky eaters. The tents were spacious enough for our family of four. The location in Lonavala was easily accessible and the weather was perfect. Our kids are already asking when we can go again! Highly recommend for families looking for their first camping experience.",
+      "pros": ["Family-friendly activities", "Child-safe environment", "Accommodating staff", "Great food variety", "Easy accessibility"],
+      "cons": ["Could use more shade during day", "Limited activities for teens"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300&fit=crop",
+          "caption": "Kids enjoying the treasure hunt"
+        }
+      ],
+      "helpful": 19,
+      "verified": true,
+      "tripDate": "2024-07-15",
+      "createdAt": "2024-07-18T10:30:00Z"
+    },
+    {
+      "id": "review-006",
+      "campId": "camp-005",
+      "userId": "user-007",
+      "rating": 5,
+      "title": "Epic High Altitude Adventure",
+      "content": "As someone who's done multiple high-altitude treks, I can say this Ladakh experience was exceptional! The acclimatization program was well-planned and professional. Our guide Tenzin was incredibly knowledgeable about the region and its culture. The monastery visits were enlightening and the monks were welcoming. The landscape is otherworldly - like being on another planet! The double-humped camels in Nubra Valley were a unique experience. Camping at 14,000 feet was challenging but the support team was excellent. The oxygen support was reassuring. Food was surprisingly good considering the remote location. This is not for beginners but for experienced trekkers, it's a must-do!",
+      "pros": ["Professional high-altitude support", "Knowledgeable local guides", "Unique cultural experiences", "Stunning landscapes", "Well-planned itinerary"],
+      "cons": ["Very expensive", "Physically demanding", "Limited communication"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+          "caption": "Monastery in Ladakh"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+          "caption": "Camping at high altitude"
+        }
+      ],
+      "helpful": 35,
+      "verified": true,
+      "tripDate": "2024-06-20",
+      "createdAt": "2024-06-25T15:45:00Z"
+    },
+    {
+      "id": "review-007",
+      "campId": "camp-006",
+      "userId": "user-008",
+      "rating": 4,
+      "title": "Peaceful Coffee Plantation Retreat",
+      "content": "Perfect getaway for coffee lovers! The plantation tour was fascinating - learned so much about coffee cultivation and processing. The tasting sessions were educational and delicious. The camping setup among the coffee plants was unique and peaceful. Waking up to the aroma of coffee was magical! The guided nature walks revealed beautiful birds and butterflies. The local cuisine was authentic and flavorful. The hosts were warm and welcoming. Only wish the stay was longer! The weather in Coorg was perfect - cool and misty. Great for couples or solo travelers looking for a peaceful retreat. Will definitely return during the harvest season!",
+      "pros": ["Educational coffee tours", "Peaceful setting", "Authentic local cuisine", "Knowledgeable hosts", "Perfect weather"],
+      "cons": ["Too short duration", "Limited adventure activities"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
+          "caption": "Coffee plantation at sunrise"
+        }
+      ],
+      "helpful": 16,
+      "verified": true,
+      "tripDate": "2024-10-10",
+      "createdAt": "2024-10-13T12:20:00Z"
+    },
+    {
+      "id": "review-008",
+      "campId": "camp-007",
+      "userId": "user-009",
+      "rating": 5,
+      "title": "Thrilling Rishikesh Adventure",
+      "content": "What an adrenaline rush! The white water rafting was expertly managed with top-notch safety equipment. Our raft guide was experienced and made sure everyone felt safe while having maximum fun. The rapids were exciting but not overwhelming for first-timers. The riverside camping was perfectly located with great views of the Ganges. The evening yoga session by the river was incredibly peaceful. Food was fresh and healthy with good vegetarian options. The morning meditation session was a perfect way to start the day. The optional bungee jumping was terrifying but amazing! Staff was professional and safety-conscious throughout. Perfect combination of adventure and spirituality that Rishikesh is famous for!",
+      "pros": ["Professional rafting guides", "Excellent safety standards", "Beautiful riverside location", "Great yoga sessions", "Perfect adventure-spirituality balance"],
+      "cons": ["Can be crowded during peak season", "Extra activities are expensive"],
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
+          "caption": "White water rafting action"
+        }
+      ],
+      "helpful": 28,
+      "verified": true,
+      "tripDate": "2024-03-18",
+      "createdAt": "2024-03-22T14:15:00Z"
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Arjun Sharma",
+      "email": "arjun.sharma@email.com",
+      "phone": "+91-9876543210",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Mumbai, Maharashtra",
+      "dateOfBirth": "1992-03-15",
+      "bio": "Adventure enthusiast and photographer. Love exploring the great outdoors and capturing moments in nature.",
+      "preferences": {
+        "difficulty": ["moderate", "challenging"],
+        "activities": ["Trekking", "Photography", "Wildlife"],
+        "seasons": ["autumn", "winter"],
+        "groupSize": "small",
+        "budget": "medium"
+      },
+      "emergencyContact": {
+        "name": "Priya Sharma",
+        "phone": "+91-9876543211",
+        "relation": "Wife"
+      },
+      "stats": {
+        "totalBookings": 8,
+        "totalSpent": 45000,
+        "favoriteDestination": "Himachal Pradesh",
+        "memberSince": "2022-01-15"
+      },
+      "createdAt": "2022-01-15T10:00:00Z",
+      "updatedAt": "2024-11-15T14:30:00Z"
+    },
+    {
+      "id": "user-002",
+      "name": "Sneha Patel",
+      "email": "sneha.patel@email.com",
+      "phone": "+91-9876543212",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Ahmedabad, Gujarat",
+      "dateOfBirth": "1988-07-22",
+      "bio": "Yoga instructor and nature lover. Seeking peaceful retreats and wellness experiences in nature.",
+      "preferences": {
+        "difficulty": ["easy", "moderate"],
+        "activities": ["Wellness", "Yoga", "Nature Walks"],
+        "seasons": ["spring", "autumn"],
+        "groupSize": "medium",
+        "budget": "high"
+      },
+      "emergencyContact": {
+        "name": "Raj Patel",
+        "phone": "+91-9876543213",
+        "relation": "Husband"
+      },
+      "stats": {
+        "totalBookings": 12,
+        "totalSpent": 78000,
+        "favoriteDestination": "Kerala",
+        "memberSince": "2021-08-10"
+      },
+      "createdAt": "2021-08-10T10:00:00Z",
+      "updatedAt": "2024-11-12T16:45:00Z"
+    },
+    {
+      "id": "user-003",
+      "name": "Vikram Singh",
+      "email": "vikram.singh@email.com",
+      "phone": "+91-9876543214",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": false,
+      "location": "Delhi, NCR",
+      "dateOfBirth": "1995-11-08",
+      "bio": "Software engineer and weekend warrior. Always looking for adrenaline-pumping adventures.",
+      "preferences": {
+        "difficulty": ["challenging", "extreme"],
+        "activities": ["Adventure Sports", "Rock Climbing", "Rafting"],
+        "seasons": ["summer", "monsoon"],
+        "groupSize": "large",
+        "budget": "medium"
+      },
+      "emergencyContact": {
+        "name": "Sunita Singh",
+        "phone": "+91-9876543215",
+        "relation": "Mother"
+      },
+      "stats": {
+        "totalBookings": 5,
+        "totalSpent": 32000,
+        "favoriteDestination": "Uttarakhand",
+        "memberSince": "2023-03-20"
+      },
+      "createdAt": "2023-03-20T10:00:00Z",
+      "updatedAt": "2024-11-10T12:20:00Z"
+    },
+    {
+      "id": "user-004",
+      "name": "Kavya Reddy",
+      "email": "kavya.reddy@email.com",
+      "phone": "+91-9876543216",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Bangalore, Karnataka",
+      "dateOfBirth": "1990-05-12",
+      "bio": "Travel blogger and cultural enthusiast. Love exploring local traditions and cuisines during camping trips.",
+      "preferences": {
+        "difficulty": ["easy", "moderate"],
+        "activities": ["Cultural", "Photography", "Local Cuisine"],
+        "seasons": ["winter", "spring"],
+        "groupSize": "small",
+        "budget": "high"
+      },
+      "emergencyContact": {
+        "name": "Anand Reddy",
+        "phone": "+91-9876543217",
+        "relation": "Brother"
+      },
+      "stats": {
+        "totalBookings": 15,
+        "totalSpent": 95000,
+        "favoriteDestination": "Rajasthan",
+        "memberSince": "2020-12-05"
+      },
+      "createdAt": "2020-12-05T10:00:00Z",
+      "updatedAt": "2024-11-14T18:15:00Z"
+    },
+    {
+      "id": "user-005",
+      "name": "Rohit Kumar",
+      "email": "rohit.kumar@email.com",
+      "phone": "+91-9876543218",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Pune, Maharashtra",
+      "dateOfBirth": "1987-09-30",
+      "bio": "Marketing professional and family man. Enjoys camping trips with wife and kids.",
+      "preferences": {
+        "difficulty": ["easy"],
+        "activities": ["Family Friendly", "Nature Walks", "Stargazing"],
+        "seasons": ["winter", "spring"],
+        "groupSize": "medium",
+        "budget": "medium"
+      },
+      "emergencyContact": {
+        "name": "Meera Kumar",
+        "phone": "+91-9876543219",
+        "relation": "Wife"
+      },
+      "stats": {
+        "totalBookings": 6,
+        "totalSpent": 28000,
+        "favoriteDestination": "Maharashtra",
+        "memberSince": "2022-06-18"
+      },
+      "createdAt": "2022-06-18T10:00:00Z",
+      "updatedAt": "2024-11-08T11:30:00Z"
+    },
+    {
+      "id": "user-006",
+      "name": "Ananya Gupta",
+      "email": "ananya.gupta@email.com",
+      "phone": "+91-9876543220",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Kolkata, West Bengal",
+      "dateOfBirth": "1993-12-25",
+      "bio": "Medical student and wildlife enthusiast. Passionate about conservation and bird watching.",
+      "preferences": {
+        "difficulty": ["moderate"],
+        "activities": ["Wildlife", "Bird Watching", "Conservation"],
+        "seasons": ["winter", "spring"],
+        "groupSize": "small",
+        "budget": "low"
+      },
+      "emergencyContact": {
+        "name": "Dr. Amit Gupta",
+        "phone": "+91-9876543221",
+        "relation": "Father"
+      },
+      "stats": {
+        "totalBookings": 4,
+        "totalSpent": 18000,
+        "favoriteDestination": "West Bengal",
+        "memberSince": "2023-09-12"
+      },
+      "createdAt": "2023-09-12T10:00:00Z",
+      "updatedAt": "2024-11-06T09:45:00Z"
+    },
+    {
+      "id": "user-007",
+      "name": "Karan Malhotra",
+      "email": "karan.malhotra@email.com",
+      "phone": "+91-9876543222",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "role": "organizer",
+      "verified": true,
+      "location": "Manali, Himachal Pradesh",
+      "dateOfBirth": "1985-04-18",
+      "bio": "Professional mountain guide with 10+ years experience. Specialized in Himalayan expeditions.",
+      "preferences": {
+        "difficulty": ["challenging", "extreme"],
+        "activities": ["Mountaineering", "High Altitude", "Expedition"],
+        "seasons": ["summer", "autumn"],
+        "groupSize": "small",
+        "budget": "high"
+      },
+      "emergencyContact": {
+        "name": "Simran Malhotra",
+        "phone": "+91-9876543223",
+        "relation": "Wife"
+      },
+      "stats": {
+        "totalBookings": 25,
+        "totalSpent": 150000,
+        "favoriteDestination": "Himachal Pradesh",
+        "memberSince": "2019-05-20"
+      },
+      "organizerStats": {
+        "campsOrganized": 45,
+        "totalParticipants": 680,
+        "averageRating": 4.8,
+        "specializations": ["High Altitude", "Technical Climbing", "Wilderness Survival"]
+      },
+      "createdAt": "2019-05-20T10:00:00Z",
+      "updatedAt": "2024-11-13T15:20:00Z"
+    },
+    {
+      "id": "user-008",
+      "name": "Priya Nair",
+      "email": "priya.nair@email.com",
+      "phone": "+91-9876543224",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": false,
+      "location": "Kochi, Kerala",
+      "dateOfBirth": "1991-08-14",
+      "bio": "Graphic designer and solo traveler. Love peaceful retreats and creative inspiration from nature.",
+      "preferences": {
+        "difficulty": ["easy", "moderate"],
+        "activities": ["Solo Travel", "Art & Craft", "Meditation"],
+        "seasons": ["monsoon", "winter"],
+        "groupSize": "small",
+        "budget": "medium"
+      },
+      "emergencyContact": {
+        "name": "Lakshmi Nair",
+        "phone": "+91-9876543225",
+        "relation": "Mother"
+      },
+      "stats": {
+        "totalBookings": 7,
+        "totalSpent": 35000,
+        "favoriteDestination": "Kerala",
+        "memberSince": "2022-11-08"
+      },
+      "createdAt": "2022-11-08T10:00:00Z",
+      "updatedAt": "2024-11-09T13:10:00Z"
+    },
+    {
+      "id": "user-009",
+      "name": "Aditya Joshi",
+      "email": "aditya.joshi@email.com",
+      "phone": "+91-9876543226",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Jaipur, Rajasthan",
+      "dateOfBirth": "1989-02-28",
+      "bio": "History teacher and heritage enthusiast. Fascinated by historical sites and cultural camping experiences.",
+      "preferences": {
+        "difficulty": ["easy", "moderate"],
+        "activities": ["Cultural", "Heritage", "Photography"],
+        "seasons": ["winter", "spring"],
+        "groupSize": "medium",
+        "budget": "medium"
+      },
+      "emergencyContact": {
+        "name": "Sunita Joshi",
+        "phone": "+91-9876543227",
+        "relation": "Mother"
+      },
+      "stats": {
+        "totalBookings": 9,
+        "totalSpent": 42000,
+        "favoriteDestination": "Rajasthan",
+        "memberSince": "2021-04-12"
+      },
+      "createdAt": "2021-04-12T10:00:00Z",
+      "updatedAt": "2024-11-11T10:25:00Z"
+    },
+    {
+      "id": "user-010",
+      "name": "Deepika Iyer",
+      "email": "deepika.iyer@email.com",
+      "phone": "+91-9876543228",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "role": "organizer",
+      "verified": true,
+      "location": "Coorg, Karnataka",
+      "dateOfBirth": "1986-06-05",
+      "bio": "Eco-tourism specialist and coffee plantation owner. Organizing sustainable camping experiences.",
+      "preferences": {
+        "difficulty": ["easy", "moderate"],
+        "activities": ["Eco Tourism", "Plantation Tours", "Sustainability"],
+        "seasons": ["monsoon", "winter"],
+        "groupSize": "medium",
+        "budget": "high"
+      },
+      "emergencyContact": {
+        "name": "Ravi Iyer",
+        "phone": "+91-9876543229",
+        "relation": "Husband"
+      },
+      "stats": {
+        "totalBookings": 18,
+        "totalSpent": 85000,
+        "favoriteDestination": "Karnataka",
+        "memberSince": "2020-08-15"
+      },
+      "organizerStats": {
+        "campsOrganized": 32,
+        "totalParticipants": 450,
+        "averageRating": 4.6,
+        "specializations": ["Eco Tourism", "Coffee Tours", "Sustainable Travel"]
+      },
+      "createdAt": "2020-08-15T10:00:00Z",
+      "updatedAt": "2024-11-07T14:40:00Z"
+    },
+    {
+      "id": "user-011",
+      "name": "Rahul Verma",
+      "email": "rahul.verma@email.com",
+      "phone": "+91-9876543230",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": false,
+      "location": "Lucknow, Uttar Pradesh",
+      "dateOfBirth": "1994-10-17",
+      "bio": "Fitness trainer and outdoor sports enthusiast. Always up for physical challenges and group activities.",
+      "preferences": {
+        "difficulty": ["moderate", "challenging"],
+        "activities": ["Fitness", "Team Sports", "Obstacle Courses"],
+        "seasons": ["winter", "spring"],
+        "groupSize": "large",
+        "budget": "low"
+      },
+      "emergencyContact": {
+        "name": "Sanjay Verma",
+        "phone": "+91-9876543231",
+        "relation": "Father"
+      },
+      "stats": {
+        "totalBookings": 3,
+        "totalSpent": 15000,
+        "favoriteDestination": "Uttar Pradesh",
+        "memberSince": "2024-02-20"
+      },
+      "createdAt": "2024-02-20T10:00:00Z",
+      "updatedAt": "2024-11-05T16:55:00Z"
+    },
+    {
+      "id": "user-012",
+      "name": "Meera Chopra",
+      "email": "meera.chopra@email.com",
+      "phone": "+91-9876543232",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      "role": "user",
+      "verified": true,
+      "location": "Chandigarh, Punjab",
+      "dateOfBirth": "1988-01-09",
+      "bio": "Nutritionist and wellness coach. Interested in health-focused camping and organic food experiences.",
+      "preferences": {
+        "difficulty": ["easy"],
+        "activities": ["Wellness", "Organic Farming", "Healthy Living"],
+        "seasons": ["spring", "autumn"],
+        "groupSize": "small",
+        "budget": "high"
+      },
+      "emergencyContact": {
+        "name": "Amit Chopra",
+        "phone": "+91-9876543233",
+        "relation": "Husband"
+      },
+      "stats": {
+        "totalBookings": 11,
+        "totalSpent": 68000,
+        "favoriteDestination": "Himachal Pradesh",
+        "memberSince": "2021-07-22"
+      },
+      "createdAt": "2021-07-22T10:00:00Z",
+      "updatedAt": "2024-11-04T12:18:00Z"
+    }
+  ]
+}
