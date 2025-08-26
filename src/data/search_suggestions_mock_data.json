@@ -1,0 +1,74 @@
+{
+  "suggestions": [
+    {
+      "id": "loc-1",
+      "type": "location",
+      "title": "Himachal Pradesh",
+      "subtitle": "15 camps available"
+    },
+    {
+      "id": "loc-2",
+      "type": "location",
+      "title": "Rajasthan",
+      "subtitle": "8 camps available"
+    },
+    {
+      "id": "loc-3",
+      "type": "location",
+      "title": "Kerala",
+      "subtitle": "6 camps available"
+    },
+    {
+      "id": "loc-4",
+      "type": "location",
+      "title": "Uttarakhand",
+      "subtitle": "12 camps available"
+    },
+    {
+      "id": "camp-1",
+      "type": "camp",
+      "title": "Triund Trek & Camping",
+      "subtitle": "Himachal Pradesh • ₹3,500"
+    },
+    {
+      "id": "camp-2",
+      "type": "camp",
+      "title": "Jaisalmer Desert Safari",
+      "subtitle": "Rajasthan • ₹4,200"
+    },
+    {
+      "id": "camp-3",
+      "type": "camp",
+      "title": "Gokarna Beach Camping",
+      "subtitle": "Karnataka • ₹2,800"
+    },
+    {
+      "id": "act-1",
+      "type": "activity",
+      "title": "Trekking",
+      "subtitle": "25 camps offer this",
+      "category": "Adventure"
+    },
+    {
+      "id": "act-2",
+      "type": "activity",
+      "title": "Photography",
+      "subtitle": "18 camps offer this",
+      "category": "Creative"
+    },
+    {
+      "id": "act-3",
+      "type": "activity",
+      "title": "Wildlife Safari",
+      "subtitle": "12 camps offer this",
+      "category": "Nature"
+    },
+    {
+      "id": "act-4",
+      "type": "activity",
+      "title": "River Rafting",
+      "subtitle": "8 camps offer this",
+      "category": "Adventure"
+    }
+  ]
+}

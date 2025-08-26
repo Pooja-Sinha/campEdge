@@ -1,6 +1,6 @@
 {
-  "name": "CampIndia - Discover Amazing Camping Experiences",
-  "short_name": "CampIndia",
+  "name": "CampEdge - Discover Amazing Camping Experiences",
+  "short_name": "CampEdge",
   "description": "Discover the beauty of India through authentic camping experiences. From Himalayan peaks to desert dunes, create memories that last a lifetime.",
   "start_url": "/",
   "display": "standalone",
@@ -104,14 +104,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "CampIndia homepage showing featured camps"
+      "label": "CampEdge homepage showing featured camps"
     },
     {
       "src": "/images/screenshot-narrow.png",
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "CampIndia mobile view with camp listings"
+      "label": "CampEdge mobile view with camp listings"
     }
   ],
   "related_applications": [],

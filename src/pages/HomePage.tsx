@@ -1,10 +1,65 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Search, MapPin, Star, Users, Calendar, ArrowRight } from 'lucide-react'
 import { useFeaturedCamps } from '../hooks/useCamps'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 
 const HomePage = () => {
   const { data: featuredResponse, isLoading, error } = useFeaturedCamps()
+  const navigate = useNavigate()
+
+  // Search form state
+  const [searchForm, setSearchForm] = useState({
+    destination: '',
+    checkIn: '',
+    groupSize: ''
+  })
+
+  const handleInputChange = (field: string, value: string) => {
+    setSearchForm(prev => ({
+      ...prev,
+      [field]: value
+    }))
+  }
+
+  const handleSearch = () => {
+    // Build search query parameters
+    const searchParams = new URLSearchParams()
+
+    if (searchForm.destination) {
+      searchParams.set('search', searchForm.destination)
+    }
+
+    if (searchForm.checkIn) {
+      searchParams.set('startDate', searchForm.checkIn)
+      // For single date, set end date as same date (single day trip) or add a few days
+      const checkInDate = new Date(searchForm.checkIn)
+      const checkOutDate = new Date(checkInDate)
+      checkOutDate.setDate(checkOutDate.getDate() + 3) // Default 3-day trip
+      searchParams.set('endDate', checkOutDate.toISOString().split('T')[0])
+    }
+
+    if (searchForm.groupSize) {
+      // Convert group size to groupSize parameter
+      switch (searchForm.groupSize) {
+        case '1-2 people':
+          searchParams.set('groupSize', '2')
+          break
+        case '3-5 people':
+          searchParams.set('groupSize', '5')
+          break
+        case '6-10 people':
+          searchParams.set('groupSize', '10')
+          break
+        case '10+ people':
+          searchParams.set('groupSize', '15')
+          break
+      }
+    }
+
+    // Navigate to camps page with search parameters
+    navigate(`/camps?${searchParams.toString()}`)
+  }
 
   return (
     <div className="min-h-screen">
@@ -65,6 +120,8 @@ const HomePage = () => {
                     type="text"
                     placeholder="Where do you want to go?"
                     className="input-field pl-10"
+                    value={searchForm.destination}
+                    onChange={(e) => handleInputChange('destination', e.target.value)}
                   />
                 </div>
               </div>
@@ -75,22 +132,34 @@ const HomePage = () => {
                 <input
                   type="date"
                   className="input-field"
+                  value={searchForm.checkIn}
+                  onChange={(e) => handleInputChange('checkIn', e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Group Size
                 </label>
-                <select className="input-field">
-                  <option>1-2 people</option>
-                  <option>3-5 people</option>
-                  <option>6-10 people</option>
-                  <option>10+ people</option>
+                <select
+                  className="input-field"
+                  value={searchForm.groupSize}
+                  onChange={(e) => handleInputChange('groupSize', e.target.value)}
+                >
+                  <option value="">Select group size</option>
+                  <option value="1-2 people">1-2 people</option>
+                  <option value="3-5 people">3-5 people</option>
+                  <option value="6-10 people">6-10 people</option>
+                  <option value="10+ people">10+ people</option>
                 </select>
               </div>
               <div className="flex items-end">
-                <button className="btn-primary w-full">
-                  Search Camps
+                <button
+                  className="btn-primary w-full flex items-center justify-center"
+                  onClick={handleSearch}
+                >
+                  <Search className="w-4 h-4 mr-2" />
+                  <span>Search Camps</span>
                 </button>
               </div>
             </div>

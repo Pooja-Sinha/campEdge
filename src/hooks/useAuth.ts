@@ -50,6 +50,29 @@ export const useAuth = () => {
     },
   });
 
+  const signup = useMutation({
+    mutationFn: (userData: {
+      name: string;
+      email: string;
+      password: string;
+      phone: string;
+      role: 'user' | 'organizer';
+    }) => userApi.signup(userData),
+    onSuccess: (response) => {
+      if (response.success) {
+        // Update the user query cache
+        queryClient.setQueryData(AUTH_QUERY_KEYS.user, response);
+        // Invalidate all user-related queries
+        queryClient.invalidateQueries({ queryKey: ['wishlist'] });
+        queryClient.invalidateQueries({ queryKey: ['bookings'] });
+        queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      }
+    },
+    onError: (error) => {
+      console.error('Signup failed:', error);
+    },
+  });
+
   const updateProfile = useMutation({
     mutationFn: ({ userId, updates }: { userId: string; updates: Partial<User> }) =>
       userApi.updateProfile(userId, updates),
@@ -64,6 +87,7 @@ export const useAuth = () => {
   return {
     login,
     logout,
+    signup,
     updateProfile,
   };
 };

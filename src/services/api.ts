@@ -83,8 +83,28 @@ export const campApi = {
     
     // Apply filters
     if (filters) {
+      // General search across multiple fields
+      if (filters.search) {
+        const searchTerm = filters.search.toLowerCase();
+        camps = camps.filter(camp =>
+          camp.title.toLowerCase().includes(searchTerm) ||
+          camp.description.toLowerCase().includes(searchTerm) ||
+          camp.shortDescription.toLowerCase().includes(searchTerm) ||
+          camp.location.name.toLowerCase().includes(searchTerm) ||
+          camp.location.state.toLowerCase().includes(searchTerm) ||
+          camp.location.nearestCity.toLowerCase().includes(searchTerm) ||
+          camp.activities.some(activity =>
+            activity.name.toLowerCase().includes(searchTerm)
+          ) ||
+          camp.amenities.some(amenity =>
+            amenity.name.toLowerCase().includes(searchTerm)
+          ) ||
+          camp.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+        );
+      }
+
       if (filters.location) {
-        camps = camps.filter(camp => 
+        camps = camps.filter(camp =>
           camp.location.name.toLowerCase().includes(filters.location!.toLowerCase()) ||
           camp.location.state.toLowerCase().includes(filters.location!.toLowerCase()) ||
           camp.location.nearestCity.toLowerCase().includes(filters.location!.toLowerCase())
@@ -308,6 +328,72 @@ export const userApi = {
       success: true,
       data: users[userIndex]
     };
+  },
+
+  // Sign up new user
+  signup: async (userData: {
+    name: string;
+    email: string;
+    password: string;
+    phone: string;
+    role: 'user' | 'organizer';
+  }): Promise<ApiResponse<User>> => {
+    await delay();
+
+    const users = getFromStorage<User>(STORAGE_KEYS.USERS);
+
+    // Check if user already exists
+    const existingUser = users.find(u => u.email === userData.email);
+    if (existingUser) {
+      return {
+        success: false,
+        data: null,
+        error: 'A user with this email already exists'
+      };
+    }
+
+    // Validate required fields
+    if (!userData.name || !userData.email || !userData.password || !userData.phone) {
+      return {
+        success: false,
+        data: null,
+        error: 'All fields are required'
+      };
+    }
+
+    // Create new user
+    const newUser: User = {
+      id: `user-${Date.now()}`,
+      name: userData.name,
+      email: userData.email,
+      phone: userData.phone,
+      role: userData.role,
+      avatar: `https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face`,
+      preferences: {
+        language: 'en',
+        theme: 'system',
+        notifications: {
+          email: true,
+          push: true,
+          sms: false
+        },
+        currency: 'INR'
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    // Add user to storage
+    users.push(newUser);
+    saveToStorage(STORAGE_KEYS.USERS, users);
+
+    // Auto-login the new user
+    localStorage.setItem(STORAGE_KEYS.CURRENT_USER, newUser.id);
+
+    return {
+      success: true,
+      data: newUser
+    };
   }
 };
 
@@ -361,22 +447,36 @@ export const reviewApi = {
 // Booking API
 export const bookingApi = {
   // Get user bookings
-  getUserBookings: async (userId: string): Promise<ApiResponse<Booking[]>> => {
+  getUserBookings: async (userId: string): Promise<ApiResponse<any[]>> => {
     await delay();
-    
+
     const bookings = getFromStorage<Booking>(STORAGE_KEYS.BOOKINGS);
     const userBookings = bookings.filter(b => b.userId === userId);
-    
+
+    // Enrich bookings with camp data
+    const enrichedBookings = userBookings.map(booking => {
+      const camp = campingData.camps.find(c => c.id === booking.campId);
+      const slot = camp?.availability.slots.find(s => s.id === booking.slotId);
+
+      return {
+        ...booking,
+        camp: camp || null,
+        slot: slot || null
+      };
+    });
+
     return {
       success: true,
-      data: userBookings
+      data: enrichedBookings
     };
   },
 
   // Create booking
   createBooking: async (booking: Omit<Booking, 'id' | 'createdAt' | 'updatedAt'>): Promise<ApiResponse<Booking>> => {
     await delay();
-    
+
+    console.log('Creating booking with data:', booking);
+
     const bookings = getFromStorage<Booking>(STORAGE_KEYS.BOOKINGS);
     const newBooking: Booking = {
       ...booking,
@@ -384,10 +484,12 @@ export const bookingApi = {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
-    
+
     bookings.push(newBooking);
     saveToStorage(STORAGE_KEYS.BOOKINGS, bookings);
-    
+
+    console.log('Booking created successfully:', newBooking);
+
     return {
       success: true,
       data: newBooking
@@ -427,15 +529,24 @@ export const bookingApi = {
 // Wishlist API
 export const wishlistApi = {
   // Get user wishlist
-  getUserWishlist: async (userId: string): Promise<ApiResponse<WishlistItem[]>> => {
+  getUserWishlist: async (userId: string): Promise<ApiResponse<any[]>> => {
     await delay();
-    
+
     const wishlist = getFromStorage<WishlistItem>(STORAGE_KEYS.WISHLIST);
     const userWishlist = wishlist.filter(w => w.userId === userId);
-    
+
+    // Enrich wishlist items with camp data
+    const enrichedWishlist = userWishlist.map(item => {
+      const camp = campingData.camps.find(c => c.id === item.campId);
+      return {
+        ...item,
+        camp: camp || null
+      };
+    });
+
     return {
       success: true,
-      data: userWishlist
+      data: enrichedWishlist
     };
   },
 

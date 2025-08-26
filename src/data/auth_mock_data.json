@@ -1,0 +1,65 @@
+{
+  "users": {
+    "user@campedge.com": {
+      "id": "user-demo-001",
+      "name": "John Doe",
+      "email": "user@campedge.com",
+      "phone": "+91-9876543210",
+      "role": "user",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "preferences": {
+        "language": "en",
+        "theme": "system",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2022-01-15T10:00:00Z",
+      "updatedAt": "2024-11-15T14:30:00Z"
+    },
+    "organizer@campedge.com": {
+      "id": "org-001",
+      "name": "Adventure Guide",
+      "email": "organizer@campedge.com",
+      "phone": "+91-9876543211",
+      "role": "organizer",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "preferences": {
+        "language": "en",
+        "theme": "light",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": true
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2019-05-20T10:00:00Z",
+      "updatedAt": "2024-11-13T15:20:00Z"
+    },
+    "admin@campedge.com": {
+      "id": "admin-001",
+      "name": "Admin User",
+      "email": "admin@campedge.com",
+      "phone": "+91-9876543212",
+      "role": "admin",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "preferences": {
+        "language": "en",
+        "theme": "dark",
+        "notifications": {
+          "email": true,
+          "push": true,
+          "sms": false
+        },
+        "currency": "INR"
+      },
+      "createdAt": "2020-01-01T10:00:00Z",
+      "updatedAt": "2024-11-15T10:00:00Z"
+    }
+  },
+  "defaultPassword": "password123"
+}
