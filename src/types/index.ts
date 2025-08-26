@@ -300,6 +300,7 @@ export interface OrganizerResponse {
 
 // Search and Filter Types
 export interface SearchFilters {
+  search?: string;
   location?: string;
   dateRange?: {
     startDate: string;

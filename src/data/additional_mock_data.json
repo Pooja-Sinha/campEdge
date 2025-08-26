@@ -42,7 +42,7 @@
     },
     {
       "id": "user-demo-001",
-      "email": "user@campindia.com",
+      "email": "user@campedge.com",
       "name": "Demo User",
       "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       "role": "user",
@@ -65,7 +65,7 @@
     },
     {
       "id": "org-demo-001",
-      "email": "organizer@campindia.com",
+      "email": "organizer@campedge.com",
       "name": "Demo Organizer",
       "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       "role": "organizer",
@@ -88,14 +88,14 @@
     },
     {
       "id": "admin-demo-001",
-      "email": "admin@campindia.com",
+      "email": "admin@campedge.com",
       "name": "Demo Admin",
       "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
       "role": "admin",
       "phone": "+91-9876543212",
       "verified": true,
       "location": "Bangalore, Karnataka",
-      "bio": "CampIndia platform administrator",
+      "bio": "CampEdge platform administrator",
       "preferences": {
         "language": "en",
         "theme": "dark",
@@ -214,6 +214,36 @@
       "updatedAt": "2024-01-20T10:00:00Z",
       "checkIn": "2024-01-15T10:00:00Z",
       "checkOut": "2024-01-19T16:00:00Z"
+    },
+    {
+      "id": "booking-demo-001",
+      "userId": "user-demo-001",
+      "campId": "camp-002",
+      "slotId": "slot-004",
+      "participants": [
+        {
+          "id": "participant-demo-001",
+          "name": "Demo User",
+          "age": 30,
+          "gender": "male",
+          "email": "user@campedge.com",
+          "phone": "+91-9876543210",
+          "medicalConditions": "None",
+          "dietaryRestrictions": "None"
+        }
+      ],
+      "totalAmount": 8500,
+      "paidAmount": 8500,
+      "paymentStatus": "paid",
+      "bookingStatus": "confirmed",
+      "specialRequests": "Looking forward to the desert experience!",
+      "emergencyContact": {
+        "name": "Emergency Contact",
+        "phone": "+91-9876543299",
+        "relation": "Friend"
+      },
+      "createdAt": "2024-11-10T10:00:00Z",
+      "updatedAt": "2024-11-10T10:00:00Z"
     }
   ],
   "wishlist": [
@@ -230,6 +260,27 @@
       "campId": "camp-001",
       "addedAt": "2024-11-10T10:00:00Z",
       "notes": "Planning for next year's adventure"
+    },
+    {
+      "id": "wishlist-demo-001",
+      "userId": "user-demo-001",
+      "campId": "camp-001",
+      "addedAt": "2024-11-12T10:00:00Z",
+      "notes": "Triund trek looks amazing!"
+    },
+    {
+      "id": "wishlist-demo-002",
+      "userId": "user-demo-001",
+      "campId": "camp-003",
+      "addedAt": "2024-11-14T10:00:00Z",
+      "notes": "Beach camping sounds perfect"
+    },
+    {
+      "id": "wishlist-demo-003",
+      "userId": "user-demo-001",
+      "campId": "camp-005",
+      "addedAt": "2024-11-16T10:00:00Z",
+      "notes": "Wildlife photography opportunity"
     }
   ],
   "blogPosts": [

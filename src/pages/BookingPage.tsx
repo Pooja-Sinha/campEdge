@@ -22,6 +22,7 @@ import {
 import { useCamp } from '../hooks/useCamps'
 import { useIsAuthenticated } from '../hooks/useAuth'
 import { bookingApi } from '../services/api'
+import { useQueryClient } from '@tanstack/react-query'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import { formatCurrency, formatDate, formatDuration } from '../utils/format'
 import { cn } from '../utils/cn'
@@ -65,6 +66,7 @@ const BookingPage = () => {
 
   const { isAuthenticated, user } = useIsAuthenticated()
   const { data: campResponse, isLoading } = useCamp(campId!)
+  const queryClient = useQueryClient()
 
   const camp = campResponse?.success ? campResponse.data : null
   const selectedSlot = camp?.availability.slots.find(slot => slot.id === slotId)
@@ -150,8 +152,12 @@ const BookingPage = () => {
   }
 
   const onSubmit = async (data: BookingFormData) => {
-    if (!camp || !selectedSlot || !user) return
+    if (!camp || !selectedSlot || !user) {
+      console.error('Missing required data:', { camp: !!camp, selectedSlot: !!selectedSlot, user: !!user });
+      return;
+    }
 
+    console.log('Starting booking submission with data:', data);
     setIsSubmitting(true)
     try {
       const bookingData = {
@@ -167,13 +173,20 @@ const BookingPage = () => {
         emergencyContact: data.emergencyContact,
       }
 
+      console.log('Submitting booking data:', bookingData);
       const response = await bookingApi.createBooking(bookingData)
+      console.log('Booking API response:', response);
 
       if (response.success) {
         setBookingId(response.data.id)
         setBookingComplete(true)
+        console.log('Booking completed successfully with ID:', response.data.id);
+
+        // Invalidate booking-related queries to refresh the data
+        queryClient.invalidateQueries({ queryKey: ['bookings'] });
+        queryClient.invalidateQueries({ queryKey: ['bookings', 'user', user.id] });
       } else {
-        throw new Error('Booking failed')
+        throw new Error(response.error || 'Booking failed')
       }
     } catch (error) {
       console.error('Booking error:', error)

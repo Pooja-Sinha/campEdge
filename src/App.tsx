@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import Layout from './components/layout/Layout'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import ErrorBoundary from './components/common/ErrorBoundary'
+import { useUIStore } from './store/uiStore'
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'))
@@ -19,6 +20,13 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function App() {
+  const { theme, setTheme } = useUIStore()
+
+  // Ensure theme is properly applied on app initialization
+  useEffect(() => {
+    setTheme(theme)
+  }, [theme, setTheme])
+
   return (
     <ErrorBoundary>
       <Layout>

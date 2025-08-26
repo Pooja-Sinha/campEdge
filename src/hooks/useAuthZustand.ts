@@ -43,7 +43,7 @@ export const useAuthZustand = () => {
         addNotification({
           type: 'success',
           title: 'Account Created!',
-          message: 'Welcome to CampIndia! Your account has been created successfully.',
+          message: 'Welcome to CampEdge! Your account has been created successfully.',
         })
         return { success: true }
       } catch (error) {

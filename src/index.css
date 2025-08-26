@@ -79,18 +79,18 @@ html {
 
 body {
   font-family: var(--font-family-sans);
-  color: rgb(17 24 39);
-  background-color: rgb(249 250 251);
+  color: rgb(41 37 36);
+  background-color: rgb(254 252 248);
   transition: color 0.3s, background-color 0.3s;
 }
 
-body.dark {
+.dark body {
   color: rgb(243 244 246);
   background-color: rgb(17 24 39);
 }
 
 * {
-  border-color: rgb(229 231 235);
+  border-color: rgb(214 211 209);
 }
 
 .dark * {
@@ -136,6 +136,232 @@ body.dark {
 
 .dark .btn-secondary:hover {
   background-color: rgb(75 85 99);
+}
+
+/* Custom warm theme overrides for light mode */
+.bg-white {
+  background-color: rgb(252 250 246) !important;
+}
+
+.text-gray-900 {
+  color: rgb(41 37 36) !important;
+}
+
+.text-gray-700 {
+  color: rgb(68 64 60) !important;
+}
+
+.text-gray-600 {
+  color: rgb(87 83 78) !important;
+}
+
+.border-gray-200 {
+  border-color: rgb(231 229 228) !important;
+}
+
+.border-gray-300 {
+  border-color: rgb(214 211 209) !important;
+}
+
+/* Dark mode - keep original colors */
+.dark .bg-white {
+  background-color: rgb(31 41 55) !important;
+}
+
+.dark .text-gray-900 {
+  color: rgb(243 244 246) !important;
+}
+
+.dark .text-gray-700 {
+  color: rgb(209 213 219) !important;
+}
+
+.dark .text-gray-600 {
+  color: rgb(156 163 175) !important;
+}
+
+.dark .border-gray-200 {
+  border-color: rgb(55 65 81) !important;
+}
+
+.dark .border-gray-300 {
+  border-color: rgb(75 85 99) !important;
+}
+
+/* Input field overrides for warm theme */
+.input-field {
+  background-color: rgb(250 248 244) !important;
+  border-color: rgb(214 211 209) !important;
+  color: rgb(41 37 36) !important;
+}
+
+.input-field:focus {
+  background-color: rgb(255 253 249) !important;
+  border-color: var(--color-primary-500) !important;
+}
+
+.dark .input-field {
+  background-color: rgb(55 65 81) !important;
+  border-color: rgb(75 85 99) !important;
+  color: rgb(243 244 246) !important;
+}
+
+.dark .input-field:focus {
+  background-color: rgb(75 85 99) !important;
+  border-color: var(--color-primary-500) !important;
+}
+
+/* Additional warm theme colors */
+.bg-gray-50 {
+  background-color: rgb(250 248 244) !important;
+}
+
+.bg-gray-100 {
+  background-color: rgb(245 243 239) !important;
+}
+
+.text-gray-500 {
+  color: rgb(120 113 108) !important;
+}
+
+.text-gray-400 {
+  color: rgb(168 162 158) !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: rgb(55 65 81) !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: rgb(75 85 99) !important;
+}
+
+.dark .text-gray-500 {
+  color: rgb(107 114 128) !important;
+}
+
+.dark .text-gray-400 {
+  color: rgb(156 163 175) !important;
+}
+
+/* Card and container overrides */
+.bg-gray-800 {
+  background-color: rgb(252 250 246) !important;
+}
+
+.bg-gray-700 {
+  background-color: rgb(245 243 239) !important;
+}
+
+.border-gray-700 {
+  border-color: rgb(214 211 209) !important;
+}
+
+.dark .bg-gray-800 {
+  background-color: rgb(31 41 55) !important;
+}
+
+.dark .bg-gray-700 {
+  background-color: rgb(55 65 81) !important;
+}
+
+.dark .border-gray-700 {
+  border-color: rgb(55 65 81) !important;
+}
+
+/* Text color overrides for better contrast */
+.text-white {
+  color: rgb(41 37 36) !important;
+}
+
+.dark .text-white {
+  color: rgb(243 244 246) !important;
+}
+
+/* Hover state overrides for warm theme */
+.hover\:bg-gray-100:hover {
+  background-color: rgb(248 246 242) !important;
+}
+
+.hover\:bg-gray-50:hover {
+  background-color: rgb(252 250 246) !important;
+}
+
+.hover\:text-gray-700:hover {
+  color: rgb(68 64 60) !important;
+}
+
+.hover\:text-gray-900:hover {
+  color: rgb(41 37 36) !important;
+}
+
+/* Dark mode hover states - keep original */
+.dark .hover\:bg-gray-100:hover {
+  background-color: rgb(55 65 81) !important;
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: rgb(75 85 99) !important;
+}
+
+.dark .hover\:text-gray-700:hover {
+  color: rgb(209 213 219) !important;
+}
+
+.dark .hover\:text-gray-900:hover {
+  color: rgb(243 244 246) !important;
+}
+
+/* Red hover states for warm theme */
+.hover\:bg-red-50:hover {
+  background-color: rgb(254 242 242) !important;
+}
+
+.text-red-600 {
+  color: rgb(185 28 28) !important;
+}
+
+.hover\:text-red-700:hover {
+  color: rgb(153 27 27) !important;
+}
+
+/* Dark mode red states - keep original */
+.dark .hover\:bg-red-50:hover {
+  background-color: rgba(185, 28, 28, 0.1) !important;
+}
+
+.dark .text-red-600 {
+  color: rgb(248 113 113) !important;
+}
+
+.dark .hover\:text-red-700:hover {
+  color: rgb(239 68 68) !important;
+}
+
+/* Additional hover states for buttons and links */
+.hover\:bg-primary-50:hover {
+  background-color: rgb(240 249 255) !important;
+}
+
+.hover\:text-primary-600:hover {
+  color: var(--color-primary-600) !important;
+}
+
+.hover\:text-primary-700:hover {
+  color: var(--color-primary-700) !important;
+}
+
+/* Primary color hover states for dark mode */
+.dark .hover\:bg-primary-50:hover {
+  background-color: rgba(2, 132, 199, 0.1) !important;
+}
+
+.dark .hover\:text-primary-600:hover {
+  color: var(--color-primary-400) !important;
+}
+
+.dark .hover\:text-primary-700:hover {
+  color: var(--color-primary-300) !important;
 }
 
 .btn-outline {

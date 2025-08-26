@@ -1,10 +1,10 @@
-// CampIndia Enhanced Service Worker
+// CampEdge Enhanced Service Worker
 // Provides offline functionality, caching, and background sync
 
-const CACHE_NAME = 'campindia-v1.1.0'
-const STATIC_CACHE = 'campindia-static-v1.1.0'
-const DYNAMIC_CACHE = 'campindia-dynamic-v1.1.0'
-const IMAGE_CACHE = 'campindia-images-v1.1.0'
+const CACHE_NAME = 'campedge-v1.1.0'
+const STATIC_CACHE = 'campedge-static-v1.1.0'
+const DYNAMIC_CACHE = 'campedge-dynamic-v1.1.0'
+const IMAGE_CACHE = 'campedge-images-v1.1.0'
 
 // Assets to cache immediately
 const STATIC_ASSETS = [
@@ -126,7 +126,7 @@ self.addEventListener('push', (event) => {
   };
 
   event.waitUntil(
-    self.registration.showNotification('CampIndia', options)
+    self.registration.showNotification('CampEdge', options)
   );
 });
 
