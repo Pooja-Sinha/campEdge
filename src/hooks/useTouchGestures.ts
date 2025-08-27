@@ -84,9 +84,9 @@ export const useTouchGestures = (
     
     if (Math.abs(dx) > Math.abs(dy)) {
       return dx > 0 ? 'right' : 'left'
-    } else {
+    } 
       return dy > 0 ? 'down' : 'up'
-    }
+    
   }
 
   const clearLongPressTimer = () => {
@@ -103,6 +103,8 @@ export const useTouchGestures = (
     }
 
     const touch = e.touches[0]
+    if (!touch) {return}
+
     const touchPoint: TouchPoint = {
       x: touch.clientX,
       y: touch.clientY,
@@ -115,6 +117,7 @@ export const useTouchGestures = (
 
     // Handle multi-touch for pinch
     if (e.touches.length === 2) {
+      if (!e.touches[0] || !e.touches[1]) {return}
       const distance = getTouchDistance(e.touches[0], e.touches[1])
       initialPinchDistanceRef.current = distance
       lastPinchScaleRef.current = 1
@@ -142,9 +145,11 @@ export const useTouchGestures = (
       e.preventDefault()
     }
 
-    if (!touchStartRef.current) return
+    if (!touchStartRef.current) {return}
 
     const touch = e.touches[0]
+    if (!touch) {return}
+
     const currentPoint: TouchPoint = {
       x: touch.clientX,
       y: touch.clientY,
@@ -153,10 +158,12 @@ export const useTouchGestures = (
 
     // Handle pinch gesture
     if (e.touches.length === 2 && initialPinchDistanceRef.current && callbacks.onPinch) {
+      if (!e.touches[0] || !e.touches[1]) {return}
       const currentDistance = getTouchDistance(e.touches[0], e.touches[1])
       const scale = currentDistance / initialPinchDistanceRef.current
       
       if (Math.abs(scale - lastPinchScaleRef.current) > pinchThreshold) {
+        if (!e.touches[0] || !e.touches[1]) {return}
         const center = {
           x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
           y: (e.touches[0].clientY + e.touches[1].clientY) / 2
@@ -194,9 +201,11 @@ export const useTouchGestures = (
 
     clearLongPressTimer()
 
-    if (!touchStartRef.current) return
+    if (!touchStartRef.current) {return}
 
     const touch = e.changedTouches[0]
+    if (!touch) {return}
+
     const endPoint: TouchPoint = {
       x: touch.clientX,
       y: touch.clientY,

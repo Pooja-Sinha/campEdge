@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react'
 import { useUIStore } from '../../store/uiStore'
 import { cn } from '../../utils/cn'
@@ -36,7 +36,7 @@ const NotificationSystem = () => {
     }
   }
 
-  if (notifications.length === 0) return null
+  if (notifications.length === 0) {return null}
 
   return (
     <div className="fixed top-4 right-4 z-50 space-y-2 max-w-sm w-full">

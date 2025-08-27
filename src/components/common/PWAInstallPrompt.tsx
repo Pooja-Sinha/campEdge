@@ -1,5 +1,5 @@
+import { X, Download, Smartphone } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { X, Download, Smartphone, Monitor } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
 interface BeforeInstallPromptEvent extends Event {
@@ -68,7 +68,7 @@ const PWAInstallPrompt = () => {
   }, [isInstalled])
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return
+    if (!deferredPrompt) {return}
 
     try {
       await deferredPrompt.prompt()

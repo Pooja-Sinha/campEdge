@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import {
   Heart,
   Star,
@@ -7,18 +5,20 @@ import {
   Users,
   Calendar,
   Trash2,
-  Eye,
+
   Share2,
   Grid3X3,
   List,
-  Filter,
+
   Search
 } from 'lucide-react'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import LoadingSpinner from '../components/common/LoadingSpinner'
 import { useIsAuthenticated } from '../hooks/useAuth'
 import { useUserWishlist, useWishlist } from '../hooks/useCamps'
-import LoadingSpinner from '../components/common/LoadingSpinner'
-import { formatCurrency, formatDuration } from '../utils/format'
 import { cn } from '../utils/cn'
+import { formatCurrency, formatDuration } from '../utils/format'
 
 const WishlistPage = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
@@ -27,16 +27,16 @@ const WishlistPage = () => {
   const navigate = useNavigate()
 
   const { isAuthenticated, user } = useIsAuthenticated()
-  const { data: wishlistResponse, isLoading } = useUserWishlist(user?.id || '', !!user?.id)
+  const { data: wishlistResponse, isLoading } = useUserWishlist(user?.id || '', Boolean(user?.id))
   const { removeFromWishlist } = useWishlist()
 
   const wishlistItems = wishlistResponse?.success ? wishlistResponse.data : []
 
   // Filter wishlist items based on search
-  const filteredItems = wishlistItems.filter(item =>
+  const filteredItems = wishlistItems?.filter(item =>
     item.camp?.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.camp?.location?.name?.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  ) || []
 
   // Sort wishlist items
   const sortedItems = [...filteredItems].sort((a, b) => {
@@ -57,7 +57,7 @@ const WishlistPage = () => {
   })
 
   const handleRemoveFromWishlist = async (campId: string) => {
-    if (!user) return
+    if (!user) {return}
 
     try {
       await removeFromWishlist.mutateAsync({ userId: user.id, campId })
@@ -74,7 +74,7 @@ const WishlistPage = () => {
         await navigator.share({
           title: camp.title,
           text: camp.shortDescription,
-          url: url,
+          url,
         })
       } catch (error) {
         navigator.clipboard.writeText(url)
@@ -114,7 +114,7 @@ const WishlistPage = () => {
                 My Wishlist
               </h1>
               <p className="text-gray-600 dark:text-gray-400">
-                {wishlistItems.length} saved camp{wishlistItems.length !== 1 ? 's' : ''}
+                {wishlistItems?.length || 0} saved camp{(wishlistItems?.length || 0) !== 1 ? 's' : ''}
               </p>
             </div>
 
@@ -146,7 +146,7 @@ const WishlistPage = () => {
           </div>
 
           {/* Search and Sort */}
-          {wishlistItems.length > 0 && (
+          {(wishlistItems?.length || 0) > 0 && (
             <div className="flex flex-col sm:flex-row gap-4">
               {/* Search */}
               <div className="relative flex-1">
@@ -201,7 +201,7 @@ const WishlistPage = () => {
                   Clear Search
                 </button>
               </>
-            ) : wishlistItems.length === 0 ? (
+            ) : (wishlistItems?.length || 0) === 0 ? (
               <>
                 <Heart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
@@ -225,9 +225,9 @@ const WishlistPage = () => {
                   <WishlistCard
                     key={item.id}
                     item={item}
-                    onRemove={() => handleRemoveFromWishlist(item.campId)}
+                    onRemove={async () => handleRemoveFromWishlist(item.campId)}
                     onShare={() => item.camp && handleShare(item.camp)}
-                    onView={() => navigate(`/camps/${item.campId}`)}
+                    onView={async () => navigate(`/camps/${item.campId}`)}
                   />
                 ))}
               </div>
@@ -240,9 +240,9 @@ const WishlistPage = () => {
                   <WishlistListItem
                     key={item.id}
                     item={item}
-                    onRemove={() => handleRemoveFromWishlist(item.campId)}
+                    onRemove={async () => handleRemoveFromWishlist(item.campId)}
                     onShare={() => item.camp && handleShare(item.camp)}
-                    onView={() => navigate(`/camps/${item.campId}`)}
+                    onView={async () => navigate(`/camps/${item.campId}`)}
                   />
                 ))}
               </div>
@@ -343,7 +343,7 @@ const WishlistCard = ({ item, onRemove, onShare, onView }: WishlistCardProps) =>
           </div>
           <div className="flex items-center">
             <Calendar className="w-4 h-4 mr-1" />
-            <span>{formatDuration(camp.duration)}</span>
+            <span>{formatDuration(camp.duration, camp.duration - 1)}</span>
           </div>
         </div>
 
@@ -440,7 +440,7 @@ const WishlistListItem = ({ item, onRemove, onShare, onView }: WishlistCardProps
             </div>
             <div className="flex items-center">
               <Calendar className="w-4 h-4 mr-1" />
-              <span>{formatDuration(camp.duration)}</span>
+              <span>{formatDuration(camp.duration, camp.duration - 1)}</span>
             </div>
           </div>
 

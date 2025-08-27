@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
 import {
   Search,
   Filter,
@@ -9,18 +7,18 @@ import {
   Calendar,
   Grid3X3,
   List,
-  SlidersHorizontal,
-  X,
-  ChevronDown,
+
   Heart,
   Eye
 } from 'lucide-react'
-import { useCamps, useWishlist, useUserWishlist } from '../hooks/useCamps'
-import { useIsAuthenticated } from '../hooks/useAuth'
-import type { SearchFilters, DifficultyLevel, Season } from '../types/index'
+import { useState, useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import LoadingSpinner from '../components/common/LoadingSpinner'
-import { formatCurrency, formatDuration, formatGroupSize } from '../utils/format'
+import { useIsAuthenticated } from '../hooks/useAuth'
+import { useCamps, useWishlist, useUserWishlist } from '../hooks/useCamps'
+import type { SearchFilters, DifficultyLevel, Season } from '../types/index'
 import { cn } from '../utils/cn'
+import { formatCurrency, formatDuration, formatGroupSize } from '../utils/format'
 
 const CampsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -33,12 +31,12 @@ const CampsPage = () => {
   const { addToWishlist, removeFromWishlist } = useWishlist()
 
   // Fetch user's wishlist once at component level
-  const { data: wishlistResponse } = useUserWishlist(user?.id || '', !!user?.id)
+  const { data: wishlistResponse } = useUserWishlist(user?.id || '', Boolean(user?.id))
   const userWishlist = wishlistResponse?.success ? wishlistResponse.data : []
 
   // Helper function to check if a camp is in wishlist
   const isInWishlist = (campId: string) => {
-    return userWishlist.some(item => item.campId === campId)
+    return userWishlist?.some(item => item.campId === campId) || false
   }
 
   // Filter states
@@ -78,28 +76,28 @@ const CampsPage = () => {
   // Update URL params when filters change
   useEffect(() => {
     const params = new URLSearchParams()
-    if (searchQuery) params.set('search', searchQuery)
-    if (filters.search) params.set('search', filters.search)
-    if (filters.location) params.set('location', filters.location)
-    if (filters.dateRange?.startDate) params.set('startDate', filters.dateRange.startDate)
-    if (filters.dateRange?.endDate) params.set('endDate', filters.dateRange.endDate)
-    if (filters.priceRange?.min) params.set('minPrice', filters.priceRange.min.toString())
+    if (searchQuery) {params.set('search', searchQuery)}
+    if (filters.search) {params.set('search', filters.search)}
+    if (filters.location) {params.set('location', filters.location)}
+    if (filters.dateRange?.startDate) {params.set('startDate', filters.dateRange.startDate)}
+    if (filters.dateRange?.endDate) {params.set('endDate', filters.dateRange.endDate)}
+    if (filters.priceRange?.min) {params.set('minPrice', filters.priceRange.min.toString())}
     if (filters.priceRange?.max && filters.priceRange.max < 50000) {
       params.set('maxPrice', filters.priceRange.max.toString())
     }
-    if (filters.difficulty?.length) params.set('difficulty', filters.difficulty.join(','))
-    if (filters.groupSize) params.set('groupSize', filters.groupSize.toString())
+    if (filters.difficulty?.length) {params.set('difficulty', filters.difficulty.join(','))}
+    if (filters.groupSize) {params.set('groupSize', filters.groupSize.toString())}
     if (filters.duration?.min && filters.duration.min > 1) {
       params.set('minDuration', filters.duration.min.toString())
     }
     if (filters.duration?.max && filters.duration.max < 30) {
       params.set('maxDuration', filters.duration.max.toString())
     }
-    if (filters.season?.length) params.set('season', filters.season.join(','))
-    if (filters.activities?.length) params.set('activities', filters.activities.join(','))
-    if (filters.amenities?.length) params.set('amenities', filters.amenities.join(','))
-    if (filters.rating) params.set('rating', filters.rating.toString())
-    if (filters.verified) params.set('verified', 'true')
+    if (filters.season?.length) {params.set('season', filters.season.join(','))}
+    if (filters.activities?.length) {params.set('activities', filters.activities.join(','))}
+    if (filters.amenities?.length) {params.set('amenities', filters.amenities.join(','))}
+    if (filters.rating) {params.set('rating', filters.rating.toString())}
+    if (filters.verified) {params.set('verified', 'true')}
 
     setSearchParams(params)
   }, [filters, searchQuery, setSearchParams])
@@ -117,7 +115,7 @@ const CampsPage = () => {
   }
 
   const toggleWishlist = async (campId: string) => {
-    if (!isAuthenticated || !user) return
+    if (!isAuthenticated || !user) {return}
 
     const campIsInWishlist = isInWishlist(campId)
 
@@ -134,8 +132,8 @@ const CampsPage = () => {
 
   const difficultyOptions: DifficultyLevel[] = ['easy', 'moderate', 'challenging', 'extreme']
   const seasonOptions: Season[] = ['spring', 'summer', 'monsoon', 'autumn', 'winter']
-  const activityOptions = ['Trekking', 'Camping', 'Photography', 'Wildlife', 'Adventure Sports', 'Cultural', 'Wellness']
-  const amenityOptions = ['WiFi', 'Meals', 'Transport', 'Guide', 'Equipment', 'First Aid', 'Parking']
+  // const activityOptions = ['Trekking', 'Camping', 'Photography', 'Wildlife', 'Adventure Sports', 'Cultural', 'Wellness']
+  // const amenityOptions = ['WiFi', 'Meals', 'Transport', 'Guide', 'Equipment', 'First Aid', 'Parking']
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">

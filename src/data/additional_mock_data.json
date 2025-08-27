@@ -24,7 +24,7 @@
       "id": "user-002",
       "email": "priya.sharma@example.com",
       "name": "Priya Sharma",
-      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       "role": "user",
       "phone": "+91-9876543214",
       "preferences": {
@@ -315,7 +315,7 @@
       "author": {
         "id": "author-002",
         "name": "Meera Joshi",
-        "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+        "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
       },
       "category": "destination",
       "tags": ["rajasthan", "desert", "timing", "weather"],

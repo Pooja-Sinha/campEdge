@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
 import { 
   Search, 
   MapPin, 
@@ -11,9 +10,10 @@ import {
   TrendingUp,
   History
 } from 'lucide-react'
+import { useState, useEffect, useRef, useMemo } from 'react'
+import searchSuggestionsData from '../../data/search_suggestions_mock_data.json'
 import { useDebounce } from '../../hooks/useDebounce'
 import { cn } from '../../utils/cn'
-import searchSuggestionsData from '../../data/search_suggestions_mock_data.json'
 
 interface SearchSuggestion {
   id: string
@@ -105,7 +105,7 @@ const AdvancedSearch = ({
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return
+      if (!isOpen) {return}
 
       switch (e.key) {
         case 'ArrowDown':
@@ -121,7 +121,10 @@ const AdvancedSearch = ({
         case 'Enter':
           e.preventDefault()
           if (selectedIndex >= 0) {
-            handleSuggestionClick(filteredSuggestions[selectedIndex])
+            const suggestion = filteredSuggestions[selectedIndex]
+            if (suggestion) {
+              handleSuggestionClick(suggestion)
+            }
           } else {
             handleSearch()
           }
@@ -151,7 +154,7 @@ const AdvancedSearch = ({
   }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
+    const {value} = e.target
     setQuery(value)
     setIsOpen(true)
     setSelectedIndex(-1)
@@ -183,8 +186,8 @@ const AdvancedSearch = ({
     inputRef.current?.focus()
   }
 
-  const getSuggestionIcon = (suggestion: SearchSuggestion) => {
-    if (suggestion.icon) return suggestion.icon
+  const getSuggestionIcon = async (suggestion: SearchSuggestion) => {
+    if (suggestion.icon) {return suggestion.icon}
     
     switch (suggestion.type) {
       case 'location':
@@ -264,12 +267,12 @@ const AdvancedSearch = ({
             <div className="py-2">
               {/* Group suggestions by type */}
               {Object.entries(
-                filteredSuggestions.reduce((groups, suggestion) => {
-                  const type = suggestion.type
-                  if (!groups[type]) groups[type] = []
+                filteredSuggestions.reduce<Record<string, SearchSuggestion[]>>((groups, suggestion) => {
+                  const {type} = suggestion
+                  if (!groups[type]) {groups[type] = []}
                   groups[type].push(suggestion)
                   return groups
-                }, {} as Record<string, SearchSuggestion[]>)
+                }, {})
               ).map(([type, suggestions]) => (
                 <div key={type}>
                   {/* Type Header */}
@@ -278,7 +281,7 @@ const AdvancedSearch = ({
                   </div>
                   
                   {/* Suggestions */}
-                  {suggestions.map((suggestion, index) => {
+                  {suggestions.map((suggestion) => {
                     const globalIndex = filteredSuggestions.indexOf(suggestion)
                     return (
                       <button

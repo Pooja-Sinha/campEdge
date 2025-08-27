@@ -6,7 +6,7 @@ import { format, formatDistanceToNow, parseISO } from 'date-fns'
 export const formatCurrency = (amount: number, currency: 'INR' | 'USD' = 'INR'): string => {
   const formatter = new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: currency,
+    currency,
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })
@@ -17,7 +17,7 @@ export const formatCurrency = (amount: number, currency: 'INR' | 'USD' = 'INR'):
 /**
  * Format date in a readable format
  */
-export const formatDate = (date: string | Date, formatString: string = 'MMM dd, yyyy'): string => {
+export const formatDate = (date: string | Date, formatString = 'MMM dd, yyyy'): string => {
   const dateObj = typeof date === 'string' ? parseISO(date) : date
   return format(dateObj, formatString)
 }
@@ -78,28 +78,28 @@ export const formatPhoneNumber = (phone: string): string => {
  * Truncate text with ellipsis
  */
 export const truncateText = (text: string, maxLength: number): string => {
-  if (text.length <= maxLength) return text
-  return text.slice(0, maxLength).trim() + '...'
+  if (text.length <= maxLength) {return text}
+  return `${text.slice(0, maxLength).trim()  }...`
 }
 
 /**
  * Format file size
  */
 export const formatFileSize = (bytes: number): string => {
-  if (bytes === 0) return '0 Bytes'
+  if (bytes === 0) {return '0 Bytes'}
   
   const k = 1024
   const sizes = ['Bytes', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
   
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))  } ${  sizes[i]}`
 }
 
 /**
  * Format percentage
  */
 export const formatPercentage = (value: number, total: number): string => {
-  if (total === 0) return '0%'
+  if (total === 0) {return '0%'}
   const percentage = (value / total) * 100
   return `${percentage.toFixed(1)}%`
 }

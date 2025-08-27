@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { 
   Sparkles, 
   TrendingUp, 
@@ -13,8 +11,11 @@ import {
   RefreshCw,
   Brain
 } from 'lucide-react'
-import { recommendationService, SmartRecommendations as RecommendationsData } from '../../services/recommendationService'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useIsAuthenticated } from '../../hooks/useAuth'
+import { recommendationService } from '../../services/recommendationService'
+import type { SmartRecommendations as RecommendationsData } from '../../services/recommendationService'
 import { useCampsStore } from '../../store/campsStore'
 import { cn } from '../../utils/cn'
 import { formatCurrency } from '../../utils/format'
@@ -61,9 +62,9 @@ const SmartRecommendations = ({
 
   const getCurrentSeason = () => {
     const month = new Date().getMonth()
-    if (month >= 2 && month <= 4) return 'spring'
-    if (month >= 5 && month <= 7) return 'summer'
-    if (month >= 8 && month <= 10) return 'autumn'
+    if (month >= 2 && month <= 4) {return 'spring'}
+    if (month >= 5 && month <= 7) {return 'summer'}
+    if (month >= 8 && month <= 10) {return 'autumn'}
     return 'winter'
   }
 
@@ -117,8 +118,8 @@ const SmartRecommendations = ({
   ]
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'text-green-600 bg-green-100 dark:bg-green-900/20'
-    if (confidence >= 0.6) return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20'
+    if (confidence >= 0.8) {return 'text-green-600 bg-green-100 dark:bg-green-900/20'}
+    if (confidence >= 0.6) {return 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20'}
     return 'text-gray-600 bg-gray-100 dark:bg-gray-900/20'
   }
 
@@ -208,7 +209,7 @@ const SmartRecommendations = ({
                 className={cn(
                   "flex items-center space-x-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all",
                   isActive
-                    ? category.color + " font-medium"
+                    ? `${category.color  } font-medium`
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                 )}
               >
@@ -233,7 +234,7 @@ const SmartRecommendations = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {activeRecommendations.map((recommendation) => {
             const camp = getCampById(recommendation.campId)
-            if (!camp) return null
+            if (!camp) {return null}
 
             return (
               <Link

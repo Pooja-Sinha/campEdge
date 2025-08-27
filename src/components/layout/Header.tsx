@@ -1,6 +1,6 @@
+import { Menu, X, Search, User, Heart, Bell, Sun, Moon, LogOut, Settings, ChevronDown } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Menu, X, Search, User, Heart, Bell, Sun, Moon, LogOut, Settings, ChevronDown } from 'lucide-react'
 import { useIsAuthenticated, useAuth } from '../../hooks/useAuth'
 import { useUIStore } from '../../store/uiStore'
 
@@ -18,9 +18,11 @@ const Header = () => {
 
   const toggleTheme = () => {
     const themes = ['light', 'dark', 'system'] as const
-    const currentIndex = themes.indexOf(theme)
+    const currentIndex = themes.indexOf(theme as any)
     const nextTheme = themes[(currentIndex + 1) % themes.length]
-    setTheme(nextTheme)
+    if (nextTheme) {
+      setTheme(nextTheme)
+    }
   }
 
   const handleLogout = async () => {
@@ -84,7 +86,7 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {/* Search */}
             <button
-              onClick={() => navigate('/camps')}
+              onClick={async () => navigate('/camps')}
               className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
               aria-label="Search camps"
             >
@@ -105,7 +107,7 @@ const Header = () => {
               <>
                 {/* Notifications */}
                 <button
-                  onClick={() => navigate('/notifications')}
+                  onClick={async () => navigate('/notifications')}
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors relative"
                   aria-label="Notifications"
                 >
@@ -115,7 +117,7 @@ const Header = () => {
 
                 {/* Wishlist */}
                 <button
-                  onClick={() => navigate('/wishlist')}
+                  onClick={async () => navigate('/wishlist')}
                   className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                   aria-label="Wishlist"
                 >
@@ -168,7 +170,7 @@ const Header = () => {
 
                       <button
                         onClick={() => {
-                          navigate('/settings')
+                          navigate('/profile?tab=settings')
                           setIsProfileMenuOpen(false)
                         }}
                         className="w-full flex items-center space-x-2 px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"

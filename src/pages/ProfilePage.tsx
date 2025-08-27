@@ -1,7 +1,4 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import {
   User,
   Mail,
@@ -20,11 +17,15 @@ import {
   Award,
   Clock
 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
+import { z } from 'zod'
+import LoadingSpinner from '../components/common/LoadingSpinner'
 import { useIsAuthenticated, useAuth } from '../hooks/useAuth'
 import { useUserBookings, useUserWishlist } from '../hooks/useCamps'
-import LoadingSpinner from '../components/common/LoadingSpinner'
-import { formatCurrency, formatDate, formatDuration } from '../utils/format'
 import { cn } from '../utils/cn'
+import { formatCurrency, formatDate, formatDuration } from '../utils/format'
 
 const profileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -43,21 +44,30 @@ const profileSchema = z.object({
 type ProfileFormData = z.infer<typeof profileSchema>
 
 const ProfilePage = () => {
+  const [searchParams] = useSearchParams()
   const [activeTab, setActiveTab] = useState<'profile' | 'bookings' | 'wishlist' | 'settings'>('profile')
   const [isEditing, setIsEditing] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
 
   const { isAuthenticated, user } = useIsAuthenticated()
+
+  // Set active tab based on URL parameter
+  useEffect(() => {
+    const tabParam = searchParams.get('tab')
+    if (tabParam && ['profile', 'bookings', 'wishlist', 'settings'].includes(tabParam)) {
+      setActiveTab(tabParam as 'profile' | 'bookings' | 'wishlist' | 'settings')
+    }
+  }, [searchParams])
   const { updateProfile } = useAuth()
   const { data: bookingsResponse, isLoading: bookingsLoading } = useUserBookings(user?.id || '')
-  const { data: wishlistResponse, isLoading: wishlistLoading } = useUserWishlist(user?.id || '', !!user?.id)
+  const { data: wishlistResponse, isLoading: wishlistLoading } = useUserWishlist(user?.id || '', Boolean(user?.id))
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch
+    // watch
   } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
@@ -95,7 +105,7 @@ const ProfilePage = () => {
     try {
       await updateProfile.mutateAsync({
         userId: user.id,
-        ...data,
+        updates: data,
       })
       setIsEditing(false)
     } catch (error) {
@@ -192,13 +202,13 @@ const ProfilePage = () => {
             <div className="hidden md:flex space-x-8">
               <div className="text-center">
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {bookings.length}
+                  {bookings?.length || 0}
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Bookings</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {wishlistItems.length}
+                  {wishlistItems?.length || 0}
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Wishlist</div>
               </div>
@@ -418,7 +428,7 @@ const ProfilePage = () => {
                 My Bookings
               </h2>
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                {bookings.length} booking{bookings.length !== 1 ? 's' : ''}
+                {bookings?.length || 0} booking{(bookings?.length || 0) !== 1 ? 's' : ''}
               </div>
             </div>
 
@@ -426,7 +436,7 @@ const ProfilePage = () => {
               <div className="flex justify-center py-12">
                 <LoadingSpinner size="lg" text="Loading bookings..." />
               </div>
-            ) : bookings.length === 0 ? (
+            ) : (bookings?.length || 0) === 0 ? (
               <div className="text-center py-12">
                 <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
@@ -441,7 +451,7 @@ const ProfilePage = () => {
               </div>
             ) : (
               <div className="space-y-6">
-                {bookings.map((booking) => (
+                {bookings?.map((booking) => (
                   <div
                     key={booking.id}
                     className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700"
@@ -449,7 +459,7 @@ const ProfilePage = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex space-x-4">
                         <img
-                          src={booking.camp?.images?.find(img => img.isPrimary)?.url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'}
+                          src={booking.camp?.images?.find((img: any) => img.isPrimary)?.url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'}
                           alt={booking.camp?.title || 'Camp'}
                           className="w-20 h-20 rounded-lg object-cover"
                         />
@@ -526,7 +536,7 @@ const ProfilePage = () => {
                 My Wishlist
               </h2>
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                {wishlistItems.length} camp{wishlistItems.length !== 1 ? 's' : ''}
+                {wishlistItems?.length || 0} camp{(wishlistItems?.length || 0) !== 1 ? 's' : ''}
               </div>
             </div>
 
@@ -534,7 +544,7 @@ const ProfilePage = () => {
               <div className="flex justify-center py-12">
                 <LoadingSpinner size="lg" text="Loading wishlist..." />
               </div>
-            ) : wishlistItems.length === 0 ? (
+            ) : (wishlistItems?.length || 0) === 0 ? (
               <div className="text-center py-12">
                 <Heart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
@@ -549,7 +559,7 @@ const ProfilePage = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {wishlistItems.map((item) => (
+                {wishlistItems?.map((item) => (
                   <div
                     key={item.id}
                     className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-shadow duration-300 group"

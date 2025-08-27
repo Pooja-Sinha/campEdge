@@ -1,8 +1,8 @@
-import { ReactNode } from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import PWAInstallPrompt from '../common/PWAInstallPrompt'
+import type { ReactNode } from 'react'
 import NotificationSystem from '../common/NotificationSystem'
+import PWAInstallPrompt from '../common/PWAInstallPrompt'
+import Footer from './Footer'
+import Header from './Header'
 
 interface LayoutProps {
   children: ReactNode

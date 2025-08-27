@@ -1,7 +1,9 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
+import campingData from '../data/camping_mock_data.json'
 import type { Camp, SearchFilters } from '../types/index'
-import { campsData } from '../data/camps_mock_data'
+
+const campsData = campingData as any
 
 interface CampsState {
   // Data
@@ -48,7 +50,7 @@ const filterCamps = (camps: Camp[], filters: SearchFilters): Camp[] => {
     // Price range filter
     if (filters.priceRange) {
       const price = camp.pricing.basePrice
-      if (price < filters.priceRange.min || price > filters.priceRange.max) {
+      if (price < (filters.priceRange?.min ?? 0) || price > (filters.priceRange?.max ?? 999999)) {
         return false
       }
     }
@@ -62,8 +64,8 @@ const filterCamps = (camps: Camp[], filters: SearchFilters): Camp[] => {
     
     // Duration filter
     if (filters.duration) {
-      const days = camp.duration.days
-      if (days < filters.duration.min || days > filters.duration.max) {
+      const {days} = camp.duration
+      if (days < (filters.duration?.min ?? 0) || days > (filters.duration?.max ?? 999)) {
         return false
       }
     }
@@ -158,7 +160,7 @@ export const useCampsStore = create<CampsState>()(
           // Simulate API delay
           await new Promise(resolve => setTimeout(resolve, 500))
           
-          const camps = campsData.camps
+          const {camps} = campsData
           const filtered = filterCamps(camps, get().filters)
           const sorted = sortCamps(filtered, get().sortBy)
           
@@ -182,7 +184,7 @@ export const useCampsStore = create<CampsState>()(
           // Simulate API delay
           await new Promise(resolve => setTimeout(resolve, 300))
           
-          const featuredCamps = campsData.camps.filter(camp => camp.featured)
+          const featuredCamps = campsData.camps.filter((camp: any) => camp.featured)
           
           set({ 
             featuredCamps,
@@ -207,12 +209,12 @@ export const useCampsStore = create<CampsState>()(
           
           // Text search
           if (query.trim()) {
-            results = results.filter(camp =>
+            results = results.filter((camp: any) =>
               camp.title.toLowerCase().includes(query.toLowerCase()) ||
               camp.description.toLowerCase().includes(query.toLowerCase()) ||
               camp.location.name.toLowerCase().includes(query.toLowerCase()) ||
               camp.location.state.toLowerCase().includes(query.toLowerCase()) ||
-              camp.activities.some(activity => 
+              camp.activities.some((activity: any) =>
                 activity.name.toLowerCase().includes(query.toLowerCase())
               )
             )
@@ -246,7 +248,7 @@ export const useCampsStore = create<CampsState>()(
           // Simulate API delay
           await new Promise(resolve => setTimeout(resolve, 300))
           
-          const camp = campsData.camps.find(c => c.id === id)
+          const camp = campsData.camps.find((c: any) => c.id === id)
           
           if (!camp) {
             throw new Error('Camp not found')
