@@ -221,7 +221,7 @@ const OrganizerOverview = () => {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                 <Plus className="w-4 h-4 text-white" />
               </div>
-              <div className="text-sm font-medium text-gray-900 dark:text-white">
+              <div className="text-sm font-medium text-blue-700 dark:text-blue-200">
                 Add New Camp
               </div>
             </Link>
@@ -233,7 +233,7 @@ const OrganizerOverview = () => {
               <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                 <Calendar className="w-4 h-4 text-white" />
               </div>
-              <div className="text-sm font-medium text-gray-900 dark:text-white">
+              <div className="text-sm font-medium text-green-700 dark:text-green-200">
                 Manage Bookings
               </div>
             </Link>
@@ -245,7 +245,7 @@ const OrganizerOverview = () => {
               <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                 <TrendingUp className="w-4 h-4 text-white" />
               </div>
-              <div className="text-sm font-medium text-gray-900 dark:text-white">
+              <div className="text-sm font-medium text-purple-700 dark:text-purple-200">
                 View Analytics
               </div>
             </Link>
@@ -257,7 +257,7 @@ const OrganizerOverview = () => {
               <div className="w-8 h-8 bg-yellow-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                 <Star className="w-4 h-4 text-white" />
               </div>
-              <div className="text-sm font-medium text-gray-900 dark:text-white">
+              <div className="text-sm font-medium text-yellow-700 dark:text-yellow-200">
                 Manage Reviews
               </div>
             </Link>
