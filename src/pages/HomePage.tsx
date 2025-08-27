@@ -273,7 +273,7 @@ const HomePage = () => {
         <div className="container-max section-padding">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900 dark:text-white mb-4">
-              Why Choose CampIndia?
+              Why Choose CampEdge?
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               We're committed to providing safe, authentic, and unforgettable camping experiences across India.

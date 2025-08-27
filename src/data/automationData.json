@@ -1,0 +1,296 @@
+{
+  "automationRules": [
+    {
+      "id": "AR001",
+      "name": "Booking Confirmation Email",
+      "description": "Automatically send confirmation email when booking is created",
+      "trigger": {
+        "type": "booking_created",
+        "conditions": { "status": "confirmed" }
+      },
+      "actions": [
+        {
+          "type": "send_email",
+          "config": {
+            "template": "booking_confirmation",
+            "delay": 0,
+            "subject": "Booking Confirmed - {{campName}}",
+            "personalizedContent": true
+          }
+        }
+      ],
+      "isActive": true,
+      "lastTriggered": "2024-11-15T14:30:00Z",
+      "triggerCount": 156,
+      "successRate": 98.7,
+      "createdAt": "2024-10-01T10:00:00Z"
+    },
+    {
+      "id": "AR002",
+      "name": "Pre-Trip Reminder",
+      "description": "Send reminder 24 hours before trip starts",
+      "trigger": {
+        "type": "date_approaching",
+        "conditions": { "hours_before": 24 }
+      },
+      "actions": [
+        {
+          "type": "send_sms",
+          "config": {
+            "template": "pre_trip_reminder",
+            "delay": 0,
+            "message": "Hi {{customerName}}, your {{campName}} adventure starts tomorrow! Check weather and pack accordingly."
+          }
+        },
+        {
+          "type": "send_email",
+          "config": {
+            "template": "trip_preparation",
+            "delay": 0,
+            "subject": "Tomorrow's Adventure - Final Preparations"
+          }
+        }
+      ],
+      "isActive": true,
+      "lastTriggered": "2024-11-14T18:00:00Z",
+      "triggerCount": 89,
+      "successRate": 95.5,
+      "createdAt": "2024-10-05T10:00:00Z"
+    },
+    {
+      "id": "AR003",
+      "name": "Dynamic Pricing Adjustment",
+      "description": "Adjust pricing based on demand and occupancy",
+      "trigger": {
+        "type": "booking_created",
+        "conditions": { "occupancy_threshold": 80 }
+      },
+      "actions": [
+        {
+          "type": "adjust_pricing",
+          "config": {
+            "multiplier": 1.2,
+            "duration": "until_booking",
+            "maxIncrease": 50
+          }
+        },
+        {
+          "type": "send_notification",
+          "config": {
+            "message": "High demand detected - pricing adjusted for {{campName}}",
+            "recipients": ["organizer"]
+          }
+        }
+      ],
+      "isActive": true,
+      "lastTriggered": "2024-11-13T16:45:00Z",
+      "triggerCount": 23,
+      "successRate": 87.0,
+      "createdAt": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": "AR004",
+      "name": "Review Request Follow-up",
+      "description": "Request review 3 days after trip completion",
+      "trigger": {
+        "type": "date_approaching",
+        "conditions": { "days_after_trip": 3 }
+      },
+      "actions": [
+        {
+          "type": "send_email",
+          "config": {
+            "template": "review_request",
+            "delay": 0,
+            "subject": "How was your {{campName}} experience?",
+            "incentive": "5% discount on next booking"
+          }
+        }
+      ],
+      "isActive": false,
+      "lastTriggered": "2024-11-10T12:00:00Z",
+      "triggerCount": 67,
+      "successRate": 34.5,
+      "createdAt": "2024-10-15T10:00:00Z"
+    },
+    {
+      "id": "AR005",
+      "name": "Customer Win-back Campaign",
+      "description": "Re-engage customers who haven't booked in 6 months",
+      "trigger": {
+        "type": "customer_inactive",
+        "conditions": { "months_inactive": 6 }
+      },
+      "actions": [
+        {
+          "type": "send_email",
+          "config": {
+            "template": "winback_offer",
+            "delay": 0,
+            "subject": "We miss you! Special offer inside",
+            "discount": 20
+          }
+        }
+      ],
+      "isActive": true,
+      "lastTriggered": "2024-11-12T09:00:00Z",
+      "triggerCount": 12,
+      "successRate": 15.8,
+      "createdAt": "2024-10-20T10:00:00Z"
+    },
+    {
+      "id": "AR006",
+      "name": "Payment Reminder",
+      "description": "Send payment reminder for partial payments",
+      "trigger": {
+        "type": "payment_pending",
+        "conditions": { "days_overdue": 2 }
+      },
+      "actions": [
+        {
+          "type": "send_email",
+          "config": {
+            "template": "payment_reminder",
+            "delay": 0,
+            "subject": "Payment Reminder - {{campName}} Booking"
+          }
+        },
+        {
+          "type": "send_sms",
+          "config": {
+            "template": "payment_reminder_sms",
+            "delay": 24,
+            "message": "Gentle reminder: Payment pending for your {{campName}} booking. Complete payment to secure your spot."
+          }
+        }
+      ],
+      "isActive": true,
+      "lastTriggered": "2024-11-11T10:30:00Z",
+      "triggerCount": 34,
+      "successRate": 78.2,
+      "createdAt": "2024-10-25T10:00:00Z"
+    },
+    {
+      "id": "AR007",
+      "name": "Weather Alert System",
+      "description": "Send weather alerts for upcoming trips",
+      "trigger": {
+        "type": "weather_alert",
+        "conditions": { "severity": "moderate", "hours_before": 48 }
+      },
+      "actions": [
+        {
+          "type": "send_email",
+          "config": {
+            "template": "weather_alert",
+            "delay": 0,
+            "subject": "Weather Update - {{campName}} Trip"
+          }
+        },
+        {
+          "type": "create_task",
+          "config": {
+            "title": "Review trip safety for {{campName}}",
+            "assignee": "safety_team",
+            "priority": "high"
+          }
+        }
+      ],
+      "isActive": true,
+      "lastTriggered": "2024-11-08T14:20:00Z",
+      "triggerCount": 8,
+      "successRate": 100.0,
+      "createdAt": "2024-11-01T10:00:00Z"
+    }
+  ],
+  "automationTemplates": [
+    {
+      "id": "AT001",
+      "name": "Complete Booking Journey",
+      "description": "Full customer communication flow from booking to post-trip",
+      "category": "communication",
+      "triggers": ["booking_created", "date_approaching", "trip_completed"],
+      "actions": ["send_email", "send_sms", "create_task"],
+      "popularity": 95,
+      "estimatedSetupTime": "15 minutes",
+      "expectedROI": "25% increase in customer satisfaction"
+    },
+    {
+      "id": "AT002",
+      "name": "Smart Pricing Engine",
+      "description": "Dynamic pricing based on demand, season, and competition",
+      "category": "pricing",
+      "triggers": ["booking_created", "date_approaching", "occupancy_change"],
+      "actions": ["adjust_pricing", "send_notification"],
+      "popularity": 87,
+      "estimatedSetupTime": "30 minutes",
+      "expectedROI": "15-20% revenue increase"
+    },
+    {
+      "id": "AT003",
+      "name": "Customer Retention System",
+      "description": "Automated follow-ups and loyalty programs",
+      "category": "marketing",
+      "triggers": ["trip_completed", "customer_inactive", "review_received"],
+      "actions": ["send_email", "create_task", "update_status"],
+      "popularity": 78,
+      "estimatedSetupTime": "20 minutes",
+      "expectedROI": "30% improvement in retention"
+    },
+    {
+      "id": "AT004",
+      "name": "Operations Optimizer",
+      "description": "Streamline operations with automated task management",
+      "category": "operations",
+      "triggers": ["booking_created", "payment_received", "date_approaching"],
+      "actions": ["create_task", "update_status", "send_notification"],
+      "popularity": 65,
+      "estimatedSetupTime": "25 minutes",
+      "expectedROI": "40% reduction in manual work"
+    }
+  ],
+  "workflowStats": {
+    "totalExecutions": 2847,
+    "successRate": 94.2,
+    "timeSaved": "156 hours",
+    "activeRules": 6,
+    "averageResponseTime": "2.3 seconds",
+    "errorRate": 5.8,
+    "mostTriggeredRule": "AR001",
+    "highestSuccessRate": "AR007"
+  },
+  "emailTemplates": [
+    {
+      "id": "booking_confirmation",
+      "name": "Booking Confirmation",
+      "subject": "Booking Confirmed - {{campName}}",
+      "category": "transactional",
+      "openRate": 98.5,
+      "clickRate": 45.2
+    },
+    {
+      "id": "pre_trip_reminder",
+      "name": "Pre-Trip Reminder",
+      "subject": "Tomorrow's Adventure - Final Preparations",
+      "category": "reminder",
+      "openRate": 89.3,
+      "clickRate": 67.8
+    },
+    {
+      "id": "review_request",
+      "name": "Review Request",
+      "subject": "How was your {{campName}} experience?",
+      "category": "feedback",
+      "openRate": 76.4,
+      "clickRate": 23.1
+    },
+    {
+      "id": "winback_offer",
+      "name": "Win-back Offer",
+      "subject": "We miss you! Special offer inside",
+      "category": "marketing",
+      "openRate": 65.7,
+      "clickRate": 18.9
+    }
+  ]
+}

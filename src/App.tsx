@@ -17,6 +17,7 @@ const BlogPostPage = lazy(async () => import('./pages/BlogPostPage'))
 const LoginPage = lazy(async () => import('./pages/LoginPage'))
 const SignupPage = lazy(async () => import('./pages/SignupPage'))
 const AdminDashboard = lazy(async () => import('./pages/admin/AdminDashboard'))
+const OrganizerDashboard = lazy(async () => import('./pages/organizer/OrganizerDashboard'))
 const NotFoundPage = lazy(async () => import('./pages/NotFoundPage'))
 
 const App = () => {
@@ -50,6 +51,9 @@ const App = () => {
 
             {/* Admin Routes */}
             <Route path="/admin/*" element={<AdminDashboard />} />
+
+            {/* Organizer Routes */}
+            <Route path="/organizer/*" element={<OrganizerDashboard />} />
 
             {/* 404 Route */}
             <Route path="*" element={<NotFoundPage />} />

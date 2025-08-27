@@ -89,7 +89,7 @@ const SignupPage = () => {
           </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-display font-bold text-gray-900 dark:text-white">
-          Join CampIndia
+          Join CampEdge
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
           Create your account and start your adventure

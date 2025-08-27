@@ -145,7 +145,7 @@ const AdminDashboard = () => {
                 Admin Dashboard
               </h1>
               <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Welcome back! Here's what's happening with CampIndia.
+                Welcome back! Here's what's happening with CampEdge.
               </p>
             </div>
 

@@ -48,12 +48,23 @@ const LoginPage = () => {
       })
 
       if (response.success) {
-        navigate(from, { replace: true })
+        // Role-based redirection
+        const user = response.data
+        if (user?.role === 'organizer') {
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          navigate('/organizer', { replace: true })
+        } else if (user?.role === 'admin') {
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          navigate('/admin', { replace: true })
+        } else {
+          // Default to user dashboard or original destination
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          navigate(from, { replace: true })
+        }
       } else {
-        console.log('Invalid email or password (LoginPage): data: ', data)
         setError('root', { message: 'Invalid email or password' })
       }
-    } catch (error) {
+    } catch {
       setError('root', { message: 'Login failed. Please try again.' })
     } finally {
       setIsLoading(false)
@@ -62,13 +73,13 @@ const LoginPage = () => {
 
   // All demo accounts (Organizer & Admin can still login manually)
   const allDemoAccounts = [
-    { email: 'user@campedge.com', password: 'password123', role: 'User' },
-    { email: 'organizer@campedge.com', password: 'password123', role: 'Organizer' },
-    { email: 'admin@campedge.com', password: 'password123', role: 'Admin' },
+    { email: 'user@campedge.com', password: 'Password@123', role: 'User' },
+    { email: 'organizer@campedge.com', password: 'Password@123', role: 'Organizer' },
+    { email: 'admin@campedge.com', password: 'Password@123', role: 'Admin' },
   ]
 
   // Filter to show only User account in demo section
-  const demoAccounts = allDemoAccounts.filter(account => account.role === 'User')
+  const demoAccounts = allDemoAccounts.filter(account => (account.role === 'User' || account.role === 'Organizer'))
 
   const fillDemoAccount = (email: string, password: string) => {
     setValue('email', email)
@@ -87,7 +98,7 @@ const LoginPage = () => {
           Welcome back
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-          Sign in to your CampIndia account
+          Sign in to your CampEdge account
         </p>
       </div>
 
@@ -113,6 +124,7 @@ const LoginPage = () => {
             </div>
           </div>
 
+          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             {errors.root && (
               <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
@@ -229,7 +241,7 @@ const LoginPage = () => {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                  Don't have an account?
+                  Don&apos;t have an account?
                 </span>
               </div>
             </div>

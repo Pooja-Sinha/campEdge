@@ -40,9 +40,9 @@ const mockSignup = async (userData: any): Promise<User> => {
   await new Promise(resolve => setTimeout(resolve, 1500))
   
   // Check if email already exists
-  if (userData.email === 'user@campindia.com' || 
-      userData.email === 'organizer@campindia.com' || 
-      userData.email === 'admin@campindia.com') {
+  if (userData.email === 'user@campedge.com' ||
+      userData.email === 'organizer@campedge.com' ||
+      userData.email === 'admin@campedge.com') {
     throw new Error('Email already exists')
   }
   

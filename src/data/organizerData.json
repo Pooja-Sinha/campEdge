@@ -1,0 +1,56 @@
+{
+  "organizer": {
+    "id": "ORG001",
+    "email": "organizer@campedge.com",
+    "role": "organizer",
+    "profile": {
+      "personal": {
+        "firstName": "Rajesh",
+        "lastName": "Kumar",
+        "email": "organizer@campedge.com",
+        "phone": "+91-9876543210",
+        "bio": "Experienced adventure tourism operator with 15+ years in the Himalayas. Passionate about sustainable tourism and creating unforgettable experiences for travelers.",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      },
+      "business": {
+        "companyName": "Himalayan Adventures Pvt Ltd",
+        "businessType": "Adventure Tourism Company",
+        "registrationNumber": "U63040DL2008PTC182855",
+        "taxId": "07AABCH9692R1Z5",
+        "website": "https://himalayan-adventures.com",
+        "establishedYear": 2008,
+        "description": "Leading adventure tourism company specializing in Himalayan treks, camping experiences, and cultural tours. We focus on sustainable tourism practices and authentic local experiences.",
+        "address": "123 Adventure Street, Manali, Himachal Pradesh 175131, India",
+        "city": "Manali",
+        "state": "Himachal Pradesh",
+        "country": "India"
+      },
+      "social": {
+        "facebook": "https://facebook.com/himalayan.adventures",
+        "instagram": "https://instagram.com/himalayan_adventures",
+        "twitter": "https://twitter.com/himalayan_adv",
+        "youtube": "https://youtube.com/c/himalayan-adventures"
+      },
+      "verification": {
+        "emailVerified": true,
+        "phoneVerified": true,
+        "businessVerified": true,
+        "documentsUploaded": true,
+        "verificationDate": "2024-01-15T10:00:00Z"
+      },
+      "settings": {
+        "notifications": {
+          "email": true,
+          "sms": true,
+          "push": true
+        },
+        "business": {
+          "autoApproveBookings": false,
+          "instantBooking": true,
+          "requireDeposit": true,
+          "depositPercentage": 30
+        }
+      }
+    }
+  }
+}

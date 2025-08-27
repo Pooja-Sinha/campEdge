@@ -212,12 +212,12 @@ class PaymentService {
     await new Promise(resolve => setTimeout(resolve, 500))
 
     const paymentId = `upi_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    const upiId = 'campindia@paytm'
+    const upiId = 'campedge@paytm'
     const {amount} = details
     const note = encodeURIComponent(details.description)
 
     // Generate UPI payment link
-    const upiLink = `upi://pay?pa=${upiId}&pn=CampIndia&am=${amount}&cu=INR&tn=${note}`
+    const upiLink = `upi://pay?pa=${upiId}&pn=CampEdge&am=${amount}&cu=INR&tn=${note}`
     
     // Mock QR code (in real app, would generate actual QR code)
     const qrCode = `data:image/svg+xml;base64,${btoa(`

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# CampIndia Node.js Issue Fix Script
+# CampEdge Node.js Issue Fix Script
 # This script helps resolve Node.js version conflicts
 
-echo "🔧 CampIndia Node.js Issue Fix Script"
+echo "🔧 CampEdge Node.js Issue Fix Script"
 echo "====================================="
 
 # Function to check if command exists

@@ -42,11 +42,15 @@ export const useAuth = () => {
     onSuccess: () => {
       // Clear all cached data
       queryClient.clear();
-      // Set user to null
+      // Set user to null immediately
       queryClient.setQueryData(AUTH_QUERY_KEYS.user, {
         success: true,
         data: null,
       });
+      // Force refetch of user data
+      queryClient.invalidateQueries({ queryKey: AUTH_QUERY_KEYS.user });
+      // Remove from localStorage as well
+      localStorage.removeItem('auth-storage');
     },
   });
 
@@ -108,7 +112,7 @@ export const useIsAuthenticated = () => {
 
 // Hook to check user role
 export const useUserRole = () => {
-  const { user } = useIsAuthenticated();
+  const { user, isLoading } = useIsAuthenticated();
 
   const isAdmin = user?.role === 'admin';
   const isOwner = user?.role === 'owner';
@@ -121,6 +125,7 @@ export const useUserRole = () => {
     isOwner,
     isOrganizer,
     isUser,
+    isLoading,
   };
 };
 
