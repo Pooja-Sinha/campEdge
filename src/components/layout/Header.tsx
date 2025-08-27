@@ -1,17 +1,21 @@
-import { Menu, X, Search, User, Heart, Bell, Sun, Moon, LogOut, Settings, ChevronDown } from 'lucide-react'
+import { Menu, X, Search, User, Heart, Bell, Sun, Moon, LogOut, Settings, ChevronDown, Building2 } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useIsAuthenticated, useAuth } from '../../hooks/useAuth'
+import { useIsAuthenticated, useAuth, useUserRole } from '../../hooks/useAuth'
 import { useUIStore } from '../../store/uiStore'
+import { logLogout } from '../../utils/authLogger'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const [isMobileProfileMenuOpen, setIsMobileProfileMenuOpen] = useState(false)
   const { isAuthenticated, user } = useIsAuthenticated()
   const { logout } = useAuth()
+  const { isOrganizer, isAdmin } = useUserRole()
   const { theme, setTheme } = useUIStore()
   const navigate = useNavigate()
   const profileMenuRef = useRef<HTMLDivElement>(null)
+  const mobileProfileMenuRef = useRef<HTMLDivElement>(null)
 
   // Determine if we're in dark mode for icon display
   const isDarkMode = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -26,20 +30,57 @@ const Header = () => {
   }
 
   const handleLogout = async () => {
+    console.log('🚪 Starting logout process...')
+    console.log('Current user:', user)
+    console.log('Is authenticated:', isAuthenticated)
+
     try {
-      await logout.mutateAsync()
+      console.log('🔄 Calling logout.mutateAsync()...')
+      const result = await logout.mutateAsync()
+      console.log('✅ Logout API result:', result)
+
+      // Log successful logout
+      logLogout({
+        user: {
+          id: user?.id,
+          email: user?.email,
+          role: user?.role,
+          loginTimestamp: user?.createdAt
+        },
+        component: 'Header.tsx - Desktop Profile Dropdown',
+        success: true
+      })
+
+      console.log('🔄 Closing profile menu and navigating...')
       setIsProfileMenuOpen(false)
       navigate('/')
+      console.log('✅ Logout process completed')
     } catch (error) {
-      console.error('Logout failed:', error)
+      console.error('❌ Logout failed:', error)
+
+      // Log failed logout
+      logLogout({
+        user: {
+          id: user?.id,
+          email: user?.email,
+          role: user?.role,
+          loginTimestamp: user?.createdAt
+        },
+        component: 'Header.tsx - Desktop Profile Dropdown',
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      })
     }
   }
 
-  // Close profile menu when clicking outside
+  // Close profile menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
         setIsProfileMenuOpen(false)
+      }
+      if (mobileProfileMenuRef.current && !mobileProfileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileProfileMenuOpen(false)
       }
     }
 
@@ -157,6 +198,38 @@ const Header = () => {
                         </p>
                       </div>
 
+                      {/* Organizer Dashboard Link */}
+                      {isOrganizer && (
+                        <button
+                          onClick={() => {
+                            navigate('/organizer')
+                            setIsProfileMenuOpen(false)
+                          }}
+                          className="w-full flex items-center space-x-2 px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        >
+                          <Building2 className="w-4 h-4" />
+                          <span>Organizer Dashboard</span>
+                        </button>
+                      )}
+
+                      {/* Admin Dashboard Link */}
+                      {isAdmin && (
+                        <button
+                          onClick={() => {
+                            navigate('/admin')
+                            setIsProfileMenuOpen(false)
+                          }}
+                          className="w-full flex items-center space-x-2 px-4 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        >
+                          <Settings className="w-4 h-4" />
+                          <span>Admin Dashboard</span>
+                        </button>
+                      )}
+
+                      {(isOrganizer || isAdmin) && (
+                        <hr className="my-2 border-gray-200 dark:border-gray-700" />
+                      )}
+
                       <button
                         onClick={() => {
                           navigate('/profile')
@@ -210,14 +283,173 @@ const Header = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile Search Button */}
+            <button
+              onClick={() => navigate('/camps')}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              aria-label="Search camps"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+
+            {/* Mobile Notifications Button */}
+            {isAuthenticated && (
+              <button
+                onClick={() => navigate('/notifications')}
+                className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors relative"
+                aria-label="Notifications"
+              >
+                <Bell className="w-5 h-5" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+              </button>
+            )}
+
+            {/* Mobile Profile Button */}
+            {isAuthenticated && user && (
+              <div className="relative" ref={mobileProfileMenuRef}>
+                <button
+                  onClick={() => setIsMobileProfileMenuOpen(!isMobileProfileMenuOpen)}
+                  className="flex items-center space-x-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                  aria-label="Profile menu"
+                >
+                  <img
+                    src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=059669&color=fff`}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                </button>
+
+                {/* Mobile Profile Dropdown */}
+                {isMobileProfileMenuOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+                    <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                        {user?.name}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {user?.email}
+                      </p>
+                    </div>
+
+                    {/* Mobile Dashboard Links */}
+                    {isOrganizer && (
+                      <button
+                        onClick={() => {
+                          navigate('/organizer')
+                          setIsMobileProfileMenuOpen(false)
+                        }}
+                        className="w-full flex items-center space-x-2 px-4 py-3 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      >
+                        <Building2 className="w-4 h-4" />
+                        <span>Organizer Dashboard</span>
+                      </button>
+                    )}
+
+                    {isAdmin && (
+                      <button
+                        onClick={() => {
+                          navigate('/admin')
+                          setIsMobileProfileMenuOpen(false)
+                        }}
+                        className="w-full flex items-center space-x-2 px-4 py-3 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      >
+                        <Settings className="w-4 h-4" />
+                        <span>Admin Dashboard</span>
+                      </button>
+                    )}
+
+                    {(isOrganizer || isAdmin) && (
+                      <hr className="my-1 border-gray-200 dark:border-gray-700" />
+                    )}
+
+                    <button
+                      onClick={() => {
+                        navigate('/profile')
+                        setIsMobileProfileMenuOpen(false)
+                      }}
+                      className="w-full flex items-center space-x-2 px-4 py-3 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <User className="w-4 h-4" />
+                      <span>My Profile</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        // Add settings navigation here
+                        setIsMobileProfileMenuOpen(false)
+                      }}
+                      className="w-full flex items-center space-x-2 px-4 py-3 text-left text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <Settings className="w-4 h-4" />
+                      <span>Settings</span>
+                    </button>
+
+                    <hr className="my-1 border-gray-200 dark:border-gray-700" />
+
+                    <button
+                      onClick={async () => {
+                        try {
+                          await logout.mutateAsync()
+
+                          // Log successful logout
+                          logLogout({
+                            user: {
+                              id: user?.id,
+                              email: user?.email,
+                              role: user?.role,
+                              loginTimestamp: user?.createdAt
+                            },
+                            component: 'Header.tsx - Mobile Profile Dropdown',
+                            success: true
+                          })
+
+                          setIsMobileProfileMenuOpen(false)
+                          navigate('/')
+                        } catch (error) {
+                          // Log failed logout
+                          logLogout({
+                            user: {
+                              id: user?.id,
+                              email: user?.email,
+                              role: user?.role,
+                              loginTimestamp: user?.createdAt
+                            },
+                            component: 'Header.tsx - Mobile Profile Dropdown',
+                            success: false,
+                            error: error instanceof Error ? error.message : 'Unknown error'
+                          })
+                        }
+                      }}
+                      className="w-full flex items-center space-x-2 px-4 py-3 text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

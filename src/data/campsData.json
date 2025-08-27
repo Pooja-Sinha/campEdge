@@ -1,0 +1,106 @@
+{
+  "camps": [
+    {
+      "id": "C001",
+      "organizerId": "ORG001",
+      "title": "Triund Trek & Camping Experience",
+      "shortDescription": "2-day trek to Triund with overnight camping under the stars",
+      "description": "Experience the magic of the Himalayas with our 2-day Triund trek and camping adventure. This moderate-level trek takes you through beautiful rhododendron forests and offers stunning views of the Dhauladhar range. Spend a night under the stars at Triund top, one of the most beautiful camping spots in Himachal Pradesh.",
+      "category": "Mountain Trekking",
+      "difficulty": "moderate",
+      "location": {
+        "address": "McLeod Ganj, Dharamshala, Himachal Pradesh",
+        "city": "Dharamshala",
+        "state": "Himachal Pradesh",
+        "coordinates": { "lat": 32.2396, "lng": 76.3200 }
+      },
+      "maxParticipants": 15,
+      "minParticipants": 4,
+      "duration": { "days": 2, "nights": 1 },
+      "pricing": {
+        "basePrice": 2500,
+        "currency": "INR",
+        "priceIncludes": ["Professional guide", "Camping equipment", "Meals (dinner & breakfast)", "First aid kit"],
+        "priceExcludes": ["Transportation to base camp", "Personal expenses", "Travel insurance"]
+      },
+      "amenities": ["Tents", "Sleeping bags", "Campfire", "Basic toilet facilities"],
+      "activities": ["Trekking", "Camping", "Stargazing", "Photography", "Nature walks"],
+      "images": [
+        "https://images.unsplash.com/photo-1464822759844-d150baec0494?w=800&h=600",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600"
+      ],
+      "status": "active",
+      "rating": 4.8,
+      "reviewCount": 156,
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "C002",
+      "organizerId": "ORG001",
+      "title": "Spiti Valley Desert Camping",
+      "shortDescription": "5-day adventure through the cold desert of Spiti Valley",
+      "description": "Explore the mystical Spiti Valley, often called 'Little Tibet', with our 5-day camping expedition. Experience the unique landscape of this cold desert, visit ancient monasteries, and camp under some of the clearest skies in India. This challenging adventure is perfect for experienced trekkers seeking something extraordinary.",
+      "category": "Desert Camping",
+      "difficulty": "challenging",
+      "location": {
+        "address": "Spiti Valley, Himachal Pradesh",
+        "city": "Kaza",
+        "state": "Himachal Pradesh",
+        "coordinates": { "lat": 32.2224, "lng": 78.0685 }
+      },
+      "maxParticipants": 12,
+      "minParticipants": 6,
+      "duration": { "days": 5, "nights": 4 },
+      "pricing": {
+        "basePrice": 8500,
+        "currency": "INR",
+        "priceIncludes": ["Expert guide", "All camping equipment", "All meals", "Monastery visits", "Transportation within Spiti"],
+        "priceExcludes": ["Transportation to/from Spiti", "Personal gear", "Travel insurance", "Emergency evacuation"]
+      },
+      "amenities": ["High-altitude tents", "Sleeping bags", "Portable toilets", "Solar charging station"],
+      "activities": ["High-altitude trekking", "Monastery visits", "Stargazing", "Photography", "Cultural immersion"],
+      "images": [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600"
+      ],
+      "status": "active",
+      "rating": 4.9,
+      "reviewCount": 89,
+      "createdAt": "2024-02-01T10:00:00Z"
+    },
+    {
+      "id": "C003",
+      "organizerId": "ORG001",
+      "title": "Kasol Riverside Camping",
+      "shortDescription": "Peaceful riverside camping in the heart of Parvati Valley",
+      "description": "Relax and rejuvenate with our peaceful riverside camping experience in Kasol. Perfect for beginners and families, this easy-going trip offers beautiful views of the Parvati River, short nature walks, and a chance to experience the unique culture of the valley.",
+      "category": "Riverside Camping",
+      "difficulty": "easy",
+      "location": {
+        "address": "Kasol, Parvati Valley, Himachal Pradesh",
+        "city": "Kasol",
+        "state": "Himachal Pradesh",
+        "coordinates": { "lat": 32.0997, "lng": 77.3152 }
+      },
+      "maxParticipants": 20,
+      "minParticipants": 2,
+      "duration": { "days": 2, "nights": 1 },
+      "pricing": {
+        "basePrice": 1800,
+        "currency": "INR",
+        "priceIncludes": ["Riverside camping", "Bonfire", "Local guide", "Breakfast"],
+        "priceExcludes": ["Lunch and dinner", "Transportation", "Personal expenses"]
+      },
+      "amenities": ["Riverside tents", "Bonfire area", "Basic washrooms", "Parking"],
+      "activities": ["River walking", "Bonfire", "Local sightseeing", "Photography"],
+      "images": [
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600"
+      ],
+      "status": "active",
+      "rating": 4.6,
+      "reviewCount": 234,
+      "createdAt": "2024-03-01T10:00:00Z"
+    }
+  ]
+}

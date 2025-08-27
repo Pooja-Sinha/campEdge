@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# CampIndia Setup Script
+# CampEdge Setup Script
 # This script helps set up the development environment
 
-echo "🏕️  CampIndia Setup Script"
+echo "🏕️  CampEdge Setup Script"
 echo "=========================="
 
 # Check Node.js version

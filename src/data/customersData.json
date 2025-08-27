@@ -1,0 +1,261 @@
+{
+  "customers": [
+    {
+      "id": "CUST001",
+      "name": "Arjun Sharma",
+      "email": "arjun.sharma@email.com",
+      "phone": "+91-9876543210",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "location": "Delhi, India",
+      "joinDate": "2024-03-15T10:00:00Z",
+      "totalBookings": 3,
+      "totalSpent": 18000,
+      "averageRating": 4.7,
+      "lastBooking": "2024-11-15T14:30:00Z",
+      "preferences": ["Mountain Trekking", "Adventure Sports"],
+      "segment": "Adventure Enthusiasts",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Priya Sharma",
+        "phone": "+91-9876543211",
+        "relationship": "Wife"
+      }
+    },
+    {
+      "id": "CUST002",
+      "name": "Priya Patel",
+      "email": "priya.patel@email.com",
+      "phone": "+91-9876543212",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "location": "Mumbai, India",
+      "joinDate": "2024-02-20T10:00:00Z",
+      "totalBookings": 5,
+      "totalSpent": 25000,
+      "averageRating": 4.8,
+      "lastBooking": "2024-11-14T16:45:00Z",
+      "preferences": ["Family Camping", "Riverside Camping"],
+      "segment": "Family Campers",
+      "status": "active",
+      "communicationPreference": "sms",
+      "emergencyContact": {
+        "name": "Raj Patel",
+        "phone": "+91-9876543213",
+        "relationship": "Husband"
+      }
+    },
+    {
+      "id": "CUST003",
+      "name": "Vikram Singh",
+      "email": "vikram.singh@email.com",
+      "phone": "+91-9876543214",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "location": "Bangalore, India",
+      "joinDate": "2024-01-10T10:00:00Z",
+      "totalBookings": 2,
+      "totalSpent": 12000,
+      "averageRating": 4.5,
+      "lastBooking": "2024-11-13T12:20:00Z",
+      "preferences": ["Mountain Trekking", "Photography"],
+      "segment": "Adventure Enthusiasts",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Sunita Singh",
+        "phone": "+91-9876543215",
+        "relationship": "Mother"
+      }
+    },
+    {
+      "id": "CUST004",
+      "name": "Sneha Gupta",
+      "email": "sneha.gupta@email.com",
+      "phone": "+91-9876543216",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "location": "Pune, India",
+      "joinDate": "2024-04-05T10:00:00Z",
+      "totalBookings": 4,
+      "totalSpent": 32000,
+      "averageRating": 4.9,
+      "lastBooking": "2024-11-12T09:15:00Z",
+      "preferences": ["Desert Safari", "Cultural Tours"],
+      "segment": "Adventure Enthusiasts",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Rohit Gupta",
+        "phone": "+91-9876543217",
+        "relationship": "Husband"
+      }
+    },
+    {
+      "id": "CUST005",
+      "name": "Rahul Mehta",
+      "email": "rahul.mehta@email.com",
+      "phone": "+91-9876543218",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "location": "Chennai, India",
+      "joinDate": "2024-05-12T10:00:00Z",
+      "totalBookings": 3,
+      "totalSpent": 22500,
+      "averageRating": 4.6,
+      "lastBooking": "2024-11-11T15:45:00Z",
+      "preferences": ["Group Activities", "Riverside Camping"],
+      "segment": "Family Campers",
+      "status": "active",
+      "communicationPreference": "sms",
+      "emergencyContact": {
+        "name": "Amit Mehta",
+        "phone": "+91-9876543219",
+        "relationship": "Brother"
+      }
+    },
+    {
+      "id": "CUST006",
+      "name": "Anita Joshi",
+      "email": "anita.joshi@email.com",
+      "phone": "+91-9876543220",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "location": "Jaipur, India",
+      "joinDate": "2024-06-18T10:00:00Z",
+      "totalBookings": 1,
+      "totalSpent": 3000,
+      "averageRating": 0,
+      "lastBooking": "2024-11-10T11:30:00Z",
+      "preferences": ["Solo Travel", "Mountain Trekking"],
+      "segment": "Solo Travelers",
+      "status": "new",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Deepak Joshi",
+        "phone": "+91-9876543221",
+        "relationship": "Father"
+      }
+    },
+    {
+      "id": "CUST007",
+      "name": "Corporate Team - TechCorp",
+      "email": "hr@techcorp.com",
+      "phone": "+91-9876543222",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "location": "Gurgaon, India",
+      "joinDate": "2024-07-22T10:00:00Z",
+      "totalBookings": 2,
+      "totalSpent": 150000,
+      "averageRating": 4.8,
+      "lastBooking": "2024-11-09T14:20:00Z",
+      "preferences": ["Team Building", "Corporate Events"],
+      "segment": "Corporate Groups",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "HR Department",
+        "phone": "+91-9876543223",
+        "relationship": "Company"
+      }
+    },
+    {
+      "id": "CUST008",
+      "name": "Kavya Reddy",
+      "email": "kavya.reddy@email.com",
+      "phone": "+91-9876543224",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "location": "Hyderabad, India",
+      "joinDate": "2024-08-30T10:00:00Z",
+      "totalBookings": 2,
+      "totalSpent": 8000,
+      "averageRating": 5.0,
+      "lastBooking": "2024-10-20T10:15:00Z",
+      "preferences": ["Romantic Getaways", "Riverside Camping"],
+      "segment": "Family Campers",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Sanjay Reddy",
+        "phone": "+91-9876543225",
+        "relationship": "Husband"
+      }
+    },
+    {
+      "id": "CUST009",
+      "name": "Adventure Club Delhi",
+      "email": "contact@adventureclubdelhi.com",
+      "phone": "+91-9876543226",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "location": "Delhi, India",
+      "joinDate": "2024-09-15T10:00:00Z",
+      "totalBookings": 6,
+      "totalSpent": 180000,
+      "averageRating": 4.7,
+      "lastBooking": "2024-10-15T13:30:00Z",
+      "preferences": ["Group Adventures", "Mountain Trekking"],
+      "segment": "Adventure Enthusiasts",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Club President",
+        "phone": "+91-9876543227",
+        "relationship": "Organization"
+      }
+    },
+    {
+      "id": "CUST010",
+      "name": "International Group",
+      "email": "travel@globaladventures.com",
+      "phone": "+91-9876543228",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "location": "International",
+      "joinDate": "2024-08-01T10:00:00Z",
+      "totalBookings": 3,
+      "totalSpent": 95000,
+      "averageRating": 4.9,
+      "lastBooking": "2024-09-01T09:00:00Z",
+      "preferences": ["Cultural Tours", "Desert Safari"],
+      "segment": "Adventure Enthusiasts",
+      "status": "active",
+      "communicationPreference": "email",
+      "emergencyContact": {
+        "name": "Tour Manager",
+        "phone": "+91-9876543229",
+        "relationship": "Tour Company"
+      }
+    }
+  ],
+  "customerStats": {
+    "total": 892,
+    "active": 756,
+    "new": 89,
+    "returning": 667,
+    "churnRate": 8.5,
+    "averageLifetimeValue": 8950,
+    "averageBookingsPerCustomer": 2.8,
+    "topSpendingSegment": "Corporate Groups",
+    "mostLoyalSegment": "Family Campers"
+  },
+  "communicationHistory": [
+    {
+      "customerId": "CUST001",
+      "type": "email",
+      "subject": "Booking Confirmation - Triund Trek",
+      "status": "delivered",
+      "sentAt": "2024-11-15T14:35:00Z",
+      "openedAt": "2024-11-15T15:20:00Z"
+    },
+    {
+      "customerId": "CUST002",
+      "type": "sms",
+      "message": "Hi Priya, your Kasol Riverside Camping adventure starts tomorrow!",
+      "status": "delivered",
+      "sentAt": "2024-11-21T18:00:00Z"
+    },
+    {
+      "customerId": "CUST008",
+      "type": "email",
+      "subject": "How was your Kasol Riverside Camping experience?",
+      "status": "opened",
+      "sentAt": "2024-11-29T10:00:00Z",
+      "openedAt": "2024-11-29T14:30:00Z",
+      "clickedAt": "2024-11-29T14:32:00Z"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "bookings": [
+    {
+      "id": "B001",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "customerId": "CUST001",
+      "customerName": "Arjun Sharma",
+      "customerEmail": "arjun.sharma@email.com",
+      "customerPhone": "+91-9876543210",
+      "participants": 2,
+      "checkInDate": "2024-12-15T14:00:00Z",
+      "checkOutDate": "2024-12-16T11:00:00Z",
+      "totalAmount": 5000,
+      "paidAmount": 1500,
+      "paymentStatus": "partial",
+      "bookingStatus": "confirmed",
+      "specialRequests": "Vegetarian meals only",
+      "emergencyContact": {
+        "name": "Priya Sharma",
+        "phone": "+91-9876543211",
+        "relationship": "Wife"
+      },
+      "createdAt": "2024-11-20T10:30:00Z",
+      "updatedAt": "2024-11-22T15:45:00Z"
+    },
+    {
+      "id": "B002",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "customerId": "CUST002",
+      "customerName": "Priya Patel",
+      "customerEmail": "priya.patel@email.com",
+      "customerPhone": "+91-9876543212",
+      "participants": 4,
+      "checkInDate": "2024-12-20T15:00:00Z",
+      "checkOutDate": "2024-12-21T12:00:00Z",
+      "totalAmount": 7200,
+      "paidAmount": 7200,
+      "paymentStatus": "completed",
+      "bookingStatus": "confirmed",
+      "specialRequests": "Need extra blankets for children",
+      "emergencyContact": {
+        "name": "Raj Patel",
+        "phone": "+91-9876543213",
+        "relationship": "Husband"
+      },
+      "createdAt": "2024-11-18T14:20:00Z",
+      "updatedAt": "2024-11-19T09:15:00Z"
+    },
+    {
+      "id": "B003",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Camping",
+      "customerId": "CUST003",
+      "customerName": "Vikram Singh",
+      "customerEmail": "vikram.singh@email.com",
+      "customerPhone": "+91-9876543214",
+      "participants": 1,
+      "checkInDate": "2024-12-25T10:00:00Z",
+      "checkOutDate": "2024-12-29T18:00:00Z",
+      "totalAmount": 8500,
+      "paidAmount": 0,
+      "paymentStatus": "pending",
+      "bookingStatus": "pending",
+      "specialRequests": "Solo traveler, prefer single tent",
+      "emergencyContact": {
+        "name": "Sunita Singh",
+        "phone": "+91-9876543215",
+        "relationship": "Mother"
+      },
+      "createdAt": "2024-11-25T16:45:00Z",
+      "updatedAt": "2024-11-25T16:45:00Z"
+    },
+    {
+      "id": "B004",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "customerId": "CUST004",
+      "customerName": "Anita Gupta",
+      "customerEmail": "anita.gupta@email.com",
+      "customerPhone": "+91-9876543216",
+      "participants": 3,
+      "checkInDate": "2024-11-10T14:00:00Z",
+      "checkOutDate": "2024-11-11T11:00:00Z",
+      "totalAmount": 7500,
+      "paidAmount": 7500,
+      "paymentStatus": "completed",
+      "bookingStatus": "completed",
+      "specialRequests": "Anniversary celebration, need romantic setup",
+      "emergencyContact": {
+        "name": "Rohit Gupta",
+        "phone": "+91-9876543217",
+        "relationship": "Husband"
+      },
+      "createdAt": "2024-10-25T11:30:00Z",
+      "updatedAt": "2024-11-12T10:00:00Z"
+    },
+    {
+      "id": "B005",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "customerId": "CUST005",
+      "customerName": "Rahul Verma",
+      "customerEmail": "rahul.verma@email.com",
+      "customerPhone": "+91-9876543218",
+      "participants": 6,
+      "checkInDate": "2024-12-05T15:00:00Z",
+      "checkOutDate": "2024-12-06T12:00:00Z",
+      "totalAmount": 10800,
+      "paidAmount": 10800,
+      "paymentStatus": "completed",
+      "bookingStatus": "completed",
+      "specialRequests": "Group booking for friends reunion",
+      "emergencyContact": {
+        "name": "Neha Verma",
+        "phone": "+91-9876543219",
+        "relationship": "Wife"
+      },
+      "createdAt": "2024-11-01T09:15:00Z",
+      "updatedAt": "2024-12-07T14:30:00Z"
+    }
+  ]
+}

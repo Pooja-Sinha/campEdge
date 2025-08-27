@@ -32,10 +32,10 @@ const Footer = () => {
   }
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/campindia' },
-    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/campindia' },
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/campindia' },
-    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/campindia' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/campedge' },
+    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/campedge' },
+    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/campedge' },
+    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/campedge' },
   ]
 
   return (

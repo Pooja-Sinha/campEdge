@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// CampIndia Setup Verification Script
+// CampEdge Setup Verification Script
 // This script verifies that all components are working correctly
 
 import { readFileSync, existsSync } from 'fs';
@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = join(__dirname, '..');
 
-console.log('🏕️  CampIndia Setup Verification');
+console.log('🏕️  CampEdge Setup Verification');
 console.log('================================');
 
 let allChecksPass = true;

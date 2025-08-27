@@ -1,8 +1,8 @@
-import { 
-  Home, 
-  Search, 
-  Heart, 
-  User, 
+import {
+  Home,
+  Search,
+  Heart,
+  User,
   Menu,
   X,
   Mountain,
@@ -11,19 +11,25 @@ import {
   MessageSquare,
   Settings,
   LogOut,
-  Bell
+  Bell,
+  Building,
+  Sun,
+  Moon
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useIsAuthenticated, useAuth } from '../../hooks/useAuth'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useIsAuthenticated, useAuth, useUserRole } from '../../hooks/useAuth'
 import { useTouchGestures } from '../../hooks/useTouchGestures'
 import { useUIStore } from '../../store/uiStore'
+import { logLogout } from '../../utils/authLogger'
 import { cn } from '../../utils/cn'
 
 const MobileNavigation = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const { isAuthenticated, user } = useIsAuthenticated()
   const { logout } = useAuth()
+  const { isOrganizer, isAdmin } = useUserRole()
   const { isMobileMenuOpen, setMobileMenuOpen, theme, setTheme } = useUIStore()
   const [, setShowProfileMenu] = useState(false)
 
@@ -74,9 +80,12 @@ const MobileNavigation = () => {
     { path: '/camps', icon: MapPin, label: 'All Camps' },
     { path: '/blog', icon: MessageSquare, label: 'Blog' },
     ...(isAuthenticated ? [
+      ...(isOrganizer ? [{ path: '/organizer', icon: Building, label: 'Organizer Dashboard' }] : []),
+      ...(isAdmin ? [{ path: '/admin', icon: Settings, label: 'Admin Dashboard' }] : []),
       { path: '/profile', icon: User, label: 'My Profile' },
       { path: '/bookings', icon: Calendar, label: 'My Bookings' },
       { path: '/wishlist', icon: Heart, label: 'Wishlist' },
+      { path: '/notifications', icon: Bell, label: 'Notifications' },
     ] : [
       { path: '/login', icon: User, label: 'Sign In' },
       { path: '/signup', icon: User, label: 'Sign Up' },
@@ -100,7 +109,7 @@ const MobileNavigation = () => {
 
   const handleThemeToggle = () => {
     const themes = ['light', 'dark', 'system'] as const
-    const currentIndex = themes.indexOf(theme as any)
+    const currentIndex = themes.indexOf(theme)
     const nextTheme = themes[(currentIndex + 1) % themes.length]
     if (nextTheme) {
       setTheme(nextTheme)
@@ -110,9 +119,35 @@ const MobileNavigation = () => {
   const handleLogout = async () => {
     try {
       await logout.mutateAsync()
+
+      // Log successful logout
+      logLogout({
+        user: {
+          id: user?.id,
+          email: user?.email,
+          role: user?.role,
+          loginTimestamp: user?.createdAt
+        },
+        component: 'MobileNavigation.tsx - Side Menu',
+        success: true
+      })
+
       setMobileMenuOpen(false)
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      navigate('/')
     } catch (error) {
-      console.error('Logout failed:', error)
+      // Log failed logout
+      logLogout({
+        user: {
+          id: user?.id,
+          email: user?.email,
+          role: user?.role,
+          loginTimestamp: user?.createdAt
+        },
+        component: 'MobileNavigation.tsx - Side Menu',
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      })
     }
   }
 
@@ -154,9 +189,17 @@ const MobileNavigation = () => {
 
       {/* Side Menu Overlay */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50"
           onClick={() => setMobileMenuOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setMobileMenuOpen(false)
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Close menu"
         />
       )}
 
@@ -178,25 +221,93 @@ const MobileNavigation = () => {
           {/* Menu Header */}
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">
             {isAuthenticated && user ? (
-              <div className="flex items-center space-x-3">
-                <img
-                  src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=059669&color=fff`}
-                  alt={user.name}
-                  className="w-12 h-12 rounded-full"
-                />
-                <div>
-                  <div className="font-semibold text-gray-900 dark:text-white">
-                    {user.name}
+              <div>
+                <div className="flex items-center space-x-3 mb-4">
+                  <img
+                    src={user.avatar ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=059669&color=fff`}
+                    alt={user.name}
+                    className="w-12 h-12 rounded-full"
+                  />
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white">
+                      {user.name}
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {user.email}
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
-                    {user.email}
+                </div>
+
+                {/* Dashboard Quick Access */}
+                {(isOrganizer || isAdmin) && (
+                  <div className="mb-3">
+                    <div className="grid grid-cols-1 gap-2">
+                      {isOrganizer && (
+                        <Link
+                          to="/organizer"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-center space-x-2 px-3 py-2 bg-primary-100 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 rounded-lg hover:bg-primary-200 dark:hover:bg-primary-900/30 transition-colors"
+                        >
+                          <Building className="w-4 h-4" />
+                          <span className="text-sm font-medium">Organizer Dashboard</span>
+                        </Link>
+                      )}
+                      {isAdmin && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-center space-x-2 px-3 py-2 bg-primary-100 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 rounded-lg hover:bg-primary-200 dark:hover:bg-primary-900/30 transition-colors"
+                        >
+                          <Settings className="w-4 h-4" />
+                          <span className="text-sm font-medium">Admin Dashboard</span>
+                        </Link>
+                      )}
+                    </div>
                   </div>
+                )}
+
+                {/* Account Quick Actions */}
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    to="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center space-x-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  >
+                    <User className="w-4 h-4" />
+                    <span className="text-sm font-medium">Profile</span>
+                  </Link>
+                  <Link
+                    to="/camps"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center space-x-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  >
+                    <Search className="w-4 h-4" />
+                    <span className="text-sm font-medium">Search</span>
+                  </Link>
+                  <button
+                    onClick={handleThemeToggle}
+                    className="flex items-center justify-center space-x-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  >
+                    {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    <span className="text-sm font-medium">Theme</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      // Toggle settings or navigate to settings page
+                      setMobileMenuOpen(false)
+                      // You can add settings navigation here
+                    }}
+                    className="flex items-center justify-center space-x-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  >
+                    <Settings className="w-4 h-4" />
+                    <span className="text-sm font-medium">Settings</span>
+                  </button>
                 </div>
               </div>
             ) : (
               <div className="text-center">
                 <div className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Welcome to CampIndia
+                  Welcome to CampEdge
                 </div>
                 <div className="space-x-3">
                   <Link
@@ -254,7 +365,7 @@ const MobileNavigation = () => {
             {/* Logout */}
             {isAuthenticated && (
               <button
-                onClick={handleLogout}
+                onClick={() => { handleLogout().catch(() => { /* Handle logout error silently */ }) }}
                 className="w-full flex items-center space-x-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
               >
                 <LogOut className="w-5 h-5" />

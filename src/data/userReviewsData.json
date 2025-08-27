@@ -1,0 +1,217 @@
+{
+  "userReviews": [
+    {
+      "id": "UR006",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "customerId": "USER011",
+      "customerName": "Daniel Brown",
+      "customerEmail": "daniel.brown@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "rating": 4,
+      "title": "Adventure of a lifetime",
+      "content": "Spiti Valley is truly the last frontier! The landscapes are surreal and the experience is unforgettable. Our driver-guide was skilled in navigating the challenging terrain. The monasteries were peaceful and the monks were welcoming. Accommodation was basic but clean. The high altitude was challenging initially but worth it for the views. Food was simple but hearty. A must-do for adventure seekers!",
+      "pros": ["Surreal landscapes", "Skilled driver-guide", "Peaceful monasteries", "Clean accommodation", "Adventure experience"],
+      "cons": ["High altitude challenges", "Basic amenities", "Long travel times", "Limited food options"],
+      "images": [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 29,
+      "createdAt": "2024-07-20T15:45:00Z"
+    },
+    {
+      "id": "UR007",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "customerId": "USER012",
+      "customerName": "Sophie Taylor",
+      "customerEmail": "sophie.taylor@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "rating": 5,
+      "title": "Nature therapy at its best",
+      "content": "After a stressful year at work, this riverside camping was exactly what I needed. The sound of flowing water was incredibly therapeutic. I spent hours just sitting by the river reading and reflecting. The bonfire sessions were cozy and I met some amazing people. The yoga session in the morning was a perfect start to the day. Staff was attentive without being intrusive. Left feeling completely refreshed!",
+      "pros": ["Therapeutic river sounds", "Great for relaxation", "Cozy bonfire sessions", "Morning yoga", "Attentive staff", "Refreshing experience"],
+      "cons": ["Limited activities for adventure seekers", "Insects near the river"],
+      "images": [
+        "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 33,
+      "createdAt": "2024-07-05T12:20:00Z"
+    },
+    {
+      "id": "UR008",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "customerId": "USER013",
+      "customerName": "Kevin Lee",
+      "customerEmail": "kevin.lee@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "rating": 4,
+      "title": "Great team building experience",
+      "content": "Organized this trek for our office team and it was a huge success! The trek challenged us physically and brought the team closer together. Our guide was excellent at managing the group and ensuring everyone's safety. The camping experience was new for most of us and everyone loved it. The views from Triund top were spectacular. Great for corporate team building activities.",
+      "pros": ["Excellent team building", "Professional guide", "Safety focused", "Spectacular views", "New experience for team"],
+      "cons": ["Some team members found it challenging", "Weather was unpredictable", "Basic camping facilities"],
+      "images": [
+        "https://images.unsplash.com/photo-1464822759844-d150baec0494?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 26,
+      "createdAt": "2024-06-18T14:30:00Z"
+    },
+    {
+      "id": "UR009",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "customerId": "USER014",
+      "customerName": "Rachel Green",
+      "customerEmail": "rachel.green@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "rating": 5,
+      "title": "Cultural immersion at its finest",
+      "content": "This trip was an incredible cultural journey! Staying with local families gave us authentic insights into Spiti life. The monasteries were spiritually enriching and the monks shared fascinating stories. Our guide was like a walking encyclopedia of local history and culture. The landscapes were breathtaking - like being on Mars! The local food was delicious and healthy. A transformative experience that I'll cherish forever.",
+      "pros": ["Authentic cultural experience", "Local family stays", "Spiritual monasteries", "Knowledgeable guide", "Breathtaking landscapes", "Delicious local food"],
+      "cons": ["High altitude sickness initially", "Basic bathroom facilities", "Long travel distances"],
+      "images": [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300",
+        "https://images.unsplash.com/photo-1464822759844-d150baec0494?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 51,
+      "createdAt": "2024-06-02T16:15:00Z"
+    },
+    {
+      "id": "UR010",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "customerId": "USER015",
+      "customerName": "Tom Harris",
+      "customerEmail": "tom.harris@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "rating": 4,
+      "title": "Great value for money",
+      "content": "For the price point, this camping experience offers great value. The location is beautiful and the basic amenities are well-maintained. The river rafting was exciting and well-organized. Food was simple but tasty. Staff was helpful and friendly. The bonfire sessions were the highlight - great atmosphere and good music. Perfect for budget travelers looking for a nature experience.",
+      "pros": ["Great value for money", "Beautiful location", "Exciting river rafting", "Tasty food", "Helpful staff", "Great bonfire atmosphere"],
+      "cons": ["Basic amenities", "Limited luxury options", "Can get noisy with large groups"],
+      "images": [
+        "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 22,
+      "createdAt": "2024-05-15T11:45:00Z"
+    },
+    {
+      "id": "UR011",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "customerId": "USER016",
+      "customerName": "Amanda Clark",
+      "customerEmail": "amanda.clark@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "rating": 5,
+      "title": "Solo female traveler - felt completely safe",
+      "content": "As a solo female traveler, safety was my primary concern. I'm happy to report that I felt completely safe throughout the trek. The guide was professional and respectful, and the group was welcoming. The trek itself was challenging but manageable. The camping experience was amazing - sleeping under the stars was magical. The sunrise view was worth every step of the trek. Highly recommend for solo female travelers!",
+      "pros": ["Safe for solo female travelers", "Professional guide", "Welcoming group", "Manageable challenge", "Amazing camping", "Magical stargazing", "Worth the effort"],
+      "cons": ["Can be cold at night", "Basic toilet facilities", "Physical challenge"],
+      "images": [
+        "https://images.unsplash.com/photo-1464822759844-d150baec0494?w=400&h=300",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 45,
+      "createdAt": "2024-04-28T13:20:00Z"
+    },
+    {
+      "id": "UR012",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "customerId": "USER017",
+      "customerName": "Chris Martinez",
+      "customerEmail": "chris.martinez@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "rating": 4,
+      "title": "Motorcycle enthusiast's paradise",
+      "content": "As a motorcycle enthusiast, the roads to Spiti Valley were an adventure in themselves! The challenging terrain and high-altitude passes were thrilling. Our guide was experienced with the routes and ensured our safety. The landscapes are absolutely stunning - perfect for motorcycle touring. The monasteries provided peaceful stops along the way. Accommodation was basic but adequate. A must-do for adventure bikers!",
+      "pros": ["Thrilling motorcycle routes", "Experienced guide", "Stunning landscapes", "Peaceful monastery stops", "Adventure biker friendly"],
+      "cons": ["Challenging terrain", "Basic accommodation", "Weather dependent", "Requires experienced riding skills"],
+      "images": [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 35,
+      "createdAt": "2024-04-10T10:30:00Z"
+    },
+    {
+      "id": "UR013",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "customerId": "USER018",
+      "customerName": "Olivia Davis",
+      "customerEmail": "olivia.davis@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "rating": 5,
+      "title": "Perfect honeymoon destination",
+      "content": "My husband and I chose Kasol for our honeymoon and it was perfect! The romantic riverside setting, cozy tents, and peaceful atmosphere created the ideal romantic getaway. The staff was very accommodating and even arranged a special candlelight dinner by the river. The bonfire sessions were intimate and the stargazing was magical. We made beautiful memories that we'll treasure forever. Highly recommend for couples!",
+      "pros": ["Romantic riverside setting", "Cozy tents", "Peaceful atmosphere", "Accommodating staff", "Special arrangements", "Intimate bonfire", "Magical stargazing"],
+      "cons": ["Limited privacy with other campers", "Basic amenities"],
+      "images": [
+        "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 38,
+      "createdAt": "2024-03-25T15:45:00Z"
+    },
+    {
+      "id": "UR014",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "customerId": "USER019",
+      "customerName": "Ryan Johnson",
+      "customerEmail": "ryan.johnson@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "rating": 3,
+      "title": "Good trek but overcrowded",
+      "content": "The trek itself is beautiful and well-organized, but it was quite overcrowded during our visit. The trail was busy and the camping area was packed. This took away from the wilderness experience I was hoping for. The guide was knowledgeable and the views were great, but the crowds were a bit much. Would recommend visiting during off-peak times for a better experience.",
+      "pros": ["Beautiful trek", "Well-organized", "Knowledgeable guide", "Great views"],
+      "cons": ["Overcrowded", "Busy trail", "Packed camping area", "Less wilderness feel"],
+      "images": [],
+      "verified": true,
+      "helpful": 19,
+      "createdAt": "2024-03-10T12:15:00Z"
+    },
+    {
+      "id": "UR015",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "customerId": "USER020",
+      "customerName": "Grace Wilson",
+      "customerEmail": "grace.wilson@email.com",
+      "role": "User",
+      "customerAvatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "rating": 5,
+      "title": "Spiritual awakening in the mountains",
+      "content": "This journey to Spiti Valley was more than just a trip - it was a spiritual awakening. The serene monasteries, the wisdom of the monks, and the vastness of the landscape put everything in perspective. Our guide was not just knowledgeable about the places but also about the spiritual significance of each location. The meditation sessions at the monasteries were profound. I returned home with a renewed sense of purpose and inner peace.",
+      "pros": ["Spiritual awakening", "Serene monasteries", "Wise monks", "Vast landscapes", "Knowledgeable guide", "Profound meditation", "Inner peace"],
+      "cons": ["High altitude adjustment", "Basic facilities", "Long travel times"],
+      "images": [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300",
+        "https://images.unsplash.com/photo-1464822759844-d150baec0494?w=400&h=300"
+      ],
+      "verified": true,
+      "helpful": 47,
+      "createdAt": "2024-02-20T14:30:00Z"
+    }
+  ]
+}

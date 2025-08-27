@@ -54,7 +54,7 @@ const forceReinitializeStorage = () => {
   localStorage.removeItem(STORAGE_KEYS.USERS);
   localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(additionalData.users));
   console.log('Storage re-initialized with', additionalData.users.length, 'users');
-  console.log('Demo users now available:', additionalData.users.filter(u => u.email.includes('campindia.com')).map(u => u.email));
+  console.log('Demo users now available:', additionalData.users.filter(u => u.email.includes('campedge.com')).map(u => u.email));
 };
 
 // Initialize storage on module load
@@ -278,7 +278,7 @@ export const userApi = {
     }
     
     // Mock password validation (in real app, this would be handled by backend)
-    if (password !== 'password123') {
+    if (password !== 'Password@123') {
       return {
         success: false,
         data: null,

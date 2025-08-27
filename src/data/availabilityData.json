@@ -1,0 +1,286 @@
+{
+  "availability": [
+    {
+      "id": "AV001",
+      "date": "2024-12-15",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 12,
+      "basePrice": 3000,
+      "dynamicPrice": 3600,
+      "priceMultiplier": 1.2,
+      "notes": "Peak season pricing - Winter holidays",
+      "restrictions": ["Weather dependent", "Minimum age 12"]
+    },
+    {
+      "id": "AV002",
+      "date": "2024-12-16",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 8,
+      "basePrice": 3000,
+      "dynamicPrice": 3300,
+      "priceMultiplier": 1.1,
+      "notes": "Weekend pricing",
+      "restrictions": ["Weather dependent"]
+    },
+    {
+      "id": "AV003",
+      "date": "2024-12-17",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": false,
+      "capacity": 20,
+      "bookedSlots": 0,
+      "basePrice": 3000,
+      "priceMultiplier": 1.0,
+      "notes": "Equipment maintenance day",
+      "restrictions": ["Maintenance scheduled"]
+    },
+    {
+      "id": "AV004",
+      "date": "2024-12-18",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 15,
+      "basePrice": 3000,
+      "dynamicPrice": 3450,
+      "priceMultiplier": 1.15,
+      "notes": "High demand - Limited spots",
+      "restrictions": ["Weather dependent"]
+    },
+    {
+      "id": "AV005",
+      "date": "2024-12-19",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 20,
+      "basePrice": 3000,
+      "dynamicPrice": 3600,
+      "priceMultiplier": 1.2,
+      "notes": "Fully booked - Waitlist available",
+      "restrictions": ["Waitlist only"]
+    },
+    {
+      "id": "AV006",
+      "date": "2024-12-20",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 2,
+      "basePrice": 3000,
+      "dynamicPrice": 3600,
+      "priceMultiplier": 1.2,
+      "notes": "Peak season - Christmas week",
+      "restrictions": ["Weather dependent", "Advance booking required"]
+    },
+    {
+      "id": "AV007",
+      "date": "2024-12-22",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "isAvailable": true,
+      "capacity": 25,
+      "bookedSlots": 4,
+      "basePrice": 2500,
+      "dynamicPrice": 2750,
+      "priceMultiplier": 1.1,
+      "notes": "Weekend pricing",
+      "restrictions": ["River conditions dependent"]
+    },
+    {
+      "id": "AV008",
+      "date": "2024-12-23",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "isAvailable": true,
+      "capacity": 25,
+      "bookedSlots": 18,
+      "basePrice": 2500,
+      "dynamicPrice": 2875,
+      "priceMultiplier": 1.15,
+      "notes": "High demand - Christmas weekend",
+      "restrictions": ["River conditions dependent"]
+    },
+    {
+      "id": "AV009",
+      "date": "2024-12-25",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 3,
+      "basePrice": 3000,
+      "dynamicPrice": 3900,
+      "priceMultiplier": 1.3,
+      "notes": "Christmas Day - Premium pricing",
+      "restrictions": ["Weather dependent", "Holiday surcharge"]
+    },
+    {
+      "id": "AV010",
+      "date": "2024-12-28",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "isAvailable": true,
+      "capacity": 12,
+      "bookedSlots": 2,
+      "basePrice": 8500,
+      "dynamicPrice": 9350,
+      "priceMultiplier": 1.1,
+      "notes": "Year-end special",
+      "restrictions": ["High altitude", "Medical clearance required"]
+    },
+    {
+      "id": "AV011",
+      "date": "2024-12-30",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "isAvailable": true,
+      "capacity": 25,
+      "bookedSlots": 6,
+      "basePrice": 2500,
+      "dynamicPrice": 3250,
+      "priceMultiplier": 1.3,
+      "notes": "New Year's Eve - Premium pricing",
+      "restrictions": ["River conditions dependent", "Noise restrictions after 11 PM"]
+    },
+    {
+      "id": "AV012",
+      "date": "2025-01-01",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "isAvailable": true,
+      "capacity": 12,
+      "bookedSlots": 0,
+      "basePrice": 8500,
+      "dynamicPrice": 11050,
+      "priceMultiplier": 1.3,
+      "notes": "New Year's Day - Premium experience",
+      "restrictions": ["High altitude", "Medical clearance required", "Weather dependent"]
+    },
+    {
+      "id": "AV013",
+      "date": "2025-01-05",
+      "campId": "C001",
+      "campName": "Triund Trek & Camping Experience",
+      "isAvailable": true,
+      "capacity": 20,
+      "bookedSlots": 1,
+      "basePrice": 3000,
+      "priceMultiplier": 1.0,
+      "notes": "Regular pricing resumes",
+      "restrictions": ["Weather dependent"]
+    },
+    {
+      "id": "AV014",
+      "date": "2025-01-10",
+      "campId": "C002",
+      "campName": "Spiti Valley Desert Safari",
+      "isAvailable": true,
+      "capacity": 12,
+      "bookedSlots": 12,
+      "basePrice": 8500,
+      "priceMultiplier": 1.0,
+      "notes": "Corporate booking - Fully reserved",
+      "restrictions": ["Private group booking"]
+    },
+    {
+      "id": "AV015",
+      "date": "2025-01-15",
+      "campId": "C003",
+      "campName": "Kasol Riverside Camping",
+      "isAvailable": true,
+      "capacity": 25,
+      "bookedSlots": 0,
+      "basePrice": 2500,
+      "priceMultiplier": 1.0,
+      "notes": "Post-holiday regular pricing",
+      "restrictions": ["River conditions dependent"]
+    }
+  ],
+  "pricingRules": [
+    {
+      "id": "PR001",
+      "name": "Winter Peak Season",
+      "type": "seasonal",
+      "multiplier": 1.3,
+      "startDate": "2024-12-15",
+      "endDate": "2025-01-15",
+      "isActive": true,
+      "description": "Peak winter season pricing for high demand period",
+      "applicableCamps": ["C001", "C002", "C003"]
+    },
+    {
+      "id": "PR002",
+      "name": "Weekend Premium",
+      "type": "weekend",
+      "multiplier": 1.15,
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "isActive": true,
+      "description": "Weekend pricing premium for Friday-Sunday",
+      "applicableCamps": ["C001", "C002", "C003"]
+    },
+    {
+      "id": "PR003",
+      "name": "High Demand Surge",
+      "type": "demand",
+      "multiplier": 1.2,
+      "isActive": true,
+      "description": "Automatic price increase when occupancy exceeds 80%",
+      "applicableCamps": ["C001", "C002", "C003"],
+      "conditions": {
+        "occupancyThreshold": 80
+      }
+    },
+    {
+      "id": "PR004",
+      "name": "Holiday Special",
+      "type": "holiday",
+      "multiplier": 1.4,
+      "startDate": "2024-12-24",
+      "endDate": "2025-01-02",
+      "isActive": true,
+      "description": "Premium pricing for Christmas and New Year period",
+      "applicableCamps": ["C001", "C002", "C003"]
+    },
+    {
+      "id": "PR005",
+      "name": "Early Bird Discount",
+      "type": "early_bird",
+      "multiplier": 0.9,
+      "isActive": true,
+      "description": "10% discount for bookings made 30+ days in advance",
+      "applicableCamps": ["C001", "C002", "C003"],
+      "conditions": {
+        "daysInAdvance": 30
+      }
+    }
+  ],
+  "seasonalTrends": {
+    "peak": {
+      "months": ["December", "January", "March", "April", "May"],
+      "averageOccupancy": 85,
+      "priceMultiplier": 1.2
+    },
+    "moderate": {
+      "months": ["February", "June", "September", "October", "November"],
+      "averageOccupancy": 65,
+      "priceMultiplier": 1.0
+    },
+    "low": {
+      "months": ["July", "August"],
+      "averageOccupancy": 45,
+      "priceMultiplier": 0.8
+    }
+  }
+}

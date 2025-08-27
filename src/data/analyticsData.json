@@ -1,0 +1,245 @@
+{
+  "businessMetrics": {
+    "revenue": {
+      "total": 2847000,
+      "thisMonth": 485000,
+      "lastMonth": 423000,
+      "growth": 14.6,
+      "target": 500000,
+      "targetProgress": 97
+    },
+    "bookings": {
+      "total": 1247,
+      "thisMonth": 89,
+      "lastMonth": 76,
+      "growth": 17.1,
+      "conversionRate": 12.8,
+      "averageValue": 5449
+    },
+    "customers": {
+      "total": 892,
+      "new": 34,
+      "returning": 55,
+      "retentionRate": 68.5,
+      "lifetimeValue": 8950
+    },
+    "occupancy": {
+      "average": 78.5,
+      "thisMonth": 82.3,
+      "lastMonth": 74.7,
+      "peak": 95.2,
+      "low": 45.8
+    }
+  },
+  "revenueByMonth": [
+    { "month": "Jan", "revenue": 320000, "bookings": 67 },
+    { "month": "Feb", "revenue": 280000, "bookings": 58 },
+    { "month": "Mar", "revenue": 450000, "bookings": 89 },
+    { "month": "Apr", "revenue": 520000, "bookings": 102 },
+    { "month": "May", "revenue": 480000, "bookings": 95 },
+    { "month": "Jun", "revenue": 380000, "bookings": 78 },
+    { "month": "Jul", "revenue": 220000, "bookings": 45 },
+    { "month": "Aug", "revenue": 190000, "bookings": 38 },
+    { "month": "Sep", "revenue": 340000, "bookings": 71 },
+    { "month": "Oct", "revenue": 420000, "bookings": 85 },
+    { "month": "Nov", "revenue": 485000, "bookings": 89 },
+    { "month": "Dec", "revenue": 520000, "bookings": 98 }
+  ],
+  "campPerformance": [
+    {
+      "campId": "C001",
+      "name": "Triund Trek & Camping Experience",
+      "revenue": 1245000,
+      "bookings": 415,
+      "occupancyRate": 82.5,
+      "averageRating": 4.8,
+      "profitMargin": 65.2
+    },
+    {
+      "campId": "C002",
+      "name": "Spiti Valley Desert Safari",
+      "revenue": 892000,
+      "bookings": 105,
+      "occupancyRate": 75.8,
+      "averageRating": 4.9,
+      "profitMargin": 58.7
+    },
+    {
+      "campId": "C003",
+      "name": "Kasol Riverside Camping",
+      "revenue": 710000,
+      "bookings": 284,
+      "occupancyRate": 71.2,
+      "averageRating": 4.6,
+      "profitMargin": 72.1
+    }
+  ],
+  "customerSegments": [
+    {
+      "id": "SEG001",
+      "name": "Adventure Enthusiasts",
+      "size": 156,
+      "revenue": 487000,
+      "avgBookingValue": 3120,
+      "retentionRate": 78,
+      "growthRate": 23,
+      "characteristics": ["High-value bookings", "Frequent travelers", "Social media active", "Group organizers"],
+      "preferredCamps": ["C001", "C002"],
+      "seasonality": "Peak in winter and spring"
+    },
+    {
+      "id": "SEG002",
+      "name": "Family Campers",
+      "size": 89,
+      "revenue": 234000,
+      "avgBookingValue": 2630,
+      "retentionRate": 85,
+      "growthRate": 12,
+      "characteristics": ["Weekend bookings", "Safety-conscious", "Budget-aware", "Repeat customers"],
+      "preferredCamps": ["C003", "C001"],
+      "seasonality": "Consistent year-round"
+    },
+    {
+      "id": "SEG003",
+      "name": "Corporate Groups",
+      "size": 34,
+      "revenue": 198000,
+      "avgBookingValue": 5820,
+      "retentionRate": 92,
+      "growthRate": 45,
+      "characteristics": ["Large groups", "Premium services", "Advance booking", "Team building focus"],
+      "preferredCamps": ["C002", "C001"],
+      "seasonality": "Peak in Q1 and Q4"
+    },
+    {
+      "id": "SEG004",
+      "name": "Solo Travelers",
+      "size": 67,
+      "revenue": 145000,
+      "avgBookingValue": 2160,
+      "retentionRate": 45,
+      "growthRate": 8,
+      "characteristics": ["Flexible dates", "Budget-conscious", "Experience-focused", "Social seekers"],
+      "preferredCamps": ["C003", "C001"],
+      "seasonality": "Peak in shoulder seasons"
+    }
+  ],
+  "aiInsights": [
+    {
+      "id": "AI001",
+      "type": "opportunity",
+      "title": "Peak Season Pricing Opportunity",
+      "description": "Analysis shows you can increase prices by 25% during Dec 20-Jan 5 without affecting demand. Competitor analysis supports this pricing strategy.",
+      "impact": "high",
+      "confidence": 87,
+      "actionable": true,
+      "category": "pricing",
+      "potentialRevenue": 45000,
+      "implementationEffort": "low"
+    },
+    {
+      "id": "AI002",
+      "type": "warning",
+      "title": "Customer Churn Risk Detected",
+      "description": "15% of your repeat customers show signs of churn based on booking patterns and engagement metrics. Immediate retention campaign recommended.",
+      "impact": "high",
+      "confidence": 92,
+      "actionable": true,
+      "category": "customer",
+      "affectedCustomers": 23,
+      "potentialLoss": 78000
+    },
+    {
+      "id": "AI003",
+      "type": "recommendation",
+      "title": "Optimize Weekend Availability",
+      "description": "Weekend slots are consistently overbooked. Adding 2 more weekend dates per month could increase revenue by 18%.",
+      "impact": "medium",
+      "confidence": 78,
+      "actionable": true,
+      "category": "operations",
+      "additionalRevenue": 28000,
+      "requiredSlots": 8
+    },
+    {
+      "id": "AI004",
+      "type": "prediction",
+      "title": "Seasonal Demand Forecast",
+      "description": "Winter season demand predicted to be 35% higher than last year. Consider expanding capacity or adjusting pricing strategy.",
+      "impact": "high",
+      "confidence": 84,
+      "actionable": true,
+      "category": "marketing",
+      "demandIncrease": 35,
+      "seasonStart": "2024-12-15"
+    }
+  ],
+  "predictiveMetrics": [
+    {
+      "metric": "Monthly Revenue",
+      "current": 485000,
+      "predicted": 567000,
+      "change": 16.9,
+      "confidence": 89,
+      "timeframe": "Next 30 days"
+    },
+    {
+      "metric": "Booking Conversion",
+      "current": 12.8,
+      "predicted": 15.2,
+      "change": 18.8,
+      "confidence": 76,
+      "timeframe": "Next 30 days"
+    },
+    {
+      "metric": "Customer Retention",
+      "current": 68.5,
+      "predicted": 72.1,
+      "change": 5.3,
+      "confidence": 82,
+      "timeframe": "Next 90 days"
+    },
+    {
+      "metric": "Average Booking Value",
+      "current": 5449,
+      "predicted": 6127,
+      "change": 12.4,
+      "confidence": 71,
+      "timeframe": "Next 60 days"
+    }
+  ],
+  "competitorAnalysis": {
+    "marketPosition": "Leading",
+    "priceCompetitiveness": 92,
+    "serviceQuality": 96,
+    "marketShare": 18.5,
+    "competitors": [
+      {
+        "name": "Mountain Adventures Co",
+        "marketShare": 15.2,
+        "avgPrice": 3200,
+        "rating": 4.3
+      },
+      {
+        "name": "Himalayan Expeditions",
+        "marketShare": 12.8,
+        "avgPrice": 4100,
+        "rating": 4.5
+      },
+      {
+        "name": "Adventure Seekers",
+        "marketShare": 10.1,
+        "avgPrice": 2800,
+        "rating": 4.1
+      }
+    ]
+  },
+  "operationalMetrics": {
+    "staffUtilization": 87.5,
+    "equipmentUtilization": 92.3,
+    "maintenanceCosts": 45000,
+    "customerSatisfaction": 4.7,
+    "responseTime": "2.3 hours",
+    "issueResolutionRate": 94.8
+  }
+}
