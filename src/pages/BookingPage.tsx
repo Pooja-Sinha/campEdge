@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom'
-import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,20 +9,23 @@ import {
   Calendar,
   MapPin,
   Phone,
-  Mail,
+
   Plus,
   Trash2,
   AlertCircle,
   Shield,
   Clock
 } from 'lucide-react'
-import { useCamp } from '../hooks/useCamps'
-import { useIsAuthenticated } from '../hooks/useAuth'
-import { bookingApi } from '../services/api'
-import { useQueryClient } from '@tanstack/react-query'
+import { useState, useEffect } from 'react'
+import { useForm, useFieldArray } from 'react-hook-form'
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom'
+import { z } from 'zod'
 import LoadingSpinner from '../components/common/LoadingSpinner'
-import { formatCurrency, formatDate, formatDuration } from '../utils/format'
+import { useIsAuthenticated } from '../hooks/useAuth'
+import { useCamp } from '../hooks/useCamps'
+import { bookingApi } from '../services/api'
 import { cn } from '../utils/cn'
+import { formatCurrency, formatDate, formatDuration } from '../utils/format'
 
 // Validation schemas
 const participantSchema = z.object({
@@ -46,8 +46,8 @@ const bookingSchema = z.object({
     relation: z.string().min(2, 'Relationship is required'),
   }),
   specialRequests: z.string().optional(),
-  agreeToTerms: z.boolean().refine(val => val === true, 'You must agree to terms and conditions'),
-  agreeToPolicy: z.boolean().refine(val => val === true, 'You must agree to cancellation policy'),
+  agreeToTerms: z.boolean().refine(val => val, 'You must agree to terms and conditions'),
+  agreeToPolicy: z.boolean().refine(val => val, 'You must agree to cancellation policy'),
 })
 
 type BookingFormData = z.infer<typeof bookingSchema>
@@ -153,7 +153,7 @@ const BookingPage = () => {
 
   const onSubmit = async (data: BookingFormData) => {
     if (!camp || !selectedSlot || !user) {
-      console.error('Missing required data:', { camp: !!camp, selectedSlot: !!selectedSlot, user: !!user });
+      console.error('Missing required data:', { camp: Boolean(camp), selectedSlot: Boolean(selectedSlot), user: Boolean(user) });
       return;
     }
 
@@ -164,7 +164,10 @@ const BookingPage = () => {
         userId: user.id,
         campId: camp.id,
         slotId: selectedSlot.id,
-        participants: data.participants,
+        participants: data.participants.map((p, index) => ({
+          ...p,
+          id: `participant-${Date.now()}-${index}`
+        })),
         totalAmount: totalPrice,
         paidAmount: totalPrice,
         paymentStatus: 'paid' as const,
@@ -177,7 +180,7 @@ const BookingPage = () => {
       const response = await bookingApi.createBooking(bookingData)
       console.log('Booking API response:', response);
 
-      if (response.success) {
+      if (response.success && response.data) {
         setBookingId(response.data.id)
         setBookingComplete(true)
         console.log('Booking completed successfully with ID:', response.data.id);
@@ -196,7 +199,7 @@ const BookingPage = () => {
     }
   }
 
-  if (isLoading) {
+  if (isLoading || !camp) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" text="Loading booking details..." />
@@ -204,7 +207,7 @@ const BookingPage = () => {
     )
   }
 
-  if (!camp || !selectedSlot) {
+  if (!selectedSlot) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -215,7 +218,7 @@ const BookingPage = () => {
             The booking information is invalid or expired.
           </p>
           <button
-            onClick={() => navigate('/camps')}
+            onClick={async () => navigate('/camps')}
             className="btn-primary"
           >
             Browse Camps
@@ -250,13 +253,13 @@ const BookingPage = () => {
 
           <div className="space-y-3">
             <button
-              onClick={() => navigate('/profile')}
+              onClick={async () => navigate('/profile')}
               className="w-full btn-primary"
             >
               View My Bookings
             </button>
             <button
-              onClick={() => navigate('/camps')}
+              onClick={async () => navigate('/camps')}
               className="w-full btn-secondary"
             >
               Browse More Camps
@@ -274,7 +277,7 @@ const BookingPage = () => {
         <div className="container-max section-padding py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => navigate(-1)}
+              onClick={async () => navigate(-1)}
               className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -778,11 +781,11 @@ const BookingPage = () => {
                       </div>
 
                       {/* Group Discount */}
-                      {camp.pricing.groupDiscounts.length > 0 && watchedParticipants.length >= camp.pricing.groupDiscounts[0].minSize && (
+                      {camp.pricing.groupDiscounts.length > 0 && camp.pricing.groupDiscounts[0] && watchedParticipants.length >= camp.pricing.groupDiscounts[0].minSize && (
                         <div className="flex justify-between text-green-600 dark:text-green-400">
-                          <span>Group discount ({camp.pricing.groupDiscounts[0].discountPercentage}% off)</span>
+                          <span>Group discount ({camp.pricing.groupDiscounts[0]?.discountPercentage}% off)</span>
                           <span>
-                            -{formatCurrency(totalPrice * camp.pricing.groupDiscounts[0].discountPercentage / 100)}
+                            -{formatCurrency(totalPrice * (camp.pricing.groupDiscounts[0]?.discountPercentage || 0) / 100)}
                           </span>
                         </div>
                       )}
@@ -792,8 +795,8 @@ const BookingPage = () => {
                           <span className="text-gray-900 dark:text-white">Total</span>
                           <span className="text-gray-900 dark:text-white">
                             {formatCurrency(
-                              camp.pricing.groupDiscounts.length > 0 && watchedParticipants.length >= camp.pricing.groupDiscounts[0].minSize
-                                ? totalPrice * (1 - camp.pricing.groupDiscounts[0].discountPercentage / 100)
+                              camp.pricing.groupDiscounts.length > 0 && camp.pricing.groupDiscounts[0] && watchedParticipants.length >= camp.pricing.groupDiscounts[0].minSize
+                                ? totalPrice * (1 - (camp.pricing.groupDiscounts[0]?.discountPercentage || 0) / 100)
                                 : totalPrice
                             )}
                           </span>

@@ -17,7 +17,7 @@ export interface WeatherData {
     icon: string
     description: string
   }
-  forecast: Array<{
+  forecast: {
     date: string
     day: string
     high: number
@@ -28,8 +28,8 @@ export interface WeatherData {
     precipitation: number
     humidity: number
     windSpeed: number
-  }>
-  alerts?: Array<{
+  }[]
+  alerts?: {
     id: string
     type: 'warning' | 'watch' | 'advisory'
     title: string
@@ -37,7 +37,7 @@ export interface WeatherData {
     severity: 'minor' | 'moderate' | 'severe' | 'extreme'
     startTime: string
     endTime: string
-  }>
+  }[]
   bestTimeToVisit: {
     months: string[]
     reason: string
@@ -53,8 +53,8 @@ const mockWeatherData: Record<string, WeatherData> = weatherMockData as Record<s
 
 
 class WeatherService {
-  private apiKey: string = process.env.REACT_APP_WEATHER_API_KEY || 'mock-api-key'
-  private baseUrl: string = 'https://api.openweathermap.org/data/2.5'
+  private readonly apiKey: string = import.meta.env['VITE_WEATHER_API_KEY'] || 'mock-api-key'
+  private readonly baseUrl = 'https://api.openweathermap.org/data/2.5'
 
   // Get weather data for a location
   async getWeatherData(location: string, coordinates?: { lat: number; lng: number }): Promise<WeatherData> {
@@ -71,11 +71,55 @@ class WeatherService {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 500))
 
-      return weatherData
+      return weatherData || mockWeatherData['maharashtra'] || {
+        current: {
+          temperature: 25,
+          feelsLike: 27,
+          humidity: 60,
+          windSpeed: 10,
+          windDirection: 'NE',
+          pressure: 1013,
+          visibility: 10,
+          uvIndex: 5,
+          condition: 'Clear',
+          icon: 'sunny',
+          description: 'Clear sky'
+        },
+        forecast: [],
+        bestTimeToVisit: {
+          months: ['October', 'November', 'December', 'January', 'February', 'March'],
+          reason: 'Pleasant weather with comfortable temperatures',
+          temperature: { min: 15, max: 30 },
+          rainfall: 'Low',
+          conditions: ['Clear skies', 'Mild temperatures', 'Low humidity']
+        }
+      }
     } catch (error) {
       console.error('Weather API error:', error)
       // Return fallback data
-      return mockWeatherData['maharashtra']
+      return mockWeatherData['maharashtra'] || {
+        current: {
+          temperature: 25,
+          feelsLike: 27,
+          humidity: 60,
+          windSpeed: 10,
+          windDirection: 'NE',
+          pressure: 1013,
+          visibility: 10,
+          uvIndex: 5,
+          condition: 'Clear',
+          icon: 'sunny',
+          description: 'Clear sky'
+        },
+        forecast: [],
+        bestTimeToVisit: {
+          months: ['October', 'November', 'December', 'January', 'February', 'March'],
+          reason: 'Pleasant weather with comfortable temperatures',
+          temperature: { min: 15, max: 30 },
+          rainfall: 'Low',
+          conditions: ['Clear skies', 'Mild temperatures', 'Low humidity']
+        }
+      }
     }
   }
 
@@ -178,7 +222,7 @@ class WeatherService {
     const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 
                        'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
     const index = Math.round(degrees / 22.5) % 16
-    return directions[index]
+    return directions[index] || 'N'
   }
 }
 

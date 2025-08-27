@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
   Star,
@@ -18,7 +16,7 @@ import {
   Mail,
   Globe,
   Mountain,
-  Thermometer,
+
   Cloud,
   Plane,
   Train,
@@ -28,30 +26,36 @@ import {
   Plus,
   Minus
 } from 'lucide-react'
-import { useCamp, useWishlist, useIsInWishlist } from '../hooks/useCamps'
-import { useIsAuthenticated } from '../hooks/useAuth'
+import { useState } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import LoadingSpinner from '../components/common/LoadingSpinner'
-import { formatCurrency, formatDuration, formatGroupSize, formatDate } from '../utils/format'
+import ReviewSystem from '../components/reviews/ReviewSystem'
+import { useIsAuthenticated } from '../hooks/useAuth'
+import { useCamp, useWishlist, useIsInWishlist, useCampReviews, useAddReview } from '../hooks/useCamps'
 import { cn } from '../utils/cn'
+import { formatCurrency, formatDuration, formatGroupSize, formatDate } from '../utils/format'
 
 const CampDetailPage = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [showAllImages, setShowAllImages] = useState(false)
+  const [, setShowAllImages] = useState(false)
   const [selectedSlot, setSelectedSlot] = useState<string>('')
   const [participants, setParticipants] = useState(1)
-  const [showBookingModal, setShowBookingModal] = useState(false)
+  // const [, setShowBookingModal] = useState(false)
   const { isAuthenticated, user } = useIsAuthenticated()
   const { addToWishlist, removeFromWishlist } = useWishlist()
 
   const { data: campResponse, isLoading, error } = useCamp(id || '')
+  const { data: reviewsResponse, isLoading: reviewsLoading } = useCampReviews(id || '', 1, 20)
+  const addReviewMutation = useAddReview()
 
   const camp = campResponse?.success ? campResponse.data : null
+  const reviews = reviewsResponse?.data || []
   const isInWishlist = useIsInWishlist(user?.id, camp?.id || '')
 
   const toggleWishlist = async () => {
-    if (!isAuthenticated || !user || !camp) return
+    if (!isAuthenticated || !user || !camp) {return}
 
     try {
       if (isInWishlist) {
@@ -112,7 +116,7 @@ const CampDetailPage = () => {
     navigate(bookingUrl)
   }
 
-  if (isLoading) {
+  if (isLoading || !camp) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" text="Loading camp details..." />
@@ -120,7 +124,7 @@ const CampDetailPage = () => {
     )
   }
 
-  if (error || !camp) {
+  if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -145,7 +149,7 @@ const CampDetailPage = () => {
         <div className="container-max section-padding py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => navigate(-1)}
+              onClick={async () => navigate(-1)}
               className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -779,6 +783,87 @@ const CampDetailPage = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Reviews Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center space-x-2">
+              <Star className="w-6 h-6 text-yellow-500" />
+              <span>Reviews & Ratings</span>
+            </h3>
+
+            {reviewsLoading ? (
+              <div className="flex justify-center py-8">
+                <LoadingSpinner size="md" text="Loading reviews..." />
+              </div>
+            ) : (
+              <ReviewSystem
+                campId={camp?.id || ''}
+                reviews={reviews.map(review => {
+                  // Generate user name based on userId
+                  const userNames: Record<string, string> = {
+                    'user-001': 'Arjun Sharma',
+                    'user-002': 'Priya Patel',
+                    'user-003': 'Vikram Singh',
+                    'user-004': 'Anita Desai',
+                    'user-005': 'Rahul Kumar',
+                    'user-006': 'Sneha Gupta',
+                    'user-007': 'Amit Verma',
+                    'user-008': 'Kavya Nair'
+                  };
+
+                  return {
+                    id: review.id,
+                    userId: review.userId,
+                    userName: userNames[review.userId] || `User ${review.userId.slice(-3)}`,
+                    userAvatar: undefined, // Will use generated avatar
+                    rating: review.rating,
+                    title: review.title,
+                    content: review.content,
+                    pros: review.pros || [],
+                    cons: review.cons || [],
+                    images: review.images?.map(img => ({ url: img.url, caption: img.caption })) || [],
+                    helpful: review.helpful,
+                    verified: review.verified,
+                    tripDate: review.createdAt, // Using createdAt as trip date for now
+                    createdAt: review.createdAt,
+                    organizerResponse: review.response ? {
+                      content: review.response.content,
+                      respondedAt: review.response.createdAt,
+                      respondedBy: review.response.organizerId
+                    } : undefined
+                  };
+                })}
+                averageRating={camp?.rating.average || 0}
+                totalReviews={camp?.rating.count || 0}
+                canReview={isAuthenticated && Boolean(user)}
+                onSubmitReview={(reviewData) => {
+                  if (user && camp) {
+                    addReviewMutation.mutate({
+                      userId: user.id,
+                      campId: camp.id,
+                      bookingId: `booking-${Date.now()}`, // Temporary booking ID
+                      rating: reviewData.rating,
+                      title: reviewData.title,
+                      content: reviewData.content,
+                      pros: reviewData.pros ? reviewData.pros.split(',').map((p: string) => p.trim()) : [],
+                      cons: reviewData.cons ? reviewData.cons.split(',').map((c: string) => c.trim()) : [],
+                      wouldRecommend: reviewData.rating >= 4,
+                      verified: false,
+                      helpful: 0
+                    });
+                  }
+                }}
+                onHelpfulClick={(reviewId, helpful) => {
+                  console.log('Helpful clicked:', reviewId, helpful);
+                  // TODO: Implement helpful functionality
+                }}
+                onReportReview={(reviewId, reason) => {
+                  console.log('Report review:', reviewId, reason);
+                  // TODO: Implement report functionality
+                }}
+              />
+            )}
           </div>
 
           {/* Emergency Contacts */}

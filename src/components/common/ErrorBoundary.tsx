@@ -1,5 +1,6 @@
-import { Component, ErrorInfo, ReactNode } from 'react'
 import { AlertTriangle, RefreshCw } from 'lucide-react'
+import { Component } from 'react'
+import type { ErrorInfo, ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
@@ -7,7 +8,7 @@ interface Props {
 
 interface State {
   hasError: boolean
-  error?: Error
+  error?: Error | null
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -20,15 +21,15 @@ class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error }
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Error caught by boundary:', error, errorInfo)
   }
 
   handleRetry = () => {
-    this.setState({ hasError: false, error: undefined })
+    this.setState({ hasError: false, error: null })
   }
 
-  render() {
+  override render() {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center section-padding">
@@ -46,7 +47,7 @@ class ErrorBoundary extends Component<Props, State> {
                 We're sorry, but something unexpected happened. Please try refreshing the page.
               </p>
               
-              {process.env.NODE_ENV === 'development' && this.state.error && (
+              {import.meta.env.DEV && this.state.error && (
                 <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 mb-6 text-left">
                   <p className="text-sm font-mono text-red-600 dark:text-red-400">
                     {this.state.error.message}

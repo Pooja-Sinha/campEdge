@@ -6,6 +6,19 @@ export interface User {
   avatar?: string;
   role: UserRole;
   phone?: string;
+  bio?: string;
+  location?: string;
+  dateOfBirth?: string;
+  verified?: boolean;
+  rating?: {
+    average: number;
+    count: number;
+  };
+  emergencyContact?: {
+    name?: string;
+    phone?: string;
+    relation?: string;
+  };
   preferences: UserPreferences;
   createdAt: string;
   updatedAt: string;
@@ -91,6 +104,8 @@ export interface Camp {
   tags: string[];
   featured: boolean;
   verified: boolean;
+  availableSlots?: any[];
+  inclusions?: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -307,8 +322,8 @@ export interface SearchFilters {
     endDate: string;
   };
   priceRange?: {
-    min: number;
-    max: number;
+    min?: number;
+    max?: number;
   };
   groupSize?: number;
   difficulty?: DifficultyLevel[];
@@ -316,8 +331,8 @@ export interface SearchFilters {
   amenities?: string[];
   season?: Season[];
   duration?: {
-    min: number;
-    max: number;
+    min?: number;
+    max?: number;
   };
   rating?: number;
   verified?: boolean;

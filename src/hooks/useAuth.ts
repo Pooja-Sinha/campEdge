@@ -11,7 +11,7 @@ export const AUTH_QUERY_KEYS = {
 export const useCurrentUser = () => {
   return useQuery({
     queryKey: AUTH_QUERY_KEYS.user,
-    queryFn: () => userApi.getCurrentUser(),
+    queryFn: async () => userApi.getCurrentUser(),
     staleTime: 10 * 60 * 1000, // 10 minutes
     gcTime: 30 * 60 * 1000, // 30 minutes
     retry: false, // Don't retry auth queries
@@ -23,7 +23,7 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
 
   const login = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
+    mutationFn: async ({ email, password }: { email: string; password: string }) =>
       userApi.login(email, password),
     onSuccess: (response) => {
       if (response.success) {
@@ -38,7 +38,7 @@ export const useAuth = () => {
   });
 
   const logout = useMutation({
-    mutationFn: () => userApi.logout(),
+    mutationFn: async () => userApi.logout(),
     onSuccess: () => {
       // Clear all cached data
       queryClient.clear();
@@ -51,7 +51,7 @@ export const useAuth = () => {
   });
 
   const signup = useMutation({
-    mutationFn: (userData: {
+    mutationFn: async (userData: {
       name: string;
       email: string;
       password: string;
@@ -74,7 +74,7 @@ export const useAuth = () => {
   });
 
   const updateProfile = useMutation({
-    mutationFn: ({ userId, updates }: { userId: string; updates: Partial<User> }) =>
+    mutationFn: async ({ userId, updates }: { userId: string; updates: Partial<User> }) =>
       userApi.updateProfile(userId, updates),
     onSuccess: (response) => {
       if (response.success) {

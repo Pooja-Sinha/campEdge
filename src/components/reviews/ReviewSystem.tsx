@@ -1,19 +1,16 @@
-import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { 
   Star, 
-  ThumbsUp, 
-  ThumbsDown, 
+  ThumbsUp,
   Flag, 
   Camera, 
   X,
   Send,
-  Filter,
-  SortDesc,
   CheckCircle,
   AlertCircle
 } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { cn } from '../../utils/cn'
 import { formatDate } from '../../utils/format'
@@ -28,10 +25,10 @@ interface Review {
   content: string
   pros: string[]
   cons: string[]
-  images: Array<{
+  images: {
     url: string
     caption?: string
-  }>
+  }[]
   helpful: number
   verified: boolean
   tripDate: string
@@ -66,14 +63,14 @@ const reviewSchema = z.object({
 type ReviewFormData = z.infer<typeof reviewSchema>
 
 const ReviewSystem = ({
-  campId,
+  campId: _campId,
   reviews,
   averageRating,
   totalReviews,
   canReview = false,
   onSubmitReview,
   onHelpfulClick,
-  onReportReview
+  onReportReview: _onReportReview
 }: ReviewSystemProps) => {
   const [showReviewForm, setShowReviewForm] = useState(false)
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'highest' | 'lowest' | 'helpful'>('newest')

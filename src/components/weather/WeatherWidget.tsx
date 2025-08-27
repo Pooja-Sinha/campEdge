@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { 
   Cloud, 
   Sun, 
@@ -7,13 +6,15 @@ import {
   Droplets, 
   Eye, 
   Gauge,
-  Thermometer,
+
   AlertTriangle,
   Calendar,
   TrendingUp,
   RefreshCw
 } from 'lucide-react'
-import { weatherService, WeatherData } from '../../services/weatherService'
+import { useState, useEffect } from 'react'
+import { weatherService } from '../../services/weatherService'
+import type { WeatherData } from '../../services/weatherService'
 import { cn } from '../../utils/cn'
 
 interface WeatherWidgetProps {
@@ -87,11 +88,11 @@ const WeatherWidget = ({
   }
 
   const getTemperatureColor = (temp: number) => {
-    if (temp < 0) return 'text-blue-600'
-    if (temp < 10) return 'text-blue-500'
-    if (temp < 20) return 'text-green-500'
-    if (temp < 30) return 'text-yellow-500'
-    if (temp < 40) return 'text-orange-500'
+    if (temp < 0) {return 'text-blue-600'}
+    if (temp < 10) {return 'text-blue-500'}
+    if (temp < 20) {return 'text-green-500'}
+    if (temp < 30) {return 'text-yellow-500'}
+    if (temp < 40) {return 'text-orange-500'}
     return 'text-red-500'
   }
 

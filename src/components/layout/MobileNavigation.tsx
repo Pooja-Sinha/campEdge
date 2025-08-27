@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, 
   Search, 
@@ -15,9 +13,11 @@ import {
   LogOut,
   Bell
 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useIsAuthenticated, useAuth } from '../../hooks/useAuth'
-import { useUIStore } from '../../store/uiStore'
 import { useTouchGestures } from '../../hooks/useTouchGestures'
+import { useUIStore } from '../../store/uiStore'
 import { cn } from '../../utils/cn'
 
 const MobileNavigation = () => {
@@ -25,7 +25,7 @@ const MobileNavigation = () => {
   const { isAuthenticated, user } = useIsAuthenticated()
   const { logout } = useAuth()
   const { isMobileMenuOpen, setMobileMenuOpen, theme, setTheme } = useUIStore()
-  const [showProfileMenu, setShowProfileMenu] = useState(false)
+  const [, setShowProfileMenu] = useState(false)
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -94,15 +94,17 @@ const MobileNavigation = () => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  const handleProfileMenuToggle = () => {
-    setShowProfileMenu(!showProfileMenu)
-  }
+  // const handleProfileMenuToggle = () => {
+  //   setShowProfileMenu(!showProfileMenu)
+  // }
 
   const handleThemeToggle = () => {
     const themes = ['light', 'dark', 'system'] as const
-    const currentIndex = themes.indexOf(theme)
+    const currentIndex = themes.indexOf(theme as any)
     const nextTheme = themes[(currentIndex + 1) % themes.length]
-    setTheme(nextTheme)
+    if (nextTheme) {
+      setTheme(nextTheme)
+    }
   }
 
   const handleLogout = async () => {
@@ -169,6 +171,7 @@ const MobileNavigation = () => {
             const cleanup = attachListeners(el)
             return cleanup
           }
+          return undefined
         }}
       >
         <div className="flex flex-col h-full">
@@ -266,7 +269,7 @@ const MobileNavigation = () => {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div className="grid grid-cols-4 h-16">
           {bottomNavItems.map((item) => {
-            if (item.requireAuth && !isAuthenticated) return null
+            if (item.requireAuth && !isAuthenticated) {return null}
             
             const isActive = isActiveRoute(item.path, item.exact)
             

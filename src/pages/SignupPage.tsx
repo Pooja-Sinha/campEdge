@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { Eye, EyeOff, Mail, Lock, User, Phone, ArrowRight, Mountain, Check } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { z } from 'zod'
 import { useAuth } from '../hooks/useAuth'
 import { cn } from '../utils/cn'
 
@@ -14,7 +14,7 @@ const signupSchema = z.object({
   password: z.string().min(6, 'Password must be at least 6 characters'),
   confirmPassword: z.string(),
   role: z.enum(['user', 'organizer']),
-  agreeToTerms: z.boolean().refine(val => val === true, 'You must agree to terms and conditions'),
+  agreeToTerms: z.boolean().refine(val => val, 'You must agree to terms and conditions'),
   subscribeNewsletter: z.boolean().optional(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",

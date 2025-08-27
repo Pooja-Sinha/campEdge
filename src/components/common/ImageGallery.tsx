@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react'
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -12,6 +11,7 @@ import {
   RotateCw,
   Maximize2
 } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 import { cn } from '../../utils/cn'
 
 interface Image {
@@ -48,7 +48,7 @@ const ImageGallery = ({
   const [zoomLevel, setZoomLevel] = useState(1)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
   const [rotation, setRotation] = useState(0)
-  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [, setIsFullscreen] = useState(false)
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
   const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null)
   
@@ -164,6 +164,8 @@ const ImageGallery = ({
   }
 
   const downloadImage = async () => {
+    if (!currentImage) {return}
+
     try {
       const response = await fetch(currentImage.url)
       const blob = await response.blob()
@@ -181,6 +183,8 @@ const ImageGallery = ({
   }
 
   const shareImage = async () => {
+    if (!currentImage) {return}
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -210,28 +214,32 @@ const ImageGallery = ({
   // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
-    setTouchStart({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY
-    })
+    if (e.targetTouches[0]) {
+      setTouchStart({
+        x: e.targetTouches[0].clientX,
+        y: e.targetTouches[0].clientY
+      })
+    }
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY
-    })
+    if (e.targetTouches[0]) {
+      setTouchEnd({
+        x: e.targetTouches[0].clientX,
+        y: e.targetTouches[0].clientY
+      })
+    }
   }
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
+    if (!touchStart || !touchEnd) {return}
     
     const distanceX = touchStart.x - touchEnd.x
     const distanceY = touchStart.y - touchEnd.y
     const isLeftSwipe = distanceX > 50
     const isRightSwipe = distanceX < -50
-    const isUpSwipe = distanceY > 50
-    const isDownSwipe = distanceY < -50
+    // const isUpSwipe = distanceY > 50
+    // const isDownSwipe = distanceY < -50
 
     if (Math.abs(distanceX) > Math.abs(distanceY)) {
       if (isLeftSwipe) {
@@ -242,7 +250,7 @@ const ImageGallery = ({
     }
   }
 
-  if (!currentImage) return null
+  if (!currentImage) {return null}
 
   return (
     <div

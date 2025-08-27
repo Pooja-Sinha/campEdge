@@ -1,25 +1,25 @@
-import { Routes, Route } from 'react-router-dom'
 import { Suspense, lazy, useEffect } from 'react'
-import Layout from './components/layout/Layout'
-import LoadingSpinner from './components/common/LoadingSpinner'
+import { Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/common/ErrorBoundary'
+import LoadingSpinner from './components/common/LoadingSpinner'
+import Layout from './components/layout/Layout'
 import { useUIStore } from './store/uiStore'
 
 // Lazy load pages for better performance
-const HomePage = lazy(() => import('./pages/HomePage'))
-const CampsPage = lazy(() => import('./pages/CampsPage'))
-const CampDetailPage = lazy(() => import('./pages/CampDetailPage'))
-const BookingPage = lazy(() => import('./pages/BookingPage'))
-const ProfilePage = lazy(() => import('./pages/ProfilePage'))
-const WishlistPage = lazy(() => import('./pages/WishlistPage'))
-const BlogPage = lazy(() => import('./pages/BlogPage'))
-const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
-const LoginPage = lazy(() => import('./pages/LoginPage'))
-const SignupPage = lazy(() => import('./pages/SignupPage'))
-const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+const HomePage = lazy(async () => import('./pages/HomePage'))
+const CampsPage = lazy(async () => import('./pages/CampsPage'))
+const CampDetailPage = lazy(async () => import('./pages/CampDetailPage'))
+const BookingPage = lazy(async () => import('./pages/BookingPage'))
+const ProfilePage = lazy(async () => import('./pages/ProfilePage'))
+const WishlistPage = lazy(async () => import('./pages/WishlistPage'))
+const BlogPage = lazy(async () => import('./pages/BlogPage'))
+const BlogPostPage = lazy(async () => import('./pages/BlogPostPage'))
+const LoginPage = lazy(async () => import('./pages/LoginPage'))
+const SignupPage = lazy(async () => import('./pages/SignupPage'))
+const AdminDashboard = lazy(async () => import('./pages/admin/AdminDashboard'))
+const NotFoundPage = lazy(async () => import('./pages/NotFoundPage'))
 
-function App() {
+const App = () => {
   const { theme, setTheme } = useUIStore()
 
   // Ensure theme is properly applied on app initialization

@@ -267,7 +267,7 @@ const initializeOnlineListener = () => {
 }
 
 // Initialize system theme listener
-const initializeSystemThemeListener = () => {
+const initializeSystemThemeListener = (): (() => void) | void => {
   const { theme, setTheme } = useUIStore.getState()
   
   if (theme === 'system') {

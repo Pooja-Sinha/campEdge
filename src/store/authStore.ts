@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import type { User } from '../types/index'
 import authMockData from '../data/auth_mock_data.json'
+import type { User } from '../types/index'
 
 interface AuthState {
   user: User | null
@@ -54,6 +54,16 @@ const mockSignup = async (userData: any): Promise<User> => {
     phone: userData.phone,
     role: userData.role || 'user',
     verified: false,
+    preferences: {
+      language: 'en',
+      theme: 'system',
+      notifications: {
+        email: true,
+        push: true,
+        sms: false
+      },
+      currency: 'INR'
+    },
     avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=059669&color=fff`,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
@@ -120,7 +130,7 @@ export const useAuthStore = create<AuthState>()(
 
       updateProfile: async (userData: Partial<User>) => {
         const { user } = get()
-        if (!user) throw new Error('No user logged in')
+        if (!user) {throw new Error('No user logged in')}
         
         set({ isLoading: true, error: null })
         

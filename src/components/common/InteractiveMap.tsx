@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
 import { MapPin, Plus, Minus, Maximize2, Navigation, Layers } from 'lucide-react'
-import { Camp } from '../../types'
+import { useState, useEffect, useRef } from 'react'
+import type { Camp } from '../../types'
 import { cn } from '../../utils/cn'
 
 interface InteractiveMapProps {
@@ -30,8 +30,8 @@ const InteractiveMap = ({
   className
 }: InteractiveMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null)
-  const [zoom, setZoom] = useState(6)
-  const [center, setCenter] = useState({ lat: 20.5937, lng: 78.9629 }) // Center of India
+  const [, setZoom] = useState(6)
+  const [, setCenter] = useState({ lat: 20.5937, lng: 78.9629 }) // Center of India
   const [mapStyle, setMapStyle] = useState<'satellite' | 'terrain' | 'roadmap'>('terrain')
   const [hoveredMarker, setHoveredMarker] = useState<string | null>(null)
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -65,11 +65,11 @@ const InteractiveMap = ({
       const lngDiff = maxLng - minLng
       const maxDiff = Math.max(latDiff, lngDiff)
       
-      if (maxDiff > 20) setZoom(4)
-      else if (maxDiff > 10) setZoom(5)
-      else if (maxDiff > 5) setZoom(6)
-      else if (maxDiff > 2) setZoom(7)
-      else setZoom(8)
+      if (maxDiff > 20) {setZoom(4)}
+      else if (maxDiff > 10) {setZoom(5)}
+      else if (maxDiff > 5) {setZoom(6)}
+      else if (maxDiff > 2) {setZoom(7)}
+      else {setZoom(8)}
     }
   }, [markers])
 

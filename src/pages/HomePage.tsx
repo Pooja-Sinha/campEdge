@@ -1,8 +1,8 @@
+import { Search, MapPin, Star, Users, Calendar, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Search, MapPin, Star, Users, Calendar, ArrowRight } from 'lucide-react'
-import { useFeaturedCamps } from '../hooks/useCamps'
 import LoadingSpinner from '../components/common/LoadingSpinner'
+import { useFeaturedCamps } from '../hooks/useCamps'
 
 const HomePage = () => {
   const { data: featuredResponse, isLoading, error } = useFeaturedCamps()
@@ -36,7 +36,12 @@ const HomePage = () => {
       const checkInDate = new Date(searchForm.checkIn)
       const checkOutDate = new Date(checkInDate)
       checkOutDate.setDate(checkOutDate.getDate() + 3) // Default 3-day trip
-      searchParams.set('endDate', checkOutDate.toISOString().split('T')[0])
+      if (checkOutDate) {
+        const endDateString = checkOutDate.toISOString().split('T')[0]
+        if (endDateString) {
+          searchParams.set('endDate', endDateString)
+        }
+      }
     }
 
     if (searchForm.groupSize) {
@@ -189,7 +194,7 @@ const HomePage = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredResponse?.success && featuredResponse.data.map((camp) => (
+              {featuredResponse?.success && featuredResponse.data?.map((camp) => (
                 <Link
                   key={camp.id}
                   to={`/camps/${camp.id}`}

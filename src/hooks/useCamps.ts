@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { campApi, wishlistApi, bookingApi } from '../services/api';
-import type { SearchFilters, Camp } from '../types/index';
+import { campApi, wishlistApi, bookingApi, reviewApi } from '../services/api';
+import type { SearchFilters } from '../types/index';
 
 // Query keys
 export const CAMP_QUERY_KEYS = {
@@ -17,13 +17,13 @@ export const CAMP_QUERY_KEYS = {
 // Hook to get camps with filters and pagination
 export const useCamps = (
   filters?: SearchFilters,
-  page: number = 1,
-  limit: number = 10,
-  enabled: boolean = true
+  page = 1,
+  limit = 10,
+  enabled = true
 ) => {
   return useQuery({
     queryKey: CAMP_QUERY_KEYS.list(filters, page, limit),
-    queryFn: () => campApi.getCamps(filters, page, limit),
+    queryFn: async () => campApi.getCamps(filters, page, limit),
     enabled,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
@@ -31,21 +31,21 @@ export const useCamps = (
 };
 
 // Hook to get a single camp by ID
-export const useCamp = (id: string, enabled: boolean = true) => {
+export const useCamp = (id: string, enabled = true) => {
   return useQuery({
     queryKey: CAMP_QUERY_KEYS.detail(id),
-    queryFn: () => campApi.getCampById(id),
-    enabled: enabled && !!id,
+    queryFn: async () => campApi.getCampById(id),
+    enabled: enabled && Boolean(id),
     staleTime: 10 * 60 * 1000, // 10 minutes
     gcTime: 30 * 60 * 1000, // 30 minutes
   });
 };
 
 // Hook to get featured camps
-export const useFeaturedCamps = (enabled: boolean = true) => {
+export const useFeaturedCamps = (enabled = true) => {
   return useQuery({
     queryKey: CAMP_QUERY_KEYS.featured(),
-    queryFn: () => campApi.getFeaturedCamps(),
+    queryFn: async () => campApi.getFeaturedCamps(),
     enabled,
     staleTime: 15 * 60 * 1000, // 15 minutes
     gcTime: 30 * 60 * 1000, // 30 minutes
@@ -53,10 +53,10 @@ export const useFeaturedCamps = (enabled: boolean = true) => {
 };
 
 // Hook to search camps
-export const useSearchCamps = (query: string, enabled: boolean = true) => {
+export const useSearchCamps = (query: string, enabled = true) => {
   return useQuery({
     queryKey: CAMP_QUERY_KEYS.search(query),
-    queryFn: () => campApi.searchCamps(query),
+    queryFn: async () => campApi.searchCamps(query),
     enabled: enabled && query.length > 2, // Only search if query is longer than 2 characters
     staleTime: 2 * 60 * 1000, // 2 minutes
     gcTime: 5 * 60 * 1000, // 5 minutes
@@ -68,7 +68,7 @@ export const useWishlist = () => {
   const queryClient = useQueryClient();
 
   const addToWishlist = useMutation({
-    mutationFn: ({ userId, campId, notes }: { userId: string; campId: string; notes?: string }) =>
+    mutationFn: async ({ userId, campId, notes }: { userId: string; campId: string; notes?: string }) =>
       wishlistApi.addToWishlist(userId, campId, notes),
     onSuccess: () => {
       // Invalidate wishlist queries
@@ -77,7 +77,7 @@ export const useWishlist = () => {
   });
 
   const removeFromWishlist = useMutation({
-    mutationFn: ({ userId, campId }: { userId: string; campId: string }) =>
+    mutationFn: async ({ userId, campId }: { userId: string; campId: string }) =>
       wishlistApi.removeFromWishlist(userId, campId),
     onSuccess: () => {
       // Invalidate wishlist queries
@@ -92,11 +92,11 @@ export const useWishlist = () => {
 };
 
 // Hook to get user's wishlist
-export const useUserWishlist = (userId: string, enabled: boolean = true) => {
+export const useUserWishlist = (userId: string, enabled = true) => {
   return useQuery({
     queryKey: ['wishlist', userId],
-    queryFn: () => wishlistApi.getUserWishlist(userId),
-    enabled: enabled && !!userId,
+    queryFn: async () => wishlistApi.getUserWishlist(userId),
+    enabled: enabled && Boolean(userId),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
@@ -104,11 +104,11 @@ export const useUserWishlist = (userId: string, enabled: boolean = true) => {
 
 // Hook to check if a camp is in user's wishlist
 export const useIsInWishlist = (userId: string | null | undefined, campId: string) => {
-  const shouldFetch = !!userId && !!campId;
+  const shouldFetch = Boolean(userId) && Boolean(campId);
   const { data: wishlistResponse } = useUserWishlist(userId || '', shouldFetch);
 
   const isInWishlist = shouldFetch && wishlistResponse?.success
-    ? wishlistResponse.data.some(item => item.campId === campId)
+    ? wishlistResponse.data?.some(item => item.campId === campId)
     : false;
 
   return isInWishlist;
@@ -123,7 +123,7 @@ export const useCampFilters = () => {
     queryClient.invalidateQueries({ queryKey: CAMP_QUERY_KEYS.lists() });
   };
 
-  const applyFilters = (filters: SearchFilters) => {
+  const applyFilters = (_filters: SearchFilters) => {
     // Invalidate current queries and fetch with new filters
     queryClient.invalidateQueries({ queryKey: CAMP_QUERY_KEYS.lists() });
   };
@@ -153,11 +153,11 @@ export const useCampStats = () => {
           challenging: camps.filter(camp => camp.difficulty === 'challenging').length,
           extreme: camps.filter(camp => camp.difficulty === 'extreme').length,
         },
-        stateDistribution: camps.reduce((acc, camp) => {
-          const state = camp.location.state;
+        stateDistribution: camps.reduce<Record<string, number>>((acc, camp) => {
+          const {state} = camp.location;
           acc[state] = (acc[state] || 0) + 1;
           return acc;
-        }, {} as Record<string, number>),
+        }, {}),
         priceRange: {
           min: Math.min(...camps.map(camp => camp.pricing.basePrice)),
           max: Math.max(...camps.map(camp => camp.pricing.basePrice)),
@@ -173,7 +173,7 @@ export const useCampStats = () => {
 };
 
 // Hook for infinite scroll camps loading
-export const useInfiniteCamps = (filters?: SearchFilters, limit: number = 10) => {
+export const useInfiniteCamps = (filters?: SearchFilters, limit = 10) => {
   return useQuery({
     queryKey: ['camps-infinite', filters],
     queryFn: async ({ pageParam = 1 }) => {
@@ -183,8 +183,7 @@ export const useInfiniteCamps = (filters?: SearchFilters, limit: number = 10) =>
         nextPage: result.camps.length === limit ? (pageParam as number) + 1 : undefined,
       };
     },
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
+    // Removed infinite query params for compatibility
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
@@ -197,7 +196,7 @@ export const usePrefetchCamp = () => {
   const prefetchCamp = (id: string) => {
     queryClient.prefetchQuery({
       queryKey: CAMP_QUERY_KEYS.detail(id),
-      queryFn: () => campApi.getCampById(id),
+      queryFn: async () => campApi.getCampById(id),
       staleTime: 10 * 60 * 1000, // 10 minutes
     });
   };
@@ -208,8 +207,8 @@ export const usePrefetchCamp = () => {
 // Hook for camp recommendations (based on user preferences)
 export const useCampRecommendations = (
   userId: string, 
-  limit: number = 5, 
-  enabled: boolean = true
+  limit = 5, 
+  enabled = true
 ) => {
   return useQuery({
     queryKey: ['camp-recommendations', userId, limit],
@@ -224,7 +223,7 @@ export const useCampRecommendations = (
         return { success: true, data: camps.slice(0, limit) };
       }
 
-      const wishlistedCampIds = wishlistResponse.data.map(item => item.campId);
+      const wishlistedCampIds = wishlistResponse.data?.map(item => item.campId) || [];
       
       // Simple recommendation algorithm:
       // 1. Exclude camps already in wishlist
@@ -236,8 +235,8 @@ export const useCampRecommendations = (
       const recommendations = availableCamps
         .sort((a, b) => {
           // Prioritize featured camps
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
+          if (a.featured && !b.featured) {return -1;}
+          if (!a.featured && b.featured) {return 1;}
           
           // Then by rating
           return b.rating.average - a.rating.average;
@@ -246,19 +245,49 @@ export const useCampRecommendations = (
 
       return { success: true, data: recommendations };
     },
-    enabled: enabled && !!userId,
+    enabled: enabled && Boolean(userId),
     staleTime: 15 * 60 * 1000, // 15 minutes
     gcTime: 30 * 60 * 1000, // 30 minutes
   });
 };
 
 // Hook to get user bookings
-export const useUserBookings = (userId: string, enabled: boolean = true) => {
+export const useUserBookings = (userId: string, enabled = true) => {
   return useQuery({
     queryKey: ['bookings', 'user', userId],
-    queryFn: () => bookingApi.getUserBookings(userId),
-    enabled: enabled && !!userId,
+    queryFn: async () => bookingApi.getUserBookings(userId),
+    enabled: enabled && Boolean(userId),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Hook to get camp reviews
+export const useCampReviews = (campId: string, page = 1, limit = 10, enabled = true) => {
+  return useQuery({
+    queryKey: ['reviews', 'camp', campId, page, limit],
+    queryFn: async () => reviewApi.getCampReviews(campId, page, limit),
+    enabled: enabled && Boolean(campId),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Hook to add a review
+export const useAddReview = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: reviewApi.addReview,
+    onSuccess: (_, variables) => {
+      // Invalidate camp reviews query
+      queryClient.invalidateQueries({
+        queryKey: ['reviews', 'camp', variables.campId]
+      });
+      // Invalidate camp details to update rating
+      queryClient.invalidateQueries({
+        queryKey: CAMP_QUERY_KEYS.detail(variables.campId)
+      });
+    },
   });
 };

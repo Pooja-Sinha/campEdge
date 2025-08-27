@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { Eye, EyeOff, Mail, Lock, ArrowRight, Mountain } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { z } from 'zod'
 import { useAuth } from '../hooks/useAuth'
 import { cn } from '../utils/cn'
 
@@ -60,11 +60,15 @@ const LoginPage = () => {
     }
   }
 
-  const demoAccounts = [
+  // All demo accounts (Organizer & Admin can still login manually)
+  const allDemoAccounts = [
     { email: 'user@campedge.com', password: 'password123', role: 'User' },
     { email: 'organizer@campedge.com', password: 'password123', role: 'Organizer' },
     { email: 'admin@campedge.com', password: 'password123', role: 'Admin' },
   ]
+
+  // Filter to show only User account in demo section
+  const demoAccounts = allDemoAccounts.filter(account => account.role === 'User')
 
   const fillDemoAccount = (email: string, password: string) => {
     setValue('email', email)

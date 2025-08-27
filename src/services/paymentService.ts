@@ -44,11 +44,11 @@ export interface PaymentSession {
 }
 
 class PaymentService {
-  private apiKey: string = process.env.REACT_APP_PAYMENT_API_KEY || 'mock-payment-key'
-  private baseUrl: string = 'https://api.razorpay.com/v1'
+  // private _apiKey: string = import.meta.env.VITE_PAYMENT_API_KEY || 'mock-payment-key'
+  // private _baseUrl: string = 'https://api.razorpay.com/v1'
 
   // Available payment methods in India
-  private paymentMethods: PaymentMethod[] = [
+  private readonly paymentMethods: PaymentMethod[] = [
     {
       id: 'card',
       type: 'card',
@@ -113,7 +113,7 @@ class PaymentService {
 
   // Process payment
   async processPayment(
-    sessionId: string,
+    _sessionId: string,
     paymentMethod: string,
     paymentData: any
   ): Promise<PaymentResult> {
@@ -172,9 +172,9 @@ class PaymentService {
     await new Promise(resolve => setTimeout(resolve, 200))
 
     // Mock status based on payment ID
-    if (paymentId.includes('fail')) return 'failed'
-    if (paymentId.includes('pending')) return 'pending'
-    if (paymentId.includes('processing')) return 'processing'
+    if (paymentId.includes('fail')) {return 'failed'}
+    if (paymentId.includes('pending')) {return 'pending'}
+    if (paymentId.includes('processing')) {return 'processing'}
     return 'completed'
   }
 
@@ -183,7 +183,7 @@ class PaymentService {
     baseAmount: number
     fees: number
     totalAmount: number
-    breakdown: Array<{ label: string; amount: number }>
+    breakdown: { label: string; amount: number }[]
   } {
     const method = this.paymentMethods.find(m => m.id === paymentMethod)
     const feePercentage = method?.fees || 0
@@ -213,7 +213,7 @@ class PaymentService {
 
     const paymentId = `upi_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     const upiId = 'campindia@paytm'
-    const amount = details.amount
+    const {amount} = details
     const note = encodeURIComponent(details.description)
 
     // Generate UPI payment link
@@ -276,7 +276,7 @@ class PaymentService {
   }
 
   // Get refund status
-  async getRefundStatus(paymentId: string): Promise<{
+  async getRefundStatus(_paymentId: string): Promise<{
     refundId?: string
     status: 'pending' | 'processing' | 'completed' | 'failed'
     amount: number
@@ -301,16 +301,16 @@ class PaymentService {
   }): boolean {
     // Basic validation
     const cardNumber = cardDetails.number.replace(/\s/g, '')
-    if (cardNumber.length < 13 || cardNumber.length > 19) return false
-    if (!/^\d+$/.test(cardNumber)) return false
-    if (cardDetails.cvv.length < 3 || cardDetails.cvv.length > 4) return false
-    if (!cardDetails.name.trim()) return false
+    if (cardNumber.length < 13 || cardNumber.length > 19) {return false}
+    if (!/^\d+$/.test(cardNumber)) {return false}
+    if (cardDetails.cvv.length < 3 || cardDetails.cvv.length > 4) {return false}
+    if (!cardDetails.name.trim()) {return false}
 
     // Expiry validation
     const [month, year] = cardDetails.expiry.split('/')
-    if (!month || !year) return false
+    if (!month || !year) {return false}
     const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1)
-    if (expiry < new Date()) return false
+    if (expiry < new Date()) {return false}
 
     return true
   }
@@ -325,7 +325,7 @@ class PaymentService {
       'Network error, please try again',
       'Bank server temporarily unavailable'
     ]
-    return errors[Math.floor(Math.random() * errors.length)]
+    return errors[Math.floor(Math.random() * errors.length)] || 'Unknown error'
   }
 
   // Mock webhook handler

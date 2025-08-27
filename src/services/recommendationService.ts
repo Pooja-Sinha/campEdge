@@ -1,5 +1,7 @@
+import campingData from '../data/camping_mock_data.json'
 import type { Camp, User } from '../types/index'
-import { campsData } from '../data/camps_mock_data'
+
+const campsData = campingData as any
 
 export interface RecommendationScore {
   campId: string
@@ -29,7 +31,7 @@ export interface UserPreferences {
 }
 
 class RecommendationService {
-  private camps: Camp[] = campsData.camps
+  private readonly camps: Camp[] = campsData.camps
 
   // Main recommendation engine
   async getSmartRecommendations(
@@ -52,7 +54,7 @@ class RecommendationService {
       personalizedCamps: await this.getPersonalizedRecommendations(userPrefs, contextualFactors),
       trendingCamps: await this.getTrendingRecommendations(),
       similarUsersCamps: await this.getSimilarUsersRecommendations(userPrefs),
-      seasonalRecommendations: await this.getSeasonalRecommendations(contextualFactors.season),
+      seasonalRecommendations: await this.getSeasonalRecommendations(contextualFactors['season']),
       budgetFriendly: await this.getBudgetFriendlyRecommendations(userPrefs.budget),
       premiumExperiences: await this.getPremiumRecommendations()
     }
@@ -61,7 +63,7 @@ class RecommendationService {
   // Personalized recommendations based on user profile and behavior
   private async getPersonalizedRecommendations(
     preferences: UserPreferences,
-    context: any
+    _context: Record<string, any>
   ): Promise<RecommendationScore[]> {
     const scores = this.camps.map(camp => {
       let score = 0
@@ -173,13 +175,13 @@ class RecommendationService {
 
       // Seasonal relevance
       const currentMonth = new Date().toLocaleString('default', { month: 'long' })
-      if (camp.bestTimeToVisit.includes(currentMonth.toLowerCase())) {
+      if (camp.bestTimeToVisit.includes(currentMonth.toLowerCase() as any)) {
         score += 15
         reasons.push('Perfect timing for this season')
       }
 
       // Availability
-      if (camp.availableSlots.length > 3) {
+      if (camp.availableSlots && camp.availableSlots.length > 3) {
         score += 10
         reasons.push('Good availability')
       }
@@ -256,7 +258,7 @@ class RecommendationService {
       const reasons: string[] = []
 
       // Perfect season match
-      if (camp.bestTimeToVisit.includes(currentSeason)) {
+      if (camp.bestTimeToVisit.includes(currentSeason as any)) {
         score += 50
         reasons.push(`Perfect for ${currentSeason} season`)
       }
@@ -322,7 +324,7 @@ class RecommendationService {
         }
 
         // Includes meals/equipment
-        if (camp.inclusions.includes('Meals') || camp.inclusions.includes('Equipment')) {
+        if (camp.inclusions && (camp.inclusions.includes('Meals') || camp.inclusions.includes('Equipment'))) {
           score += 10
           reasons.push('Great inclusions for the price')
         }
@@ -392,7 +394,7 @@ class RecommendationService {
   }
 
   // Helper methods
-  private buildUserPreferences(user?: User, preferences?: UserPreferences): UserPreferences {
+  private buildUserPreferences(_user?: User, preferences?: UserPreferences): UserPreferences {
     return {
       difficulty: preferences?.difficulty || ['easy', 'moderate'],
       activities: preferences?.activities || ['trekking', 'photography'],
@@ -405,20 +407,20 @@ class RecommendationService {
     }
   }
 
-  private analyzeContext(context?: any) {
+  private analyzeContext(context?: Record<string, any>): Record<string, any> {
     return {
-      location: context?.location || '',
-      season: context?.season || this.getCurrentSeason(),
-      budget: context?.budget || 5000,
-      groupSize: context?.groupSize || 4
+      location: context?.['location'] || '',
+      season: context?.['season'] || this.getCurrentSeason(),
+      budget: context?.['budget'] || 5000,
+      groupSize: context?.['groupSize'] || 4
     }
   }
 
   private getCurrentSeason(): string {
     const month = new Date().getMonth()
-    if (month >= 2 && month <= 4) return 'spring'
-    if (month >= 5 && month <= 7) return 'summer'
-    if (month >= 8 && month <= 10) return 'autumn'
+    if (month >= 2 && month <= 4) {return 'spring'}
+    if (month >= 5 && month <= 7) {return 'summer'}
+    if (month >= 8 && month <= 10) {return 'autumn'}
     return 'winter'
   }
 

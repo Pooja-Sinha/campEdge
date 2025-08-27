@@ -1,5 +1,3 @@
-import { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { 
   Heart, 
   Star, 
@@ -12,10 +10,12 @@ import {
   Share2,
   ExternalLink
 } from 'lucide-react'
-import { Camp } from '../../types'
-import { formatCurrency, formatDuration } from '../../utils/format'
+import { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useTouchGestures } from '../../hooks/useTouchGestures'
+import type { Camp } from '../../types'
 import { cn } from '../../utils/cn'
+import { formatCurrency, formatDuration } from '../../utils/format'
 
 interface MobileCampCardProps {
   camp: Camp
@@ -62,6 +62,7 @@ const MobileCampCard = ({
       const cleanup = attachListeners(imageContainerRef.current)
       return cleanup
     }
+    return undefined
   }, [attachListeners])
 
   const handlePrevImage = (e: React.MouseEvent) => {
@@ -94,7 +95,7 @@ const MobileCampCard = ({
       navigator.share({
         title: camp.title,
         text: camp.description,
-        url: window.location.origin + `/camps/${camp.id}`,
+        url: `${window.location.origin  }/camps/${camp.id}`,
       }).catch(console.error)
     } else {
       setShowShareMenu(!showShareMenu)
@@ -106,7 +107,7 @@ const MobileCampCard = ({
     e.stopPropagation()
     
     try {
-      await navigator.clipboard.writeText(window.location.origin + `/camps/${camp.id}`)
+      await navigator.clipboard.writeText(`${window.location.origin  }/camps/${camp.id}`)
       setShowShareMenu(false)
       // Could show a toast notification here
     } catch (error) {
@@ -318,7 +319,7 @@ const MobileCampCard = ({
 
             <div className="flex items-center space-x-2">
               <div className="text-xs text-gray-500 dark:text-gray-400">
-                {camp.availableSlots.length} slots
+                {camp.availableSlots?.length || 0} slots
               </div>
               <ExternalLink className="w-4 h-4 text-gray-400" />
             </div>

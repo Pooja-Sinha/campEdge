@@ -1,3 +1,5 @@
+import additionalData from '../data/additional_mock_data.json';
+import campingData from '../data/camping_mock_data.json';
 import type {
   Camp,
   User,
@@ -13,11 +15,9 @@ import type {
 } from '../types/index';
 
 // Import mock data
-import campingData from '../data/camping_mock_data.json';
-import additionalData from '../data/additional_mock_data.json';
 
 // Simulate network delay
-const delay = (ms: number = 500) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = async (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Local storage keys
 const STORAGE_KEYS = {
@@ -113,8 +113,8 @@ export const campApi = {
       
       if (filters.priceRange) {
         camps = camps.filter(camp => 
-          camp.pricing.basePrice >= filters.priceRange!.min &&
-          camp.pricing.basePrice <= filters.priceRange!.max
+          camp.pricing.basePrice >= (filters.priceRange?.min ?? 0) &&
+          camp.pricing.basePrice <= (filters.priceRange?.max ?? 999999)
         );
       }
       
@@ -131,8 +131,8 @@ export const campApi = {
       
       if (filters.duration) {
         camps = camps.filter(camp => 
-          camp.duration.days >= filters.duration!.min &&
-          camp.duration.days <= filters.duration!.max
+          camp.duration.days >= (filters.duration?.min ?? 0) &&
+          camp.duration.days <= (filters.duration?.max ?? 999)
         );
       }
       
@@ -321,12 +321,12 @@ export const userApi = {
       };
     }
     
-    users[userIndex] = { ...users[userIndex], ...updates, updatedAt: new Date().toISOString() };
+    users[userIndex] = { ...users[userIndex], ...updates, updatedAt: new Date().toISOString() } as User;
     saveToStorage(STORAGE_KEYS.USERS, users);
     
     return {
       success: true,
-      data: users[userIndex]
+      data: users[userIndex] || null
     };
   },
 
@@ -515,13 +515,13 @@ export const bookingApi = {
       ...bookings[bookingIndex],
       bookingStatus: 'cancelled',
       updatedAt: new Date().toISOString()
-    };
+    } as Booking;
     
     saveToStorage(STORAGE_KEYS.BOOKINGS, bookings);
     
     return {
       success: true,
-      data: bookings[bookingIndex]
+      data: bookings[bookingIndex] || null
     };
   }
 };
@@ -679,7 +679,9 @@ export const notificationApi = {
     const notificationIndex = notifications.findIndex(n => n.id === notificationId);
     
     if (notificationIndex !== -1) {
-      notifications[notificationIndex].read = true;
+      if (notifications[notificationIndex]) {
+        notifications[notificationIndex].read = true;
+      }
       saveToStorage(STORAGE_KEYS.NOTIFICATIONS, notifications);
     }
     
