@@ -226,7 +226,7 @@ const FinancialManagement = () => {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Plus className="w-4 h-4 text-white" />
             </div>
-            <div className="text-sm font-medium text-gray-900 dark:text-white">
+            <div className="text-sm font-medium text-blue-700 dark:text-blue-200">
               Create Promo Code
             </div>
           </button>
@@ -235,7 +235,7 @@ const FinancialManagement = () => {
             <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Edit className="w-4 h-4 text-white" />
             </div>
-            <div className="text-sm font-medium text-gray-900 dark:text-white">
+            <div className="text-sm font-medium text-green-700 dark:text-green-200">
               Update Pricing
             </div>
           </button>
@@ -244,7 +244,7 @@ const FinancialManagement = () => {
             <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Download className="w-4 h-4 text-white" />
             </div>
-            <div className="text-sm font-medium text-gray-900 dark:text-white">
+            <div className="text-sm font-medium text-purple-700 dark:text-purple-200">
               Download Report
             </div>
           </button>
@@ -253,7 +253,7 @@ const FinancialManagement = () => {
             <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Calendar className="w-4 h-4 text-white" />
             </div>
-            <div className="text-sm font-medium text-gray-900 dark:text-white">
+            <div className="text-sm font-medium text-orange-700 dark:text-orange-200">
               Payout Schedule
             </div>
           </button>
